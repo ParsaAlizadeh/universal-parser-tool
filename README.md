@@ -30,6 +30,7 @@ in their directory.
 
 - AtCoder
 - Codechef
+- Spoj
 - Quera
 
 ## Manual Parser

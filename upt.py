@@ -1,16 +1,23 @@
-from selenium.webdriver import Firefox
-from selenium.webdriver.firefox.options import Options
-from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
-import atcoder, quera, codechef
-import os, sys, logging
+import logging
+import os
+import sys
 
+from selenium.webdriver import Firefox
+from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
+from selenium.webdriver.firefox.options import Options
+
+import atcoder
+import codechef
+import quera
+import spoj
 
 PARSERS = {"atcoder": atcoder,
            "quera": quera,
-           "codechef": codechef}
+           "codechef": codechef,
+           "spoj": spoj}
 
 
-def write_to_file(string:str, filename:str):
+def write_to_file(string: str, filename: str):
     string = string.strip() + "\n"
     with open(filename, "w") as file:
         file.write(string)
@@ -18,6 +25,7 @@ def write_to_file(string:str, filename:str):
 
 def excepthook(type, value, traceback):
     logging.error(value)
+    sys.__excepthook__(type, value, traceback)
 
 
 sys.excepthook = excepthook

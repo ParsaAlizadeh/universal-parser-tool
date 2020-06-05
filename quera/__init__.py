@@ -1,4 +1,5 @@
 from selenium.webdriver import Firefox
+
 from preparser import PreParser
 
 
@@ -8,7 +9,7 @@ class Parser:
             "uni": "university"}
 
     @staticmethod
-    def get_sample(driver:Firefox, args:list) -> list:
+    def get_sample(driver: Firefox, args: list) -> list:
         if len(args) != 2:
             raise Exception("arguments are not correct")
 
@@ -20,12 +21,4 @@ class Parser:
         PreParser.load_url(driver, url)
 
         sample = PreParser.get_sample(driver)
-
-        if len(sample) % 2 == 1:
-            raise Exception("found odd number of <pre> elements")
-
-        result = []
-        for i in range(0, len(sample), 2):
-            result.append([sample[i], sample[i + 1]])
-
-        return result
+        return PreParser.even_odd(sample)
