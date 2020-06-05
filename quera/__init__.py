@@ -6,7 +6,7 @@ class Parser:
     @staticmethod
     def get_sample(driver:Firefox, args:list) -> list:
         logging.warn("Make sure that there is no <pre> other than input/output")
-        url = f"https://quera.ir/problemset/contest/{args[0]}/"
+        url = f"http://quera.ir/problemset/contest/{args[0]}/"
         driver.get(url)
         logging.info("URL loaded")
 
