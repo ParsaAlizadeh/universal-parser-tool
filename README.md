@@ -41,8 +41,12 @@ class Parser:
         # Your Code
         return sample
 ```
+`driver` refers to selenium webdriver. Read selenium document for more information.
+`args` is the same as `<PARSER COMMANDS>` and it is a list of arguments passed to the parser.
+It is recommended to use `logging` to output info about parser condition.
+
 The return object must be a list:
-`[[in0, ans0], [in1, ans1], ... [in_n, ans_n]]`
+`[[in_0, ans_0], [in_1, ans_1], ... [in_n, ans_n]]`
 
 where `in_i` and `ans_i` are strings equal to sample i.
 
