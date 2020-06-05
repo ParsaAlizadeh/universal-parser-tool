@@ -1,16 +1,23 @@
 from selenium.webdriver import Firefox
-import logging
 from preparser import PreParser
 
 
-class Parser(PreParser):
+class Parser:
     @staticmethod
     def get_sample(driver:Firefox, args:list) -> list:
         if len(args) != 1:
             raise Exception("Arguments are not correct")
 
         url = f"http://quera.ir/problemset/contest/{args[0]}/"
-        driver.get(url)
-        logging.info("URL loaded")
+        PreParser.load_url(driver, url)
 
-        return super().get_sample(driver, args)
+        sample = PreParser.get_sample(driver)
+
+        if len(sample) % 2 == 1:
+            raise Exception("found odd number of <pre> elements")
+
+        result = []
+        for i in range(0, len(sample), 2):
+            result.append([sample[i], sample[i + 1]])
+
+        return result

@@ -1,5 +1,6 @@
 from selenium.webdriver import Firefox
 from selenium.webdriver.firefox.options import Options
+from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 import atcoder, quera, codechef
 import os, sys, logging
 
@@ -10,8 +11,7 @@ PARSERS = {"atcoder": atcoder,
 
 
 def write_to_file(string:str, filename:str):
-    if string[-1] != '\n':
-        string += '\n'
+    string = string.strip() + "\n"
     with open(filename, "w") as file:
         file.write(string)
 
@@ -34,14 +34,17 @@ if main_parser is None:
 
 main_parser = main_parser.Parser
 
+capa = DesiredCapabilities.FIREFOX
+capa["pageLoadStrategy"] = "none"
 opt = Options()
 opt.add_argument("--headless")
-driver = Firefox(options=opt)
+driver = Firefox(options=opt, desired_capabilities=capa)
 logging.info("driver loaded")
 
 logging.info(f"Parser \"{args[0]}\" called")
 result = main_parser.get_sample(driver, args[1:])
 logging.info("samples parsed")
+
 for i in range(len(result)):
     write_to_file(result[i][0], f"in{i}.txt")
     write_to_file(result[i][1], f"ans{i}.txt")

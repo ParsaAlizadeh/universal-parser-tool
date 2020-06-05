@@ -1,5 +1,6 @@
 from selenium.webdriver import Firefox
-import re, logging
+from preparser import PreParser
+import re
 
 
 class Parser:
@@ -9,8 +10,7 @@ class Parser:
             raise Exception("Arguments are not correct")
 
         url = f"http://atcoder.jp/contests/{args[0]}/tasks/{args[0]}_{args[1]}"
-        driver.get(url)
-        logging.info("URL loaded")
+        PreParser.load_url(driver, url)
 
         pattern = re.compile(r"pre\-sample\d")
         elements = driver.find_elements_by_css_selector("pre")
@@ -20,7 +20,7 @@ class Parser:
                 sample.append(elem.text)
 
         if len(sample) % 2 == 1:
-            raise Exception("Inputs and Outputs not the same number")
+            raise Exception("found odd number of <pre> elements")
 
         result = []
         for i in range(0, len(sample), 2):
