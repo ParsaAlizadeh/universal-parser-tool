@@ -1,11 +1,12 @@
 from selenium.webdriver import Firefox
 from selenium.webdriver.firefox.options import Options
-import atcoder, quera
+import atcoder, quera, codechef
 import os, sys, logging
 
 
 PARSERS = {"atcoder": atcoder,
-           "quera" : quera}
+           "quera": quera,
+           "codechef": codechef}
 
 
 def write_to_file(string:str, filename:str):
