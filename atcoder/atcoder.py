@@ -24,7 +24,3 @@ class Parser:
             result.append([sample[i], sample[i + 1]])
 
         return result
-
-    @staticmethod
-    def get_structure(args:list) -> list:
-        return args
