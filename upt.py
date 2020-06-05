@@ -1,7 +1,10 @@
 from selenium.webdriver import Firefox
 from selenium.webdriver.firefox.options import Options
-from atcoder import atcoder
+import atcoder
 import os, sys, logging
+
+
+PARSERS = {"atcoder": atcoder}
 
 
 def write_to_file(string:str, filename:str):
@@ -17,7 +20,6 @@ def excepthook(type, value, traceback):
 
 sys.excepthook = excepthook
 logging.basicConfig(level=logging.INFO, format="== [%(levelname)s] %(message)s")
-PARSERS = {"atcoder": atcoder}
 
 args = sys.argv[1:]
 
