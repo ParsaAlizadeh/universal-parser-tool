@@ -3,12 +3,20 @@ from preparser import PreParser
 
 
 class Parser:
+    TYPE = {"con": "contest",
+            "oly": "olympiad",
+            "uni": "university"}
+
     @staticmethod
     def get_sample(driver:Firefox, args:list) -> list:
-        if len(args) != 1:
-            raise Exception("Arguments are not correct")
+        if len(args) != 2:
+            raise Exception("arguments are not correct")
 
-        url = f"http://quera.ir/problemset/contest/{args[0]}/"
+        tp = Parser.TYPE.get(args[0])
+        if tp is None:
+            raise Exception("this type not supported")
+
+        url = f"http://quera.ir/problemset/{tp}/{args[1]}/"
         PreParser.load_url(driver, url)
 
         sample = PreParser.get_sample(driver)
