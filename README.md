@@ -22,9 +22,15 @@ You can use `upt` like this script:
 
 `upt <PARSER> <PARSER COMMANDS>`
 
-The parsers are not complete yet. for now atcoder is available. for example:
 
-`upt atcoder abc169 a`
+## Supported Parser
+
+In this time, these judges have parsers. You can find more info about them
+in their directory.
+
+- AtCoder
+- Codechef
+- Quera
 
 ## Manual Parser
 
