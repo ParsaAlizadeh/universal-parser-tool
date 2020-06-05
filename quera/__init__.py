@@ -1,26 +1,16 @@
 from selenium.webdriver import Firefox
-import re, logging
+import logging
+from preparser import PreParser
 
 
-class Parser:
+class Parser(PreParser):
     @staticmethod
     def get_sample(driver:Firefox, args:list) -> list:
-        logging.warn("Make sure that there is no <pre> other than input/output")
+        if len(args) != 1:
+            raise Exception("Arguments are not correct")
+
         url = f"http://quera.ir/problemset/contest/{args[0]}/"
         driver.get(url)
         logging.info("URL loaded")
 
-        elements = driver.find_elements_by_css_selector("pre")
-        sample = []
-        for elem in elements:
-            if len(elem.text) > 0:
-                sample.append(elem.text)
-
-        if len(sample) % 2 == 1:
-            raise Exception("Inputs and Outputs not the same number")
-
-        result = []
-        for i in range(0, len(sample), 2):
-            result.append([sample[i], sample[i + 1]])
-
-        return result
+        return super().get_sample(driver, args)
