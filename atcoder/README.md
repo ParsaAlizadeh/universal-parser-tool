@@ -1,9 +1,7 @@
 # AtCoder
 
-AtCoder specify problems using this structure:
-
+### URL Structure
 `https://atcoder.jp/contests/<CONTEST>/tasks/<CONTEST>_<PROBLEM INDEX>`
 
-Use this command to parse a problem:
-
+### upt Script
 `upt atcoder <CONTEST> <PPOBLEM_INDEX>`

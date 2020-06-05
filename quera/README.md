@@ -1,9 +1,7 @@
 # Quera
 
-Quera use this format to specify problems:
-
+### URL Structure
 `https://quera.ir/problemset/contest/<PROBLEM CODE>/<PROBLEM NAME>`
 
-Simply run below command to parse a problem:
-
+### upt Script
 `upt quera <PROBLEM CODE>`
