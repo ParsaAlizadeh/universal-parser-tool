@@ -1,10 +1,11 @@
 from selenium.webdriver import Firefox
 from selenium.webdriver.firefox.options import Options
-import atcoder
+import atcoder, quera
 import os, sys, logging
 
 
-PARSERS = {"atcoder": atcoder}
+PARSERS = {"atcoder": atcoder,
+           "quera" : quera}
 
 
 def write_to_file(string:str, filename:str):
@@ -37,6 +38,7 @@ opt.add_argument("--headless")
 driver = Firefox(options=opt)
 logging.info("driver loaded")
 
+logging.info(f"Parser \"{args[0]}\" called")
 result = main_parser.get_sample(driver, args[1:])
 logging.info("samples parsed")
 for i in range(len(result)):
