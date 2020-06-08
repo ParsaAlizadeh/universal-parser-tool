@@ -2,7 +2,7 @@ from selenium.webdriver import Firefox
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
-import logging
+import logging, requests
 
 
 class PreParser:
@@ -26,6 +26,9 @@ class PreParser:
         `driver.get(url)`. In this way, driver just wait for loading `<pre>` tags. So it
         is faster than normal mode.
         """
+        req = requests.get(url)
+        req.raise_for_status()
+
         wait = WebDriverWait(driver, 20)
         driver.get(url)
         wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, "pre")))
