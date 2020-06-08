@@ -18,7 +18,6 @@ class Parser:
         elements = driver.find_elements_by_css_selector("pre")
         sample = []
         for elem in elements:
-            print(elem.text)
             if pattern.match(elem.get_attribute("id")) and len(elem.text) > 0:
                 sample.append(elem.text)
 

@@ -25,7 +25,6 @@ def write_to_file(string: str, filename: str):
 
 def excepthook(type, value, traceback):
     logging.error(value)
-    sys.__excepthook__(type, value, traceback)
 
 
 sys.excepthook = excepthook
