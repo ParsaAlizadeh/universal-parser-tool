@@ -12,9 +12,8 @@ https://selenium-python.readthedocs.io/installation.html
 The main idea is based on [this repository](https://github.com/xalanq/cf-tool).
 So add `cf` file to your PATH.
 
-In linux, you can add `upt` file to your PATH and use it as well.
-Windows users must create their own batch file to run this code.
-
+For using globaly, you must add a script to your PATH. You can find a sample
+bash file in `upt.example`
 
 ## Parse
 
