@@ -1,0 +1,3 @@
+[console_scripts]
+upt = upt.__main__:main
+

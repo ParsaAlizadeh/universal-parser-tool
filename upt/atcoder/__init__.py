@@ -1,5 +1,5 @@
 import re
-from utils import Utils, Driver
+from upt.utils import Utils, Driver
 
 
 class Parser:

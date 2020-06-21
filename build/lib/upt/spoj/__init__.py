@@ -1,4 +1,4 @@
-from utils import Utils, Driver
+from upt.utils import Utils, Driver
 
 
 class Parser:
@@ -8,7 +8,7 @@ class Parser:
             raise Exception("arguments are not correct")
 
         driver = Driver()
-        url = f"http://www.codechef.com/problems/{args[0]}"
+        url = f"http://www.spoj.com/problems/{args[0]}/"
         Utils.load_url(driver, url)
 
         sample = Utils.get_sample(driver)

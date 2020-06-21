@@ -2,7 +2,9 @@
 
 ## Install
 
-Make sure that python3 is installed on your system and it is on your PATH.
+Simple and straight. Make sure you have Python3 and pip. Then install using this command.
+
+`pip install universial-parser-tool`
 
 This script need selenium to run. Below link has explained how to install selenium for python.
 Firefox is the default driver for this code, so install Firefox and it's driver as in link below.
@@ -10,10 +12,9 @@ Firefox is the default driver for this code, so install Firefox and it's driver 
 https://selenium-python.readthedocs.io/installation.html
 
 The main idea is based on [this repository](https://github.com/xalanq/cf-tool).
-So add `cf` file to your PATH.
+So you must add `cf` to your PATH.
 
-For using globaly, you must add a script to your PATH. You can find a sample
-bash file in `upt.example`
+After installing, `upt` command will added to your PATH.
 
 ## Parse
 

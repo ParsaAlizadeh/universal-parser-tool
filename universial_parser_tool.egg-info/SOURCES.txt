@@ -1,0 +1,13 @@
+README.md
+setup.py
+universial_parser_tool.egg-info/PKG-INFO
+universial_parser_tool.egg-info/SOURCES.txt
+universial_parser_tool.egg-info/dependency_links.txt
+universial_parser_tool.egg-info/entry_points.txt
+universial_parser_tool.egg-info/requires.txt
+universial_parser_tool.egg-info/top_level.txt
+upt/atcoder/__init__.py
+upt/codechef/__init__.py
+upt/quera/__init__.py
+upt/spoj/__init__.py
+upt/utils/__init__.py
