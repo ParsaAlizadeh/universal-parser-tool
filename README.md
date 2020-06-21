@@ -5,7 +5,7 @@
 Make sure that python3 is installed on your system and it is on your PATH.
 
 This script need selenium to run. Below link has explained how to install selenium for python.
-Firefox is the default driver for this code, so install Firefox and it's driver in link below.
+Firefox is the default driver for this code, so install Firefox and it's driver as in link below.
 
 https://selenium-python.readthedocs.io/installation.html
 
@@ -51,11 +51,7 @@ class Parser:
 It is recommended to use `logging` to output info about parser condition.
 
 Also there are some pre-written codes in utils that can help to make your parser simpler.
-
-The return object must be a list:
-`[[in_0, ans_0], [in_1, ans_1], ... [in_n, ans_n]]`
-
-where `in_i` and `ans_i` are strings equal to sample i.
+For more information, read utils source or other parsers.
 
 - Import your `<PARSER>` in `upt.py` and add the package to `PARSER` variable.
 
