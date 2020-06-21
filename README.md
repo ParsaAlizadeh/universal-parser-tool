@@ -32,6 +32,9 @@ in their directory.
 - Spoj
 - Quera
 
+*NOTE*: You may use parser for practice problems. During a contest, some of judges need
+authentication that not supported by `upt` at this time. 
+
 ## Manual Parser
 
 You can write your own parser for different judges.
@@ -39,13 +42,12 @@ You can write your own parser for different judges.
 - Create a directory named `<PARSER>` and a python file named `__init__.py` inside it.
 You must write your parser in this code
 
-- In `__init__.py` there must be a class named `Parser` and has method `get_sample`.
+- In `__init__.py` there must be a class named `Parser` and has method `parse`.
 ```python
 class Parser:
     @staticmethod
     def parse(args):
         # Your Code
-        return sample
 ```
 `args` is the same as `<PARSER COMMANDS>` and it is a list of arguments passed to the parser.
 It is recommended to use `logging` to output info about parser condition.

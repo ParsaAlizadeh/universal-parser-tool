@@ -1,4 +1,4 @@
-# Codechef
+# Spoj
 
 ### URL Structure
 `https://www.spoj.com/problems/<PROBLEM NAME>/`
