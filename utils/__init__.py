@@ -5,7 +5,7 @@ from selenium.webdriver.common.by import By
 import logging, requests
 
 
-class PreParser:
+class Utils:
     @staticmethod
     def get_sample(driver: Firefox) -> list:
         """

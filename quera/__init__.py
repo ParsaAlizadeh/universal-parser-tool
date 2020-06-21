@@ -1,6 +1,6 @@
 from selenium.webdriver import Firefox
 
-from preparser import PreParser
+from utils import Utils
 
 
 class Parser:
@@ -18,7 +18,7 @@ class Parser:
             raise Exception("this type not supported")
 
         url = f"http://quera.ir/problemset/{tp}/{args[1]}/"
-        PreParser.load_url(driver, url)
+        Utils.load_url(driver, url)
 
-        sample = PreParser.get_sample(driver)
-        return PreParser.even_odd(sample)
+        sample = Utils.get_sample(driver)
+        return Utils.even_odd(sample)

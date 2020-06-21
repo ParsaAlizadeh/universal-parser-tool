@@ -1,6 +1,6 @@
 from selenium.webdriver import Firefox
 
-from preparser import PreParser
+from utils import Utils
 
 
 class Parser:
@@ -10,9 +10,9 @@ class Parser:
             raise Exception("Arguments are not correct")
 
         url = f"http://www.codechef.com/problems/{args[0]}"
-        PreParser.load_url(driver, url)
+        Utils.load_url(driver, url)
 
-        sample = PreParser.get_sample(driver)
+        sample = Utils.get_sample(driver)
 
         s1 = "Input:\n"
         s2 = "Output:\n"
