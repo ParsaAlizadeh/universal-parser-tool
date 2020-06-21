@@ -25,7 +25,7 @@ logging.basicConfig(level=logging.INFO, format="== [%(levelname)s] %(message)s")
 args = sys.argv[1:]
 
 if len(args) < 2:
-    raise Exception("Arguments not enough")
+    raise Exception("arguments not enough")
 
 main_parser = PARSERS.get(args[0])
 if main_parser is None:
@@ -37,7 +37,7 @@ logging.info(f"Parser \"{args[0]}\" called")
 main_parser.parse(args[1:])
 logging.info(f"Parser \"{args[0]}\" finished")
 
+logging.info("removing log files")
 os.system("rm *.log")
-logging.info("all logs removed")
 
 os.system("cf gen")

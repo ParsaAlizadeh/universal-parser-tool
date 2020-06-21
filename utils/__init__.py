@@ -11,16 +11,16 @@ import requests
 
 class Driver(Firefox):
     def __init__(self):
+        logging.info("loading driver")
         capa = DesiredCapabilities.FIREFOX
         capa["pageLoadStrategy"] = "none"
         opt = Options()
         opt.add_argument("--headless")
         super().__init__(options=opt, desired_capabilities=capa)
-        logging.info("driver loaded")
 
     def __del__(self):
+        logging.info("quiting driver")
         self.quit()
-        logging.info("driver quited")
 
 
 class Utils:
@@ -45,6 +45,7 @@ class Utils:
         `driver.get(url)`. In this way, driver just wait for loading `<pre>` tags. So it
         is faster than normal mode.
         """
+        logging.info("loading URL")
         req = requests.get(url)
         req.raise_for_status()
 
@@ -52,7 +53,6 @@ class Utils:
         driver.get(url)
         wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, "pre")))
         driver.execute_script("window.stop();")
-        logging.info("URL loaded")
 
     @staticmethod
     def even_odd(sample: list) -> list:
