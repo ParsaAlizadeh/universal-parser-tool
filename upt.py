@@ -2,9 +2,7 @@ import logging
 import os
 import sys
 
-from selenium.webdriver import Firefox
-from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
-from selenium.webdriver.firefox.options import Options
+from utils import Driver
 
 import atcoder
 import codechef
@@ -35,21 +33,11 @@ if main_parser is None:
 
 main_parser = main_parser.Parser
 
-capa = DesiredCapabilities.FIREFOX
-capa["pageLoadStrategy"] = "none"
-opt = Options()
-opt.add_argument("--headless")
-driver = Firefox(options=opt, desired_capabilities=capa)
-logging.info("driver loaded")
-
 logging.info(f"Parser \"{args[0]}\" called")
-main_parser.parse(driver, args[1:])
-
+main_parser.parse(args[1:])
 logging.info(f"Parser \"{args[0]}\" finished")
 
 os.system("rm *.log")
 logging.info("all logs removed")
 
 os.system("cf gen")
-
-driver.quit()

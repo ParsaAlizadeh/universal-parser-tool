@@ -43,11 +43,10 @@ You must write your parser in this code
 ```python
 class Parser:
     @staticmethod
-    def parse(driver, args):
+    def parse(args):
         # Your Code
         return sample
 ```
-`driver` refers to selenium webdriver. Read selenium document for more information.
 `args` is the same as `<PARSER COMMANDS>` and it is a list of arguments passed to the parser.
 It is recommended to use `logging` to output info about parser condition.
 

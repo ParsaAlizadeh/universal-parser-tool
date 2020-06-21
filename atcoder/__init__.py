@@ -1,16 +1,14 @@
 import re
-
-from selenium.webdriver import Firefox
-
-from utils import Utils
+from utils import Utils, Driver
 
 
 class Parser:
     @staticmethod
-    def parse(driver: Firefox, args: list):
+    def parse(args: list):
         if len(args) != 2:
-            raise Exception("Arguments are not correct")
+            raise Exception("arguments are not correct")
 
+        driver = Driver()
         url = f"http://atcoder.jp/contests/{args[0]}/tasks/{args[0]}_{args[1]}"
         Utils.load_url(driver, url)
 

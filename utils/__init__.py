@@ -1,9 +1,26 @@
 from selenium.webdriver import Firefox
+from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
+from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
+
 import logging
 import requests
+
+
+class Driver(Firefox):
+    def __init__(self):
+        capa = DesiredCapabilities.FIREFOX
+        capa["pageLoadStrategy"] = "none"
+        opt = Options()
+        opt.add_argument("--headless")
+        super().__init__(options=opt, desired_capabilities=capa)
+        logging.info("driver loaded")
+
+    def __del__(self):
+        self.quit()
+        logging.info("driver quited")
 
 
 class Utils:

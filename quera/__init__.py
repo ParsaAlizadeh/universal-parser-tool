@@ -1,6 +1,4 @@
-from selenium.webdriver import Firefox
-
-from utils import Utils
+from utils import Utils, Driver
 
 
 class Parser:
@@ -9,7 +7,7 @@ class Parser:
             "uni": "university"}
 
     @staticmethod
-    def parse(driver: Firefox, args: list):
+    def parse(args: list):
         if len(args) != 2:
             raise Exception("arguments are not correct")
 
@@ -17,6 +15,7 @@ class Parser:
         if tp is None:
             raise Exception(f"type \"{args[0]}\" not supported")
 
+        driver = Driver()
         url = f"http://quera.ir/problemset/{tp}/{args[1]}/"
         Utils.load_url(driver, url)
 
