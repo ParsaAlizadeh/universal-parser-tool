@@ -2,7 +2,8 @@ from selenium.webdriver import Firefox
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
-import logging, requests
+import logging
+import requests
 
 
 class Utils:
@@ -12,6 +13,7 @@ class Utils:
         After loading web page, this command finds all `<pre>` tags and output list of
         texts in them.
         """
+        logging.info("reading samples")
         elements = driver.find_elements_by_css_selector("pre")
         sample = []
         for elem in elements:
@@ -62,3 +64,16 @@ class Utils:
             ind2 = prt.find(out)
             result.append([prt[ind1 + len(inp): ind2], prt[ind2 + len(out):]])
         return result
+
+    @staticmethod
+    def write_to_file(string: str, filename: str):
+        string = string.strip() + "\n"
+        with open(filename, "w") as file:
+            file.write(string)
+
+    @staticmethod
+    def write_samples(samples: list):
+        logging.info("writing samples")
+        for i in range(len(samples)):
+            Utils.write_to_file(samples[i][0], f"in{i + 1}.txt")
+            Utils.write_to_file(samples[i][1], f"ans{i + 1}.txt")

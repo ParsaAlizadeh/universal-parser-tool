@@ -9,16 +9,17 @@ class Parser:
             "uni": "university"}
 
     @staticmethod
-    def get_sample(driver: Firefox, args: list) -> list:
+    def parse(driver: Firefox, args: list):
         if len(args) != 2:
             raise Exception("arguments are not correct")
 
         tp = Parser.TYPE.get(args[0])
         if tp is None:
-            raise Exception("this type not supported")
+            raise Exception(f"type \"{args[0]}\" not supported")
 
         url = f"http://quera.ir/problemset/{tp}/{args[1]}/"
         Utils.load_url(driver, url)
 
         sample = Utils.get_sample(driver)
-        return Utils.even_odd(sample)
+        result = Utils.even_odd(sample)
+        Utils.write_samples(result)

@@ -43,13 +43,15 @@ You must write your parser in this code
 ```python
 class Parser:
     @staticmethod
-    def get_sample(driver, args):
+    def parse(driver, args):
         # Your Code
         return sample
 ```
 `driver` refers to selenium webdriver. Read selenium document for more information.
 `args` is the same as `<PARSER COMMANDS>` and it is a list of arguments passed to the parser.
 It is recommended to use `logging` to output info about parser condition.
+
+Also there are some pre-written codes in utils that can help to make your parser simpler.
 
 The return object must be a list:
 `[[in_0, ans_0], [in_1, ans_1], ... [in_n, ans_n]]`

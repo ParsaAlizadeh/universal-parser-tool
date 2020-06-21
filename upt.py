@@ -17,12 +17,6 @@ PARSERS = {"atcoder": atcoder,
            "spoj": spoj}
 
 
-def write_to_file(string: str, filename: str):
-    string = string.strip() + "\n"
-    with open(filename, "w") as file:
-        file.write(string)
-
-
 def excepthook(type, value, traceback):
     logging.error(value)
 
@@ -49,12 +43,9 @@ driver = Firefox(options=opt, desired_capabilities=capa)
 logging.info("driver loaded")
 
 logging.info(f"Parser \"{args[0]}\" called")
-result = main_parser.get_sample(driver, args[1:])
-logging.info("samples parsed")
+main_parser.parse(driver, args[1:])
 
-for i in range(len(result)):
-    write_to_file(result[i][0], f"in{i}.txt")
-    write_to_file(result[i][1], f"ans{i}.txt")
+logging.info(f"Parser \"{args[0]}\" finished")
 
 os.system("rm *.log")
 logging.info("all logs removed")
