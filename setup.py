@@ -6,7 +6,7 @@ with open('README.md') as readme_file:
 
 setup(
     name='universial-parser-tool',
-    version='0.1.3',
+    version='0.1.4',
     description='Useful tool to speedup testing codes in cp-programming',
     author='Parsa Alizadeh',
     author_email='parsa.alizadeh1@gmail.com',
@@ -18,6 +18,6 @@ setup(
         'selenium'
     ],
     entry_points={
-        'console_scripts': ['upt=upt.__main__:main']
+        'console_scripts': ['upt=upt.__init__:main']
     }
 )
