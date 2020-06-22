@@ -27,7 +27,7 @@ def main():
     if main_parser is None:
         raise Exception(f"Parser \"{args[0]}\" not found")
 
-    main_parser = main_parser.Parser
+    main_parser = main_parser.Parser()
 
     logging.info(f"Parser \"{args[0]}\" called")
     main_parser.parse(args[1:])

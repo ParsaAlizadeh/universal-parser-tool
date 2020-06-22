@@ -15,7 +15,8 @@ setup(
     long_description=README + '\n',
     packages=find_packages(include=['upt', 'upt.*']),
     install_requires=[
-        'selenium'
+        'selenium',
+        'requests'
     ],
     entry_points={
         'console_scripts': ['upt=upt.__init__:main']

@@ -39,7 +39,7 @@ class Utils:
         return sample
 
     @staticmethod
-    def load_url(driver, url):
+    def load_url(driver: Firefox, url):
         """
         If your parser depends on `<pre>` tags, it is good to use this method instead of
         `driver.get(url)`. In this way, driver just wait for loading `<pre>` tags. So it
