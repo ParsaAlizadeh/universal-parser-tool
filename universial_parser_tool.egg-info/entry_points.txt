@@ -1,3 +1,0 @@
-[console_scripts]
-upt = upt.__init__:main
-
