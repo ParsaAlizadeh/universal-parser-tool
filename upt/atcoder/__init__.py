@@ -35,5 +35,7 @@ class Parser:
         configparser.read("config.ini")
         configparser["atcoder"]["user"] = user
         configparser["atcoder"]["pass"] = pwd
-        configparser.write("config.ini")
+
+        with open("./config.ini", "w") as file:
+            configparser.write(file)
 

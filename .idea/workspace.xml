@@ -1,7 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3986f1fd-8ef1-40c3-8d7d-6df4228faacf" name="Default Changelist" comment="" />
+    <list default="true" id="3986f1fd-8ef1-40c3-8d7d-6df4228faacf" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../universal-parser-tool/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../universal-parser-tool/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../universal-parser-tool/.idea/universial-parser-tool.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../universal-parser-tool/.idea/universal-parser-tool.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../universal-parser-tool/build/lib/upt/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../universal-parser-tool/build/lib/upt/atcoder/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../universal-parser-tool/build/lib/upt/codechef/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../universal-parser-tool/build/lib/upt/quera/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../universal-parser-tool/build/lib/upt/spoj/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../universal-parser-tool/build/lib/upt/utils/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../universal-parser-tool/dist/universial-parser-tool-0.1.4.tar.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../universal-parser-tool/dist/universial_parser_tool-0.1.4-py3-none-any.whl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../universal-parser-tool/setup.py" beforeDir="false" afterPath="$PROJECT_DIR$/../universal-parser-tool/setup.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../universal-parser-tool/universial_parser_tool.egg-info/PKG-INFO" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../universal-parser-tool/universial_parser_tool.egg-info/SOURCES.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../universal-parser-tool/universial_parser_tool.egg-info/dependency_links.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../universal-parser-tool/universial_parser_tool.egg-info/entry_points.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../universal-parser-tool/universial_parser_tool.egg-info/requires.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../universal-parser-tool/universial_parser_tool.egg-info/top_level.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../universal-parser-tool/upt/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../universal-parser-tool/upt/__init__.py" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,9 +42,21 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../universal-parser-tool/README.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="29">
+                <caret line="23" selection-start-line="23" selection-end-line="23" />
+              </first_editor>
+              <second_editor />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../universal-parser-tool/upt/utils/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="779">
+            <state relative-caret-position="494">
               <caret line="41" column="32" selection-start-line="41" selection-start-column="32" selection-end-line="41" selection-end-column="32" />
               <folding>
                 <element signature="e#0#38#0" expanded="true" />
@@ -37,8 +68,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/../universal-parser-tool/upt/atcoder/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="599">
-              <caret line="32" selection-start-line="32" selection-end-line="32" />
+            <state relative-caret-position="342">
+              <caret line="18" column="66" selection-start-line="18" selection-start-column="66" selection-end-line="18" selection-end-column="66" />
               <folding>
                 <element signature="e#0#35#0" expanded="true" />
               </folding>
@@ -89,6 +120,8 @@
         <option value="$PROJECT_DIR$/upt/__init__.py" />
         <option value="$PROJECT_DIR$/upt/atcoder/__init__.py" />
         <option value="$PROJECT_DIR$/../universal-parser-tool/upt/atcoder/__init__.py" />
+        <option value="$PROJECT_DIR$/../universal-parser-tool/README.md" />
+        <option value="$PROJECT_DIR$/../universal-parser-tool/setup.py" />
       </list>
     </option>
   </component>
@@ -318,7 +351,7 @@
       <updated>1592751912864</updated>
       <workItem from="1592751921037" duration="5471000" />
       <workItem from="1592758533339" duration="3057000" />
-      <workItem from="1592840595364" duration="2883000" />
+      <workItem from="1592840595364" duration="3145000" />
     </task>
     <task id="LOCAL-00001" summary="readme edited">
       <created>1592756424405</created>
@@ -341,16 +374,24 @@
       <option name="project" value="LOCAL" />
       <updated>1592842727839</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Fix bugs on auth">
+      <created>1592843551381</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1592843551381</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="11826000" />
+    <option name="totallyTimeSpent" value="12088000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="27" width="1920" height="1053" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17502668" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17502668" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Messages" />
@@ -448,7 +489,8 @@
     <MESSAGE value="readme edited" />
     <MESSAGE value="Adding authentication for atcoder" />
     <MESSAGE value="Fix typo" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix typo" />
+    <MESSAGE value="Fix bugs on auth" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix bugs on auth" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/../universal-parser-tool/upt/utils/README.md">
@@ -507,16 +549,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../universal-parser-tool/upt/utils/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="779">
-          <caret line="41" column="32" selection-start-line="41" selection-start-column="32" selection-end-line="41" selection-end-column="32" />
-          <folding>
-            <element signature="e#0#38#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../universal-parser-tool/upt/config.ini">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -541,11 +573,21 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/../universal-parser-tool/upt/utils/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="494">
+          <caret line="41" column="32" selection-start-line="41" selection-start-column="32" selection-end-line="41" selection-end-column="32" />
+          <folding>
+            <element signature="e#0#38#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/../universal-parser-tool/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor>
-            <caret column="9" lean-forward="true" selection-start-column="9" selection-end-column="9" />
+          <first_editor relative-caret-position="29">
+            <caret line="23" selection-start-line="23" selection-end-line="23" />
           </first_editor>
           <second_editor />
         </state>
@@ -570,8 +612,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/../universal-parser-tool/upt/atcoder/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="599">
-          <caret line="32" selection-start-line="32" selection-end-line="32" />
+        <state relative-caret-position="342">
+          <caret line="18" column="66" selection-start-line="18" selection-start-column="66" selection-end-line="18" selection-end-column="66" />
           <folding>
             <element signature="e#0#35#0" expanded="true" />
           </folding>

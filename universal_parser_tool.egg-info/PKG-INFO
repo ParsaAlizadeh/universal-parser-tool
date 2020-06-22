@@ -1,18 +1,18 @@
 Metadata-Version: 2.1
-Name: universial-parser-tool
-Version: 0.1.4
+Name: universal-parser-tool
+Version: 0.2.1
 Summary: Useful tool to speedup testing codes in cp-programming
-Home-page: https://github.com/ParsaAlizadeh/universial-parser-tool
+Home-page: https://github.com/ParsaAlizadeh/universal-parser-tool
 Author: Parsa Alizadeh
 Author-email: parsa.alizadeh1@gmail.com
 License: UNKNOWN
-Description: # Universial Problem Parser Tool
+Description: # Universal Problem Parser Tool
         
         ## Install
         
         Simple and straight. Make sure you have Python3 and pip. Then install using this command.
         
-        `pip install universial-parser-tool`
+        `pip install universal-parser-tool`
         
         This script need selenium to run. Below link has explained how to install selenium for python.
         Firefox is the default driver for this code, so install Firefox and it's driver as in link below.

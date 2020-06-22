@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/universial-parser-tool.iml" filepath="$PROJECT_DIR$/.idea/universial-parser-tool.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../universal-parser-tool/.idea/universal-parser-tool.iml" filepath="$PROJECT_DIR$/../universal-parser-tool/.idea/universal-parser-tool.iml" />
     </modules>
   </component>
 </project>

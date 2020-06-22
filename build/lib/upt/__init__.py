@@ -27,16 +27,16 @@ def main():
     if main_parser is None:
         raise Exception(f"Parser \"{args[0]}\" not found")
 
-    main_parser = main_parser.Parser
+    main_parser = main_parser.Parser()
 
     logging.info(f"Parser \"{args[0]}\" called")
     main_parser.parse(args[1:])
     logging.info(f"Parser \"{args[0]}\" finished")
 
+    os.system("cf gen")
+
     logging.info("removing log files")
     os.system("rm *.log")
-
-    os.system("cf gen")
 
 
 if __name__ == "__main__":
