@@ -5,7 +5,7 @@ with open('README.md') as readme_file:
     README = readme_file.read()
 
 setup(
-    name='universial-parser-tool',
+    name='universal-parser-tool',
     version='0.2.0',
     description='Useful tool to speedup testing codes in cp-programming',
     author='Parsa Alizadeh',

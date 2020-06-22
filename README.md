@@ -1,4 +1,4 @@
-# Universial Problem Parser Tool
+# Universal Problem Parser Tool
 
 ## Install
 
