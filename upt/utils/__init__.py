@@ -7,6 +7,7 @@ from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
 import logging
 import requests
+import os
 
 
 class Driver(Firefox):
@@ -94,3 +95,7 @@ class Utils:
         for i in range(len(samples)):
             Utils.write_to_file(samples[i][0], f"in{i + 1}.txt")
             Utils.write_to_file(samples[i][1], f"ans{i + 1}.txt")
+
+    @staticmethod
+    def generate():
+        os.system("cf gen")

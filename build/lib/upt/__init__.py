@@ -4,6 +4,7 @@ import sys
 
 from upt import quera, atcoder, codechef, spoj
 
+
 PARSERS = {"atcoder": atcoder,
            "quera": quera,
            "codechef": codechef,
@@ -36,7 +37,7 @@ def main():
     os.system("cf gen")
 
     logging.info("removing log files")
-    os.system("rm *.log")
+    os.system("rm geckodriver.log")
 
 
 if __name__ == "__main__":

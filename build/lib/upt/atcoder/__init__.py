@@ -1,16 +1,16 @@
 from upt.utils import Utils, Driver
 from configparser import ConfigParser
+from os.path import expanduser
 import getpass
 import re
 
 
 class Parser:
-    def __init__(self):
-        self.driver = Driver()
-
     def parse(self, args: list):
         if args[0] == "init":
             return self.initialize()
+
+        self.driver = Driver()
 
         url = f"http://atcoder.jp/contests/{args[0]}/tasks/{args[0]}_{args[1]}"
         Utils.load_url(self.driver, url)
@@ -27,13 +27,21 @@ class Parser:
 
     @staticmethod
     def initialize():
+        print("=============================")
         print("Authentication for atcoder.jp")
         user = input("Username: ")
         pwd = getpass.getpass("Password: ")
+        print("=============================")
 
+        home = expanduser("~/")
+        print(home)
         configparser = ConfigParser()
-        configparser.read("config.ini")
+        configparser.read(home + ".upt.ini")
+        if not configparser.has_section("atcoder"):
+            configparser.add_section("atcoder")
         configparser["atcoder"]["user"] = user
         configparser["atcoder"]["pass"] = pwd
-        configparser.write("config.ini")
+
+        with open(home + ".upt.ini", "w") as file:
+            configparser.write(file)
 

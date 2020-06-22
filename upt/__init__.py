@@ -4,6 +4,7 @@ import sys
 
 from upt import quera, atcoder, codechef, spoj
 
+
 PARSERS = {"atcoder": atcoder,
            "quera": quera,
            "codechef": codechef,
