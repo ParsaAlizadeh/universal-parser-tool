@@ -6,7 +6,7 @@ with open('README.md') as readme_file:
 
 setup(
     name='universal-parser-tool',
-    version='0.1.4',
+    version='0.1.5',
     description='Useful tool to speedup testing codes in cp-programming',
     author='Parsa Alizadeh',
     author_email='parsa.alizadeh1@gmail.com',
