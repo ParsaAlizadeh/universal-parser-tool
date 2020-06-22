@@ -28,7 +28,7 @@ class Parser:
     @staticmethod
     def initialize():
         print("Authentication for atcoder.jp")
-        user = getpass.getuser("Username: ")
+        user = input("Username: ")
         pwd = getpass.getpass("Password: ")
 
         configparser = ConfigParser()

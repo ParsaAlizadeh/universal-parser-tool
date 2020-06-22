@@ -4,7 +4,7 @@
 
 Simple and straight. Make sure you have Python3 and pip. Then install using this command.
 
-`pip install universial-parser-tool`
+`pip install universal-parser-tool`
 
 This script need selenium to run. Below link has explained how to install selenium for python.
 Firefox is the default driver for this code, so install Firefox and it's driver as in link below.
