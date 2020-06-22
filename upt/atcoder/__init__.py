@@ -27,12 +27,16 @@ class Parser:
 
     @staticmethod
     def initialize():
+        print("=============================")
         print("Authentication for atcoder.jp")
         user = input("Username: ")
         pwd = getpass.getpass("Password: ")
+        print("=============================")
 
         configparser = ConfigParser()
         configparser.read("config.ini")
+        if not configparser.has_section("atcoder"):
+            configparser.add_section("atcoder")
         configparser["atcoder"]["user"] = user
         configparser["atcoder"]["pass"] = pwd
 
