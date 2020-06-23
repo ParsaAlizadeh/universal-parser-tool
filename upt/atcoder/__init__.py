@@ -34,7 +34,6 @@ class Parser:
         print("=============================")
 
         home = expanduser("~/")
-        print(home)
         configparser = ConfigParser()
         configparser.read(home + ".upt.ini")
         if not configparser.has_section("atcoder"):
