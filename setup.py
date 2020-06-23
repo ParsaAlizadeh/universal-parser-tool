@@ -19,6 +19,6 @@ setup(
         'requests'
     ],
     entry_points={
-        'console_scripts': ['upt=upt.__init__:main']
+        'console_scripts': ['upt=upt:main']
     }
 )
