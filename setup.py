@@ -6,7 +6,7 @@ with open('README.md') as readme_file:
 
 setup(
     name='universal-parser-tool',
-    version='0.1.5',
+    version='0.1.6',
     description='Useful tool to speedup testing codes in cp-programming',
     author='Parsa Alizadeh',
     author_email='parsa.alizadeh1@gmail.com',
@@ -15,7 +15,8 @@ setup(
     long_description=README + '\n',
     packages=find_packages(include=['upt', 'upt.*']),
     install_requires=[
-        'selenium'
+        'selenium',
+        'requests'
     ],
     entry_points={
         'console_scripts': ['upt=upt.__init__:main']
