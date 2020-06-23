@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: universal-parser-tool
-Version: 0.1.6
+Version: 0.1.7
 Summary: Useful tool to speedup testing codes in cp-programming
 Home-page: https://github.com/ParsaAlizadeh/universial-parser-tool
 Author: Parsa Alizadeh
@@ -70,4 +70,5 @@ Description: # Universal Problem Parser Tool
         
         
 Platform: UNKNOWN
+Requires-Python: >=3.6
 Description-Content-Type: text/markdown
