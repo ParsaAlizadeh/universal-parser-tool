@@ -34,11 +34,6 @@ def main():
     main_parser.parse(args[1:])
     logging.info(f"Parser \"{args[0]}\" finished")
 
-    os.system("cf gen")
-
-    logging.info("removing log files")
-    os.system("rm geckodriver.log")
-
 
 if __name__ == "__main__":
     main()

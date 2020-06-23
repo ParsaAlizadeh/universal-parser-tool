@@ -17,7 +17,9 @@ class Driver(Firefox):
         capa["pageLoadStrategy"] = "none"
         opt = Options()
         opt.add_argument("--headless")
-        super().__init__(options=opt, desired_capabilities=capa)
+        super().__init__(options=opt, 
+                         desired_capabilities=capa,
+                         service_log_path=os.path.devnull)
 
     def __del__(self):
         logging.info("quiting driver")
