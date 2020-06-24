@@ -1,8 +1,14 @@
-from upt.utils import Utils, Driver
-from configparser import ConfigParser
-from os.path import expanduser
+from upt.utils import Utils, Driver, By 
+from upt.utils.loginmanager import LoginManager
+
+from selenium.webdriver.common.keys import Keys
+
 import getpass
-import re
+import re, time
+import logging
+
+
+logger = logging.getLogger("atcoder")
 
 
 class Parser:
@@ -11,9 +17,15 @@ class Parser:
             return self.initialize()
 
         self.driver = Driver()
+        
+        if "-l" in args:
+            self.login()
+            args.remove("-l")
 
-        url = f"http://atcoder.jp/contests/{args[0]}/tasks/{args[0]}_{args[1]}"
-        Utils.load_url(self.driver, url)
+        url = f"https://atcoder.jp/contests/{args[0]}/tasks/{args[0]}_{args[1]}"
+        self.driver.get(url)
+        Utils.wait_until(self.driver, By.CSS_SELECTOR, "pre")
+        # Utils.load_url(self.driver, url)
 
         pattern = re.compile(r"pre\-sample\d")
         elements = self.driver.find_elements_by_css_selector("pre")
@@ -25,22 +37,29 @@ class Parser:
         result = Utils.even_odd(sample)
         Utils.write_samples(result)
 
-    @staticmethod
-    def initialize():
-        print("=============================")
-        print("Authentication for atcoder.jp")
-        user = input("Username: ")
-        pwd = getpass.getpass("Password: ")
-        print("=============================")
+    def initialize(self):
+        login = LoginManager("atcoder")
+        login.get_auth()
+        login.write()
 
-        home = expanduser("~/")
-        configparser = ConfigParser()
-        configparser.read(home + ".upt.ini")
-        if not configparser.has_section("atcoder"):
-            configparser.add_section("atcoder")
-        configparser["atcoder"]["user"] = user
-        configparser["atcoder"]["pass"] = pwd
+    def login(self):
+        logger.info("Trying to login")
+        login = LoginManager("atcoder")
+        user, pwd = login.read_auth()
+        
+        url = "https://atcoder.jp/login"
+        self.driver.get(url)
+        Utils.wait_until(self.driver, By.ID, "username")
 
-        with open(home + ".upt.ini", "w") as file:
-            configparser.write(file)
+        user_box = self.driver.find_element_by_id("username")
+        user_box.send_keys(user)
+        pass_box = self.driver.find_element_by_id("password")
+        pass_box.send_keys(pwd)
+
+        user_box.send_keys(Keys.ENTER)
+        Utils.wait_until(self.driver, By.CSS_SELECTOR, ".alert")
+        alert = self.driver.find_element_by_css_selector(".alert")
+        
+        assert "Welcome" in alert.text, "login failed"
+        logger.info("Logged in")
 

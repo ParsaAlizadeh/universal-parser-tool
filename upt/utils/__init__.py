@@ -5,16 +5,22 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
+from upt.utils.loginmanager import LoginManager
+
 import logging
 import requests
 import os
 
 
+logger = logging.getLogger("utils")
+
+
 class Driver(Firefox):
-    def __init__(self):
-        logging.info("loading driver")
+    def __init__(self, nostrategy=True):
+        logger.info("Loading driver")
         capa = DesiredCapabilities.FIREFOX
-        capa["pageLoadStrategy"] = "none"
+        if nostrategy:
+            capa["pageLoadStrategy"] = "none"
         opt = Options()
         opt.add_argument("--headless")
         super().__init__(options=opt, 
@@ -22,18 +28,18 @@ class Driver(Firefox):
                          service_log_path=os.path.devnull)
 
     def __del__(self):
-        logging.info("quiting driver")
+        logger.info("Quiting driver")
         self.quit()
+    
+    def get(self, url):
+        logger.info("Loading URL")
+        super().get(url)
 
 
 class Utils:
     @staticmethod
     def get_sample(driver: Firefox) -> list:
-        """
-        After loading web page, this command finds all `<pre>` tags and output list of
-        texts in them.
-        """
-        logging.info("reading samples")
+        logger.info("Reading samples")
         elements = driver.find_elements_by_css_selector("pre")
         sample = []
         for elem in elements:
@@ -42,29 +48,15 @@ class Utils:
         return sample
 
     @staticmethod
-    def load_url(driver: Firefox, url):
-        """
-        If your parser depends on `<pre>` tags, it is good to use this method instead of
-        `driver.get(url)`. In this way, driver just wait for loading `<pre>` tags. So it
-        is faster than normal mode.
-        """
-        logging.info("loading URL")
-        req = requests.get(url)
-        req.raise_for_status()
-
+    def wait_until(driver, by, name):
         wait = WebDriverWait(driver, 20)
-        driver.get(url)
-        wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, "pre")))
+        wait.until(EC.presence_of_element_located((by, name)))
         driver.execute_script("window.stop();")
 
     @staticmethod
     def even_odd(sample: list) -> list:
-        """
-        Let sample be the list of all pre tags, then this method consider even index as
-        input and odd index as output.
-        """
         if len(sample) % 2 == 1:
-            raise Exception("found odd number of samples")
+            raise Exception("Found odd number of samples")
 
         result = []
         for i in range(0, len(sample), 2):
@@ -74,10 +66,6 @@ class Utils:
 
     @staticmethod
     def tag_sens(sample: list, inp: str = "Input:\n", out: str = "Output:\n") -> list:
-        """
-        If pre tags has a flag like `Input` to specify input or output, using this command
-        will generate the result. `inp` and `out` are the flags for input and output.
-        """
         result = []
         for prt in sample:
             ind1 = prt.find(inp)
@@ -93,7 +81,7 @@ class Utils:
 
     @staticmethod
     def write_samples(samples: list):
-        logging.info("writing samples")
+        logger.info("Writing samples")
         for i in range(len(samples)):
             Utils.write_to_file(samples[i][0], f"in{i + 1}.txt")
             Utils.write_to_file(samples[i][1], f"ans{i + 1}.txt")
@@ -101,3 +89,4 @@ class Utils:
     @staticmethod
     def generate():
         os.system("cf gen")
+

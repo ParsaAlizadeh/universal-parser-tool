@@ -11,28 +11,20 @@ PARSERS = {"atcoder": atcoder,
            "spoj": spoj}
 
 
-def excepthook(type, value, traceback):
-    logging.error(value)
-
-
 def main():
-    sys.excepthook = excepthook
-    logging.basicConfig(level=logging.INFO, format="== [%(levelname)s] %(message)s")
+    logging.basicConfig(level=logging.INFO, format="== [%(levelname)s] %(name)7s: %(message)s")
+    logger = logging.getLogger("main")
 
     args = sys.argv[1:]
-
-    if len(args) < 2:
-        raise Exception("arguments not enough")
-
     main_parser = PARSERS.get(args[0])
     if main_parser is None:
         raise Exception(f"Parser \"{args[0]}\" not found")
 
     main_parser = main_parser.Parser()
 
-    logging.info(f"Parser \"{args[0]}\" called")
+    logger.info(f"Parser \"{args[0]}\" called")
     main_parser.parse(args[1:])
-    logging.info(f"Parser \"{args[0]}\" finished")
+    logger.info(f"Parser \"{args[0]}\" finished")
 
 
 if __name__ == "__main__":

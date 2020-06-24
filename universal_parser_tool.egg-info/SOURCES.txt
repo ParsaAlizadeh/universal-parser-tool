@@ -12,3 +12,4 @@ upt/codechef/__init__.py
 upt/quera/__init__.py
 upt/spoj/__init__.py
 upt/utils/__init__.py
+upt/utils/loginmanager.py
