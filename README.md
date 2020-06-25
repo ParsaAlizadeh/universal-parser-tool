@@ -35,4 +35,4 @@ in their directory.
 - Quera
 
 **NOTE**: You may use the parser for practice problems. During a contest, some judges need to log in.
-For now, this feature is supported by atcoder parser. Universal Problem Parser Tool
+For now, this feature is supported by atcoder parser.

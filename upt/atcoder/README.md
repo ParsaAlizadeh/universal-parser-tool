@@ -1,12 +1,12 @@
 # AtCoder
 
-### URL Structure
+## URL Structure
 `https://atcoder.jp/contests/<CONTEST>/tasks/<CONTEST>_<PROBLEM INDEX>`
 
-### upt Script
+## upt Script
 `upt atcoder <CONTEST> <PPOBLEM_INDEX>`
 
-### Login
+## Login
 
 First, initialize your login information with this command.
 
