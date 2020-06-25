@@ -25,7 +25,6 @@ class Parser:
         url = f"https://atcoder.jp/contests/{args[0]}/tasks/{args[0]}_{args[1]}"
         self.driver.get(url)
         Utils.wait_until(self.driver, By.CSS_SELECTOR, "pre")
-        # Utils.load_url(self.driver, url)
 
         pattern = re.compile(r"pre\-sample\d")
         elements = self.driver.find_elements_by_css_selector("pre")
@@ -60,6 +59,6 @@ class Parser:
         Utils.wait_until(self.driver, By.CSS_SELECTOR, ".alert")
         alert = self.driver.find_element_by_css_selector(".alert")
         
-        assert "Welcome" in alert.text, "login failed"
+        assert "Welcome" in alert.text, "Login failed"
         logger.info("Logged in")
 

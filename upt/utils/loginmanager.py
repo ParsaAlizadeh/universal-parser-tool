@@ -16,7 +16,7 @@ class LoginManager:
 
     def get_auth(self):
         print("===================================")
-        print(f"== login for {self.name} ==")
+        print(f"== Login for {self.name} ==")
         user = input("Username: ")
         pwd = getpass.getpass("Password: ")
         print("===================================")
