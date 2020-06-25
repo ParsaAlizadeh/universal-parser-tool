@@ -1,5 +1,5 @@
-from upt.utils import Utils, Driver, By 
-from upt.utils.loginmanager import LoginManager
+from ..utils import Utils, Driver, By 
+from ..utils.loginmanager import LoginManager
 
 from selenium.webdriver.common.keys import Keys
 

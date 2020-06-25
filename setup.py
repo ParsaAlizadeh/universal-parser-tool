@@ -6,8 +6,9 @@ with open('README.md') as readme_file:
 
 setup(
     name='universal-parser-tool',
-    version='0.2.4',
+    version='0.2.5',
     description='Useful tool to speedup testing codes in cp-programming',
+    license='GPL',
     author='Parsa Alizadeh',
     author_email='parsa.alizadeh1@gmail.com',
     url='https://github.com/ParsaAlizadeh/universal-parser-tool',

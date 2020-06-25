@@ -2,7 +2,7 @@ import logging
 import os
 import sys
 
-from upt import atcoder, codechef, quera, spoj
+from . import atcoder, codechef, quera, spoj
 
 
 PARSERS = {"atcoder": atcoder,

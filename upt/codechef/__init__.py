@@ -1,4 +1,4 @@
-from upt.utils import Utils, Driver, By
+from ..utils import Utils, Driver, By
 
 
 class Parser:
