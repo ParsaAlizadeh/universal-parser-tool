@@ -10,7 +10,7 @@ setup(
     description='Useful tool to speedup testing codes in cp-programming',
     author='Parsa Alizadeh',
     author_email='parsa.alizadeh1@gmail.com',
-    url='https://github.com/ParsaAlizadeh/universial-parser-tool',
+    url='https://github.com/ParsaAlizadeh/universal-parser-tool',
     long_description_content_type="text/markdown",
     long_description=README + '\n',
     packages=find_packages(include=['upt', 'upt.*']),
