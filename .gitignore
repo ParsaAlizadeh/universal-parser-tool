@@ -1,15 +1,7 @@
-# log files
 *.log
-
-# Vim Editor files
 *.swp
-
-# Compiled files
 *.pyc
 **/__pycache__
-
-# build directory
 /build/
-
-# Pycharm configuration
 /.idea/
+test.sh
