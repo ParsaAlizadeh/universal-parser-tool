@@ -84,7 +84,3 @@ class Util:
             Util.write_to_file(samples[i][0], f"in{i + 1}.txt")
             Util.write_to_file(samples[i][1], f"ans{i + 1}.txt")
 
-    @staticmethod
-    def generate():
-        os.system("cf gen")
-

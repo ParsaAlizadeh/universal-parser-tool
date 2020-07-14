@@ -18,8 +18,11 @@ def main():
 
     args = sys.argv[1:]
     main_parser = PARSERS.get(args[0])
+    
     if main_parser is None:
-        raise Exception(f"Parser \"{args[0]}\" not found")
+        logger.info(f"No parser named \"{args[0]}\", try running cf script")
+        os.system("cf " + " ".join(args))
+        return
 
     main_parser = main_parser.Parser()
 
