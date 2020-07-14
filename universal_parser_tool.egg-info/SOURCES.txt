@@ -9,7 +9,8 @@ universal_parser_tool.egg-info/top_level.txt
 upt/__init__.py
 upt/atcoder/__init__.py
 upt/codechef/__init__.py
+upt/codeforces/__init__.py
 upt/quera/__init__.py
 upt/spoj/__init__.py
-upt/utils/__init__.py
-upt/utils/loginmanager.py
+upt/util/__init__.py
+upt/util/loginmanager.py

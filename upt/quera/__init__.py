@@ -1,4 +1,4 @@
-from ..utils import Utils, Driver, By
+from ..util import Util, Driver, By
 
 
 class Parser:
@@ -18,8 +18,8 @@ class Parser:
         driver = Driver()
         url = f"http://quera.ir/problemset/{tp}/{args[1]}/"
         driver.get(url)
-        Utils.wait_until(driver, By.CSS_SELECTOR, "pre")
+        Util.wait_until(driver, By.CSS_SELECTOR, "pre")
 
-        sample = Utils.get_sample(driver)
-        result = Utils.even_odd(sample)
-        Utils.write_samples(result)
+        sample = Util.get_sample(driver)
+        result = Util.even_odd(sample)
+        Util.write_samples(result)

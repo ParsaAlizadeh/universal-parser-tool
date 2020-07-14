@@ -10,7 +10,7 @@ import requests
 import os
 
 
-logger = logging.getLogger("utils")
+logger = logging.getLogger("util")
 
 
 class Driver(Firefox):
@@ -34,7 +34,7 @@ class Driver(Firefox):
         super().get(url)
 
 
-class Utils:
+class Util:
     @staticmethod
     def get_sample(driver: Firefox) -> list:
         logger.info("Reading samples")
@@ -81,8 +81,8 @@ class Utils:
     def write_samples(samples: list):
         logger.info("Writing samples")
         for i in range(len(samples)):
-            Utils.write_to_file(samples[i][0], f"in{i + 1}.txt")
-            Utils.write_to_file(samples[i][1], f"ans{i + 1}.txt")
+            Util.write_to_file(samples[i][0], f"in{i + 1}.txt")
+            Util.write_to_file(samples[i][1], f"ans{i + 1}.txt")
 
     @staticmethod
     def generate():

@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: universal-parser-tool
-Version: 0.2.5
+Version: 1.0.0
 Summary: Useful tool to speedup testing codes in cp-programming
 Home-page: https://github.com/ParsaAlizadeh/universal-parser-tool
 Author: Parsa Alizadeh
@@ -37,13 +37,16 @@ Description: # Universal Problem Parser Tool
         In this time, these judges have parsers. You can find more info about them
         in their directory.
         
-        - AtCoder (Added login feature!)
+        - Codeforces
+        - AtCoder (+login)
         - Codechef
         - Spoj
         - Quera
         
+        Find more info about parsers in their wiki section.
+        
         **NOTE**: You may use the parser for practice problems. During a contest, some judges need to log in.
-        For now, this feature is supported by atcoder parser.
+        For now, this feature is supported by parsers with +login.
         
         
 Platform: UNKNOWN

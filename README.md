@@ -29,10 +29,13 @@ You can use `upt` like this script:
 In this time, these judges have parsers. You can find more info about them
 in their directory.
 
-- AtCoder (Added login feature!)
+- Codeforces
+- AtCoder (+login)
 - Codechef
 - Spoj
 - Quera
 
+Find more info about parsers in their wiki section.
+
 **NOTE**: You may use the parser for practice problems. During a contest, some judges need to log in.
-For now, this feature is supported by atcoder parser.
+For now, this feature is supported by parsers with +login.

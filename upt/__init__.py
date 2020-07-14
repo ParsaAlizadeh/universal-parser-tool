@@ -2,13 +2,14 @@ import logging
 import os
 import sys
 
-from . import atcoder, codechef, quera, spoj
+from . import atcoder, codechef, quera, spoj, codeforces
 
 
 PARSERS = {"atcoder": atcoder,
            "quera": quera,
            "codechef": codechef,
-           "spoj": spoj}
+           "spoj": spoj,
+           "cf": codeforces}
 
 
 def main():
