@@ -5,12 +5,14 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
+from os.path import expanduser
 import logging
 import requests
 import os
 
 
 logger = logging.getLogger("util")
+CONFIG = expanduser("~/.uptrc")
 
 
 class Driver(Firefox):
@@ -78,9 +80,11 @@ class Util:
             file.write(string)
 
     @staticmethod
-    def write_samples(samples: list):
-        logger.info("Writing samples")
+    def write_samples(samples: list, path: str = "./"):
+        if path[-1] != "/":
+            path = path + "/"
+        logger.info("Writing samples into " + path)
         for i in range(len(samples)):
-            Util.write_to_file(samples[i][0], f"in{i + 1}.txt")
-            Util.write_to_file(samples[i][1], f"ans{i + 1}.txt")
+            Util.write_to_file(samples[i][0], path + f"in{i}.txt")
+            Util.write_to_file(samples[i][1], path + f"ans{i}.txt")
 

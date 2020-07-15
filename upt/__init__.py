@@ -3,13 +3,15 @@ import os
 import sys
 
 from . import atcoder, codechef, quera, spoj, codeforces
+from .util.pathparser import PathParser
 
 
-PARSERS = {"atcoder": atcoder,
-           "quera": quera,
-           "codechef": codechef,
-           "spoj": spoj,
-           "cf": codeforces}
+PARSERS = {"atcoder": atcoder.Parser,
+           "quera": quera.Parser,
+           "codechef": codechef.Parser,
+           "spoj": spoj.Parser,
+           "cf": codeforces.Parser,
+           "init": PathParser}
 
 
 def main():
@@ -20,11 +22,11 @@ def main():
     main_parser = PARSERS.get(args[0])
     
     if main_parser is None:
-        logger.info(f"No parser named \"{args[0]}\", try running cf script")
+        logger.info(f"No parser named \"{args[0]}\" , try running cf script")
         os.system("cf " + " ".join(args))
         return
 
-    main_parser = main_parser.Parser()
+    main_parser = main_parser()
 
     logger.info(f"Parser \"{args[0]}\" called")
     main_parser.parse(args[1:])

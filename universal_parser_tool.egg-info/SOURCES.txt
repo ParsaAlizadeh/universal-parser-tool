@@ -14,3 +14,4 @@ upt/quera/__init__.py
 upt/spoj/__init__.py
 upt/util/__init__.py
 upt/util/loginmanager.py
+upt/util/pathparser.py
