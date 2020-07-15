@@ -15,7 +15,18 @@ https://selenium-python.readthedocs.io/installation.html
 The main idea is based on [this repository](https://github.com/xalanq/cf-tool).
 So you may add `cf` to your PATH.
 
-After installing, `upt` command will be added to your PATH.
+After installing, the `upt` command will be added to your PATH.
+
+## Configuration
+
+The config file located in `~/.uptrc`. Some data may be stored here from parsers too.
+
+After installing, initialize the root path using this command:
+
+`upt init <ROOT>`
+
+Some parsers create their tests in the root. For example, if `<ROOT>=~/cf/contest` and run `upt cf 4A`,
+then test files will be available in `~/cf/contest/4/A`. 
 
 ## Parse
 
@@ -25,7 +36,7 @@ You can use `upt` like this script:
 
 Parsers are listed below. You can find their commands in the repository's wiki.
 
-## Supported Parser
+## Supported Parsers
 
 In this time, these judges have parsers.
 
@@ -36,4 +47,4 @@ In this time, these judges have parsers.
 - [Spoj](https://www.spoj.com/)
 
 **NOTE**: You may use the parser for practice problems. During a contest, some judges need to log in.
-For now, this feature is supported by parsers with +login.
+For now, this feature is supported by parsers with (+login).

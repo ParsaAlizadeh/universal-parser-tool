@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: universal-parser-tool
-Version: 1.0.0
+Version: 1.1.0
 Summary: Useful tool to speedup testing codes in cp-programming
 Home-page: https://github.com/ParsaAlizadeh/universal-parser-tool
 Author: Parsa Alizadeh
@@ -14,16 +14,27 @@ Description: # Universal Problem Parser Tool
         
         `pip install universal-parser-tool`
         
-        This script needs selenium to run. The python library will be added by default if you use the above command. 
+        This script needs selenium to run. This python library will be added by default if you use the above command. 
         The below link has explained how to install selenium drivers.
-        Firefox is the default driver for this code, so install Firefox and it's driver as in the link below.
+        Firefox is the default driver for this code, so install Firefox and it's driver (geckodriver) as in the link below.
         
         https://selenium-python.readthedocs.io/installation.html
         
         The main idea is based on [this repository](https://github.com/xalanq/cf-tool).
-        So you must add `cf` to your PATH.
+        So you may add `cf` to your PATH.
         
-        After installing, `upt` command will be added to your PATH.
+        After installing, the `upt` command will be added to your PATH.
+        
+        ## Configuration
+        
+        The config file located in `~/.uptrc`. Some data may be stored here from parsers too.
+        
+        After installing, initialize the root path using this command:
+        
+        `upt init <ROOT>`
+        
+        Some parsers create their tests in the root. For example, if `<ROOT>=~/cf/contest` and run `upt cf 4A`,
+        then test files will be available in `~/cf/contest/4/A`. 
         
         ## Parse
         
@@ -31,22 +42,20 @@ Description: # Universal Problem Parser Tool
         
         `upt <PARSER> <PARSER COMMANDS>`
         
+        Parsers are listed below. You can find their commands in the repository's wiki.
         
-        ## Supported Parser
+        ## Supported Parsers
         
-        In this time, these judges have parsers. You can find more info about them
-        in their directory.
+        In this time, these judges have parsers.
         
-        - Codeforces
-        - AtCoder (+login)
-        - Codechef
-        - Spoj
-        - Quera
-        
-        Find more info about parsers in their wiki section.
+        - [AtCoder](https://atcoder.jp/) (+login)
+        - [Codechef](https://www.codechef.com/)
+        - [Codeforces](https://codeforces.com/)
+        - [Quera](https://quera.ir/)
+        - [Spoj](https://www.spoj.com/)
         
         **NOTE**: You may use the parser for practice problems. During a contest, some judges need to log in.
-        For now, this feature is supported by parsers with +login.
+        For now, this feature is supported by parsers with (+login).
         
         
 Platform: UNKNOWN

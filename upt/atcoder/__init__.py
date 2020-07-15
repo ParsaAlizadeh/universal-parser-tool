@@ -1,5 +1,6 @@
 from ..util import Util, Driver, By 
 from ..util.loginmanager import LoginManager
+from ..util.pathparser import PathParser
 
 from selenium.webdriver.common.keys import Keys
 
@@ -21,8 +22,17 @@ class Parser:
         if "-l" in args:
             self.login()
             args.remove("-l")
+        
+        path = None
+        if "-h" in args:
+            path = "./"
+            args.remove("-h")
+
+        assert len(args) == 2, "Arguments are not correct"           
 
         url = f"https://atcoder.jp/contests/{args[0]}/tasks/{args[0]}_{args[1]}"
+        path = PathParser().get_path(f"/{args[0]}/{args[1]}", makedir=True) if path is None else path
+
         self.driver.get(url)
         Util.wait_until(self.driver, By.CSS_SELECTOR, "pre")
 
@@ -34,7 +44,7 @@ class Parser:
                 sample.append(elem.text)
 
         result = Util.even_odd(sample)
-        Util.write_samples(result)
+        Util.write_samples(result, path=path)
 
     def initialize(self):
         login = LoginManager("atcoder")

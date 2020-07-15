@@ -1,9 +1,8 @@
+from . import CONFIG
 from configparser import ConfigParser
-from os.path import expanduser
 import getpass
 import logging
 
-CONFIGPATH = expanduser("~/.upt.ini")
 
 class LoginManager:
     configparser = None
@@ -11,7 +10,7 @@ class LoginManager:
     def __init__(self, name):
         if self.configparser is None:
             self.configparser = ConfigParser()
-            self.configparser.read(CONFIGPATH)
+            self.configparser.read(CONFIG)
         self.name = name
 
     def get_auth(self):
@@ -34,6 +33,6 @@ class LoginManager:
         return (user, pwd)
 
     def write(self):
-        with open(CONFIGPATH, "w") as file:
+        with open(CONFIG, "w") as file:
             self.configparser.write(file)
 
