@@ -15,10 +15,11 @@ logger = logging.getLogger("atcoder")
 class Parser:
     def parse(self, args: list):
         argparser = argparse.ArgumentParser(prog="upt atcoder",
+                                            usage="upt atcoder [-h] [-l] [-i] [init] task",
                                             description="example: upt atcoder agc044 b")
         argparser.add_argument("-l", "--login", help="Login to atcoder before parse the problem", action="store_true")
         argparser.add_argument("-i", "--inplace", help="Create tests inplace instead of root", action="store_true")
-        argparser.add_argument("task", nargs="+")
+        argparser.add_argument("task", nargs="+", help="Task contest and index to parse")
         args = argparser.parse_args(args)
 
         if args.task == ["init"]:
