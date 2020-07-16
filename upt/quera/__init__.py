@@ -1,3 +1,5 @@
+import argparse
+
 from ..util import Util, Driver, By
 
 
@@ -8,15 +10,18 @@ class Parser:
 
     @staticmethod
     def parse(args: list):
-        if len(args) != 2:
-            raise Exception("Arguments are not correct")
+        argparser = argparse.ArgumentParser(prog="upt quera",
+                                            description="example: upt quera oly 34406")
+        argparser.add_argument("type", help="Task type")
+        argparser.add_argument("code", help="Task code")
+        args = argparser.parse_args(args)
 
-        tp = Parser.TYPE.get(args[0])
-        if tp is None:
-            raise Exception(f"type \"{args[0]}\" not supported")
+        assert args.type in Parser.TYPE, f"Type \"{args.type}\" not supported"
+
+        tp = Parser.TYPE.get(args.type)
+        url = f"http://quera.ir/problemset/{tp}/{args.code}/"
 
         driver = Driver()
-        url = f"http://quera.ir/problemset/{tp}/{args[1]}/"
         driver.get(url)
         Util.wait_until(driver, By.CSS_SELECTOR, "pre")
 

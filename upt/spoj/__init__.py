@@ -1,14 +1,19 @@
+import argparse
+
 from ..util import Util, Driver, By
 
 
 class Parser:
     @staticmethod
     def parse(args: list):
-        if len(args) != 1:
-            raise Exception("Arguments are not correct")
+        argparser = argparse.ArgumentParser(prog="upt spoj",
+                                            description="example: upt spoj XMAX")
+        argparser.add_argument("task", help="Task name to parse")
+        args = argparser.parse_args(args)
+
+        url = f"http://www.spoj.com/problems/{args.task}/"
 
         driver = Driver()
-        url = f"http://www.spoj.com/problems/{args[0]}/"
         driver.get(url)
         Util.wait_until(driver, By.CSS_SELECTOR, "pre")
 

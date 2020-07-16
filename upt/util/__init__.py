@@ -1,15 +1,13 @@
-from selenium.webdriver import Firefox
-from selenium.webdriver.firefox.options import Options
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.common.by import By
-from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
-
-from os.path import expanduser
 import logging
-import requests
 import os
+from os.path import expanduser
 
+from selenium.webdriver import Firefox
+from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
+from selenium.webdriver.firefox.options import Options
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.common.by import By
 
 logger = logging.getLogger("util")
 CONFIG = expanduser("~/.uptrc")
@@ -23,14 +21,14 @@ class Driver(Firefox):
             capa["pageLoadStrategy"] = "none"
         opt = Options()
         opt.add_argument("--headless")
-        super().__init__(options=opt, 
+        super().__init__(options=opt,
                          desired_capabilities=capa,
                          service_log_path=os.path.devnull)
 
     def __del__(self):
         logger.info("Quiting driver")
         self.quit()
-    
+
     def get(self, url):
         logger.info("Loading URL")
         super().get(url)
@@ -87,4 +85,3 @@ class Util:
         for i in range(len(samples)):
             Util.write_to_file(samples[i][0], path + f"in{i}.txt")
             Util.write_to_file(samples[i][1], path + f"ans{i}.txt")
-
