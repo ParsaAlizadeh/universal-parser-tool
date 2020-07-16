@@ -4,13 +4,15 @@ from setuptools import setup, find_packages
 with open('README.md') as readme_file:
     README = readme_file.read()
 
+with open("VERSION") as version_file:
+    version = version_file.read()
+
 setup(
     name='universal-parser-tool',
-    version='1.1.0',
+    version=version,
     description='Useful tool to speedup testing codes in cp-programming',
     license='GPL',
     author='Parsa Alizadeh',
-    author_email='parsa.alizadeh1@gmail.com',
     url='https://github.com/ParsaAlizadeh/universal-parser-tool',
     long_description_content_type="text/markdown",
     long_description=README + '\n',
