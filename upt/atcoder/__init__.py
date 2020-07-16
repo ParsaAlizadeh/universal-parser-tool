@@ -3,9 +3,9 @@ from ..util.loginmanager import LoginManager
 from ..util.pathparser import PathParser
 
 from selenium.webdriver.common.keys import Keys
+import argparse
 
-import getpass
-import re, time
+import re
 import logging
 
 
@@ -14,25 +14,25 @@ logger = logging.getLogger("atcoder")
 
 class Parser:
     def parse(self, args: list):
-        if args[0] == "init":
+        argparser = argparse.ArgumentParser(prog="upt atcoder",
+                                            description="example: upt atcoder agc044 b")
+        argparser.add_argument("-l", "--login", help="Login to atcoder before parse the problem", action="store_true")
+        argparser.add_argument("-i", "--inplace", help="Create tests inplace instead of root", action="store_true")
+        argparser.add_argument("task", nargs="+")
+        args = argparser.parse_args(args)
+
+        if args.task == ["init"]:
             return self.initialize()
 
+        assert len(args.task) == 2, "Arguments not correct"
+
+        contest, index = args.task
+        url = f"https://atcoder.jp/contests/{contest}/tasks/{contest}_{index}"
+        path = "./" if args.inplace else PathParser().get_path(f"/{contest}/{index}", makedir=True)
+
         self.driver = Driver()
-        
-        if "-l" in args:
+        if args.login:
             self.login()
-            args.remove("-l")
-        
-        path = None
-        if "-h" in args:
-            path = "./"
-            args.remove("-h")
-
-        assert len(args) == 2, "Arguments are not correct"           
-
-        url = f"https://atcoder.jp/contests/{args[0]}/tasks/{args[0]}_{args[1]}"
-        path = PathParser().get_path(f"/{args[0]}/{args[1]}", makedir=True) if path is None else path
-
         self.driver.get(url)
         Util.wait_until(self.driver, By.CSS_SELECTOR, "pre")
 
