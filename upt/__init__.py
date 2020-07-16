@@ -30,7 +30,7 @@ def main():
     args = argparser.parse_args(sys.argv[1:])
 
     if args.parser not in PARSERS:
-        logger.warning(f"No parser named \"{args.parser}\", try running cf ...")
+        logger.warning(f"No parser named \"{args.parser}\", try running cf...")
         os.system("cf " + " ".join(sys.argv[1:]))
         return
 

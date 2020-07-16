@@ -1,7 +1,7 @@
-from . import CONFIG
-from configparser import ConfigParser
 import getpass
-import logging
+from configparser import ConfigParser
+
+from . import CONFIG
 
 
 class LoginManager:
@@ -19,7 +19,7 @@ class LoginManager:
         user = input("Username: ")
         pwd = getpass.getpass("Password: ")
         print("===================================")
-        
+
         if not self.configparser.has_section(self.name):
             self.configparser.add_section(self.name)
 
@@ -30,9 +30,8 @@ class LoginManager:
         assert self.configparser.has_section(self.name), f"no login data for {self.name}"
         user = self.configparser[self.name]["username"]
         pwd = self.configparser[self.name]["password"]
-        return (user, pwd)
+        return user, pwd
 
     def write(self):
         with open(CONFIG, "w") as file:
             self.configparser.write(file)
-

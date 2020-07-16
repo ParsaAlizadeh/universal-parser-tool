@@ -1,6 +1,7 @@
+import argparse
+
 from ..util import Util, Driver, By
 from ..util.pathparser import PathParser
-import argparse
 
 
 class Parser:
@@ -23,7 +24,7 @@ class Parser:
         driver = Driver()
         driver.get(url)
         Util.wait_until(driver, By.CSS_SELECTOR, "pre")
-        
+
         sample = Util.get_sample(driver)
         result = Util.even_odd(sample)
         Util.write_samples(result, path=path)

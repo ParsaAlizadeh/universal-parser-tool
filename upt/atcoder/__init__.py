@@ -1,18 +1,20 @@
-from ..util import Util, Driver, By 
-from ..util.loginmanager import LoginManager
-from ..util.pathparser import PathParser
+import argparse
+import logging
+import re
 
 from selenium.webdriver.common.keys import Keys
-import argparse
 
-import re
-import logging
-
+from ..util import Util, Driver, By
+from ..util.loginmanager import LoginManager
+from ..util.pathparser import PathParser
 
 logger = logging.getLogger("atcoder")
 
 
 class Parser:
+    def __init__(self):
+        self.driver = None
+
     def parse(self, args: list):
         argparser = argparse.ArgumentParser(prog="upt atcoder",
                                             usage="upt atcoder [-h] [-l] [-i] [init] task",
@@ -56,7 +58,7 @@ class Parser:
         logger.info("Trying to login")
         login = LoginManager("atcoder")
         user, pwd = login.read_auth()
-        
+
         url = "https://atcoder.jp/login"
         self.driver.get(url)
         Util.wait_until(self.driver, By.ID, "username")
@@ -69,7 +71,6 @@ class Parser:
         user_box.send_keys(Keys.ENTER)
         Util.wait_until(self.driver, By.CSS_SELECTOR, ".alert")
         alert = self.driver.find_element_by_css_selector(".alert")
-        
+
         assert "Welcome" in alert.text, "Login failed"
         logger.info("Logged in")
-

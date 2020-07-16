@@ -1,5 +1,6 @@
-from ..util import Util, Driver, By
 import argparse
+
+from ..util import Util, Driver, By
 
 
 class Parser:
