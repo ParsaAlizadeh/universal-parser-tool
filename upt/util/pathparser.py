@@ -10,6 +10,7 @@ logger = logging.getLogger("path")
 
 
 class PathParser:
+    usage = "upt init [-h] <path>"
     configparser = None
 
     def __init__(self):
@@ -18,7 +19,8 @@ class PathParser:
             self.configparser.read(CONFIG)
 
     def parse(self, args: list):
-        argparser = argparse.ArgumentParser(prog="upt init")
+        argparser = argparse.ArgumentParser(prog="upt init",
+                                            usage=PathParser.usage)
         argparser.add_argument("path", nargs="?", default=None, help="New root path")
         args = argparser.parse_args(args)
 

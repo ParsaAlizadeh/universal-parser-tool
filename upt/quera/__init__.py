@@ -4,6 +4,7 @@ from ..util import Util, Driver, By
 
 
 class Parser:
+    usage = "upt quera [-h] <type> <code>"
     TYPE = {"con": "contest",
             "oly": "olympiad",
             "uni": "university"}
@@ -11,7 +12,7 @@ class Parser:
     @staticmethod
     def parse(args: list):
         argparser = argparse.ArgumentParser(prog="upt quera",
-                                            description="example: upt quera oly 34406")
+                                            usage=Parser.usage)
         argparser.add_argument("type", help="Task type")
         argparser.add_argument("code", help="Task code")
         args = argparser.parse_args(args)

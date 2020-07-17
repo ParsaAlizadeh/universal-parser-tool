@@ -5,10 +5,12 @@ from ..util.pathparser import PathParser
 
 
 class Parser:
+    usage = "upt cf [-h] [-i] <task>"
+
     @staticmethod
     def parse(args: list):
         argparser = argparse.ArgumentParser(prog="upt cf",
-                                            description="example: upt cf 4A")
+                                            usage=Parser.usage)
         argparser.add_argument("-i", "--inplace", help="Create tests inplace instead of root", action="store_true")
         argparser.add_argument("task", help="Task name to parse")
         args = argparser.parse_args(args)

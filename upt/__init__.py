@@ -20,13 +20,13 @@ PARSERS = {
 def main():
     logging.basicConfig(level=logging.INFO, format="== [%(levelname)s] %(name)7s: %(message)s")
     logger = logging.getLogger("main")
-
+    
+    usage = "\n" + "\n".join("  " + parser.usage for parser in PARSERS.values())
     argparser = argparse.ArgumentParser(prog="upt",
-                                        usage="upt [-h] parser [commands...]",
-                                        description="Parsers are listed below: \n  " + "\n  ".join(PARSERS.keys()),
+                                        usage=usage,
                                         formatter_class=argparse.RawTextHelpFormatter)
-    argparser.add_argument("parser", help="Parser name")
-    argparser.add_argument("command", nargs=argparse.REMAINDER, help="Parser commands")
+    argparser.add_argument("parser", help=argparse.SUPPRESS)
+    argparser.add_argument("command", nargs=argparse.REMAINDER, help=argparse.SUPPRESS)
     args = argparser.parse_args(sys.argv[1:])
 
     if args.parser not in PARSERS:

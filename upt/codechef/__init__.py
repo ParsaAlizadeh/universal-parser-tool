@@ -4,10 +4,12 @@ from ..util import Util, Driver, By
 
 
 class Parser:
+    usage = "upt codechef [-h] <task>"
+
     @staticmethod
     def parse(args: list):
         argparser = argparse.ArgumentParser(prog="upt codechef",
-                                            description="example: upt codechef XORSUB")
+                                            usage=Parser.usage)
         argparser.add_argument("task", help="Task name to parse")
         args = argparser.parse_args(args)
 
