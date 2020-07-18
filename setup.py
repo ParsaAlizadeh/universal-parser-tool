@@ -13,6 +13,7 @@ setup(
     description='Useful tool to speedup testing codes in cp-programming',
     license='GPL',
     author='Parsa Alizadeh',
+    author_email="parsa.alizadeh1+upt@gmail.com",
     url='https://github.com/ParsaAlizadeh/universal-parser-tool',
     long_description_content_type="text/markdown",
     long_description=README + '\n',

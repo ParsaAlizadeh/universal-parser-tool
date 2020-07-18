@@ -1,3 +1,5 @@
+__version__ = "1.3.0"
+
 import argparse
 import logging
 import os
@@ -25,6 +27,7 @@ def main():
     argparser = argparse.ArgumentParser(prog="upt",
                                         usage=usage,
                                         formatter_class=argparse.RawTextHelpFormatter)
+    argparser.add_argument("-v", "--version", action="version", version=__version__)
     argparser.add_argument("parser", help=argparse.SUPPRESS)
     argparser.add_argument("command", nargs=argparse.REMAINDER, help=argparse.SUPPRESS)
     

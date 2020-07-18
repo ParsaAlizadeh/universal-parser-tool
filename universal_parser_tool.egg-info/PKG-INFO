@@ -1,9 +1,10 @@
 Metadata-Version: 2.1
 Name: universal-parser-tool
-Version: 1.2.0
+Version: 1.3.0
 Summary: Useful tool to speedup testing codes in cp-programming
 Home-page: https://github.com/ParsaAlizadeh/universal-parser-tool
 Author: Parsa Alizadeh
+Author-email: parsa.alizadeh1+upt@gmail.com
 License: GPL
 Description: # Universal Problem Parser Tool
         
