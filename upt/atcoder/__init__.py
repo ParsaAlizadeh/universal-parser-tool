@@ -1,6 +1,7 @@
 import argparse
 import logging
 import re
+import sys
 
 from selenium.webdriver.common.keys import Keys
 
@@ -12,7 +13,7 @@ logger = logging.getLogger("atcoder")
 
 
 class Parser:
-    usage = "upt atcoder [-h] [-l] [-i] (init | <task>)"
+    usage = "upt atcoder [-h] [-l] [-i] [--init] <contest> <index>"
 
     def __init__(self):
         self.driver = None
@@ -22,13 +23,12 @@ class Parser:
                                             usage=Parser.usage)
         argparser.add_argument("-l", "--login", help="Login to atcoder before parse the problem", action="store_true")
         argparser.add_argument("-i", "--inplace", help="Create tests inplace instead of root", action="store_true")
-        argparser.add_argument("task", nargs="+", help="Task contest and index")
+        argparser.add_argument("--init", nargs=0, help="Initialize login data", action=self.initaction())
+        argparser.add_argument("contest", help="Task contest")
+        argparser.add_argument("index", help="Task index")
         args = argparser.parse_args(args)
-
-        if args.task == ["init"]:
-            return self.initialize()
         
-        contest, index = args.task
+        contest, index = args.contest, args.index
         url = f"https://atcoder.jp/contests/{contest}/tasks/{contest}_{index}"
         path = "./" if args.inplace else PathParser().get_path(f"/{contest}/{index}", makedir=True)
 
@@ -47,8 +47,21 @@ class Parser:
 
         result = Util.even_odd(sample)
         Util.write_samples(result, path=path)
+    
+    def initaction(self):
+        class MyAction(argparse.Action):
+            def __init__(self, option_strings, dest, **kwargs):
+                super(MyAction, self).__init__(option_strings, dest, **kwargs)
 
-    def initialize(self):
+            def __call__(self, parser, namespace, values, option_string=None):
+                login = LoginManager("atcoder")
+                login.get_auth()
+                login.write()
+                sys.exit()
+        
+        return MyAction
+
+    def initialize(self, *args, **kwargs):
         login = LoginManager("atcoder")
         login.get_auth()
         login.write()
