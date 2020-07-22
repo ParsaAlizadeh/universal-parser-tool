@@ -27,7 +27,8 @@ class LoginManager:
         self.configparser[self.name]["password"] = pwd
 
     def read_auth(self):
-        assert self.configparser.has_section(self.name), f"no login data for {self.name}"
+        assert self.configparser.has_section(
+            self.name), f"no login data for {self.name}"
         user = self.configparser[self.name]["username"]
         pwd = self.configparser[self.name]["password"]
         return user, pwd

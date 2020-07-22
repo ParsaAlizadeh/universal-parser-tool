@@ -21,16 +21,29 @@ class Parser:
     def parse(self, args: list):
         argparser = argparse.ArgumentParser(prog="upt atcoder",
                                             usage=Parser.usage)
-        argparser.add_argument("-l", "--login", help="Login to atcoder before parse the problem", action="store_true")
-        argparser.add_argument("-i", "--inplace", help="Create tests inplace instead of root", action="store_true")
-        argparser.add_argument("--init", nargs=0, help="Initialize login data", action=self.initaction())
+        argparser.add_argument(
+            "-l",
+            "--login",
+            help="Login to atcoder before parse the problem",
+            action="store_true")
+        argparser.add_argument(
+            "-i",
+            "--inplace",
+            help="Create tests inplace instead of root",
+            action="store_true")
+        argparser.add_argument(
+            "--init",
+            nargs=0,
+            help="Initialize login data",
+            action=self.initaction())
         argparser.add_argument("contest", help="Task contest")
         argparser.add_argument("index", help="Task index")
         args = argparser.parse_args(args)
-        
+
         contest, index = args.contest, args.index
         url = f"https://atcoder.jp/contests/{contest}/tasks/{contest}_{index}"
-        path = "./" if args.inplace else PathParser().get_path(f"/{contest}/{index}", makedir=True)
+        path = "./" if args.inplace else PathParser().get_path(
+            f"/{contest}/{index}", makedir=True)
 
         self.driver = Driver()
         if args.login:
@@ -47,7 +60,7 @@ class Parser:
 
         result = Util.even_odd(sample)
         Util.write_samples(result, path=path)
-    
+
     def initaction(self):
         class MyAction(argparse.Action):
             def __init__(self, option_strings, dest, **kwargs):
@@ -58,7 +71,7 @@ class Parser:
                 login.get_auth()
                 login.write()
                 sys.exit()
-        
+
         return MyAction
 
     def initialize(self, *args, **kwargs):

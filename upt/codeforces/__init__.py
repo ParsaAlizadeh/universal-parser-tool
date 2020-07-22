@@ -11,7 +11,11 @@ class Parser:
     def parse(args: list):
         argparser = argparse.ArgumentParser(prog="upt cf",
                                             usage=Parser.usage)
-        argparser.add_argument("-i", "--inplace", help="Create tests inplace instead of root", action="store_true")
+        argparser.add_argument(
+            "-i",
+            "--inplace",
+            help="Create tests inplace instead of root",
+            action="store_true")
         argparser.add_argument("task", help="Task name to parse")
         args = argparser.parse_args(args)
 
@@ -20,7 +24,8 @@ class Parser:
             contest, index = task[:-2], task[-2:]
         else:
             contest, index = task[:-1], task[-1]
-        path = "./" if args.inplace else PathParser().get_path(f"/{contest}/{index}", makedir=True)
+        path = "./" if args.inplace else PathParser().get_path(
+            f"/{contest}/{index}", makedir=True)
         url = f"https://codeforces.com/problemset/problem/{contest}/{index}/"
 
         driver = Driver()

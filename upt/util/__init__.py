@@ -63,7 +63,8 @@ class Util:
         return result
 
     @staticmethod
-    def tag_sens(sample: list, inp: str = "Input:\n", out: str = "Output:\n") -> list:
+    def tag_sens(sample: list, inp: str = "Input:\n",
+                 out: str = "Output:\n") -> list:
         result = []
         for prt in sample:
             ind1 = prt.find(inp)
