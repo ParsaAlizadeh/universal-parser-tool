@@ -1,4 +1,4 @@
-__version__ = "1.3.0"
+__version__ = "1.4.0"
 
 import argparse
 import logging
@@ -27,20 +27,18 @@ def main():
 
     usage = "\n  upt [-h]\n" + \
         "\n".join("  " + parser.usage for parser in PARSERS.values())
-    argparser = argparse.ArgumentParser(
-        prog="upt",
-        usage=usage,
-        formatter_class=argparse.RawTextHelpFormatter)
-    argparser.add_argument(
-        "-v",
-        "--version",
-        action="version",
-        version=__version__)
-    argparser.add_argument("parser", help=argparse.SUPPRESS)
-    argparser.add_argument(
-        "command",
-        nargs=argparse.REMAINDER,
-        help=argparse.SUPPRESS)
+    argparser = argparse.ArgumentParser(prog="upt",
+                                        usage=usage,
+                                        formatter_class=argparse.RawTextHelpFormatter)
+    argparser.add_argument("-v",
+                           "--version",
+                           action="version",
+                           version=__version__)
+    argparser.add_argument("parser",
+                           help=argparse.SUPPRESS)
+    argparser.add_argument("command",
+                           nargs=argparse.REMAINDER,
+                           help=argparse.SUPPRESS)
 
     if len(sys.argv) < 2:
         argparser.print_help()
