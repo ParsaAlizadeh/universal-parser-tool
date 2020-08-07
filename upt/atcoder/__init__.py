@@ -3,9 +3,7 @@ import logging
 import re
 import sys
 
-from selenium.webdriver.common.keys import Keys
-
-from ..util import Util, Driver, By
+from ..util import Util, Driver, By, Keys
 from ..util.loginmanager import LoginManager
 from ..util.pathparser import PathParser
 
@@ -21,21 +19,18 @@ class Parser:
     def parse(self, args: list):
         argparser = argparse.ArgumentParser(prog="upt atcoder",
                                             usage=Parser.usage)
-        argparser.add_argument(
-            "-l",
-            "--login",
-            help="Login to atcoder before parse the problem",
-            action="store_true")
-        argparser.add_argument(
-            "-i",
-            "--inplace",
-            help="Create tests inplace instead of root",
-            action="store_true")
-        argparser.add_argument(
-            "--init",
-            nargs=0,
-            help="Initialize login data",
-            action=self.initaction())
+        argparser.add_argument("-l",
+                               "--login",
+                               help="Login to atcoder before parse the problem",
+                               action="store_true")
+        argparser.add_argument("-i",
+                               "--inplace",
+                               help="Create tests inplace instead of root",
+                               action="store_true")
+        argparser.add_argument("--init",
+                               nargs=0,
+                               help="Initialize login data",
+                               action=self.initaction())
         argparser.add_argument("contest", help="Task contest")
         argparser.add_argument("index", help="Task index")
         args = argparser.parse_args(args)
