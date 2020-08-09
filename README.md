@@ -40,11 +40,11 @@ Parsers are listed below. You can find their commands in the repository's wiki.
 
 In this time, these judges have parsers.
 
-- [AtCoder](https://atcoder.jp/) (+login)
-- [Codechef](https://www.codechef.com/)
-- [Codeforces](https://codeforces.com/)
-- [Quera](https://quera.ir/)
-- [Spoj](https://www.spoj.com/)
+- [AtCoder](https://github.com/ParsaAlizadeh/universal-parser-tool/wiki/AtCoder) (+login)
+- [Codechef](https://github.com/ParsaAlizadeh/universal-parser-tool/wiki/Codechef)
+- [Codeforces](https://github.com/ParsaAlizadeh/universal-parser-tool/wiki/Codeforces)
+- [Quera](https://github.com/ParsaAlizadeh/universal-parser-tool/wiki/Quera) (+login)
+- [Spoj](https://github.com/ParsaAlizadeh/universal-parser-tool/wiki/Spoj)
 
 **NOTE**: You may use the parser for practice problems. During a contest, some judges need to log in.
 For now, this feature is supported by parsers with (+login).

@@ -31,7 +31,7 @@ class Driver(Firefox):
         self.quit()
 
     def get(self, url):
-        logger.info("Loading URL")
+        logger.info(f"Loading '{url}'")
         super().get(url)
 
 

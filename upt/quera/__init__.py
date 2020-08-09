@@ -1,16 +1,15 @@
 import argparse
-import sys
 import logging
-import time
+import sys
 
-from ..util import Util, Driver, By
+from ..util import Util, Driver
 from ..util.loginmanager import LoginManager
 
 logger = logging.getLogger("quera")
 
 
 class Parser:
-    usage = "upt quera [-h] [-l] [-u URL] [--init] <type> <code>"
+    usage = "upt quera [-h] [-l] [-u URL] [--init] ..."
     TYPE = {"con": "contest",
             "oly": "olympiad",
             "uni": "university"}
@@ -31,7 +30,7 @@ class Parser:
         argparser.add_argument("-u",
                                "--url",
                                nargs=1,
-                               help="Task custom url",)
+                               help="Task custom url", )
         argparser.add_argument("--init",
                                nargs=0,
                                help="Initialize login data",
@@ -49,13 +48,10 @@ class Parser:
         else:
             url = args.url[0]
 
-        self.driver = Driver()
-
+        self.driver = Driver(nostrategy=False)
         if args.login:
             self.login()
-
         self.driver.get(url)
-        Util.wait_until(self.driver, By.CSS_SELECTOR, "pre")
 
         sample = Util.get_sample(self.driver)
         result = Util.even_odd(sample)
@@ -81,8 +77,6 @@ class Parser:
 
         url = "https://quera.ir/accounts/login"
         self.driver.get(url)
-        time.sleep(2)
-        Util.wait_until(self.driver, By.CLASS_NAME, "submit")
 
         user_box = self.driver.find_element_by_name("login")
         user_box.send_keys(user)
@@ -91,7 +85,6 @@ class Parser:
 
         submit_btn = self.driver.find_element_by_xpath("/html/body/div[3]/div/div/div[1]/form/div[3]")
         submit_btn.click()
-        time.sleep(2)
 
         assert "dashboard" in self.driver.current_url, "Login failed"
         logger.info("Logged in")
