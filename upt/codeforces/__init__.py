@@ -1,37 +1,31 @@
-import argparse
-
-from ..util import Util, Driver, By
-from ..util.pathparser import PathParser
+from ..util import parser_common
 
 
-class Parser:
-    usage = "upt cf [-h] [-i] <task>"
+PROBLEM_URL = "https://codeforces.com/problemset/problem/{0}/{1}/"
+PLACE_PATH = "/contest/{0}/{1}"
+
+
+class Codeforces(parser_common.TemplateParser):
+    name = "cf"
+    usage = "upt cf [-h] [-i] [-u URL] [task...]"
+
+    def __init__(self):
+        super().__init__()
 
     @staticmethod
-    def parse(args: list):
-        argparser = argparse.ArgumentParser(prog="upt cf",
-                                            usage=Parser.usage)
-        argparser.add_argument(
-            "-i",
-            "--inplace",
-            help="Create tests inplace instead of root",
-            action="store_true")
-        argparser.add_argument("task", help="Task name to parse")
-        args = argparser.parse_args(args)
-
-        task = args.task.lower()
+    def get_task_info(task):
+        assert len(task) >= 2, "Wrong task"
+        task = task.lower()
         if task[-1].isdigit():
-            contest, index = task[:-2], task[-2:]
-        else:
-            contest, index = task[:-1], task[-1]
-        path = "./" if args.inplace else PathParser().get_path(
-            f"/{contest}/{index}", makedir=True)
-        url = f"https://codeforces.com/problemset/problem/{contest}/{index}/"
+            return int(task[:-2]), task[-2:]
+        return int(task[:-1]), task[-1:]
 
-        driver = Driver()
-        driver.get(url)
-        Util.wait_until(driver, By.CSS_SELECTOR, "pre")
+    def url_finder(self, task):
+        task = task[0]
+        contest, index = Codeforces.get_task_info(task)
+        return PROBLEM_URL.format(contest, index)
 
-        sample = Util.get_sample(driver)
-        result = Util.even_odd(sample)
-        Util.write_samples(result, path=path)
+    def placer(self, task):
+        task = task[0]
+        contest, index = Codeforces.get_task_info(task)
+        return PLACE_PATH.format(contest, index)

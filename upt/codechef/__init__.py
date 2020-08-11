@@ -1,23 +1,23 @@
-import argparse
+from ..util import parser_common, sample_common
 
-from ..util import Util, Driver, By
+PROBLEM_URL = "http://www.codechef.com/problems/{0}"
+PLACE_PATH = "/codechef/{0}"
 
 
-class Parser:
-    usage = "upt codechef [-h] <task>"
+class Codechef(parser_common.TemplateParser):
+    name = "codechef"
+    usage = "upt codechef [-h] [-i] [-u URL] [task...]"
 
-    @staticmethod
-    def parse(args: list):
-        argparser = argparse.ArgumentParser(prog="upt codechef",
-                                            usage=Parser.usage)
-        argparser.add_argument("task", help="Task name to parse")
-        args = argparser.parse_args(args)
+    def __init__(self):
+        super().__init__()
 
-        driver = Driver()
-        url = f"http://www.codechef.com/problems/{args.task}"
-        driver.get(url)
-        Util.wait_until(driver, By.CSS_SELECTOR, "pre")
+    def url_finder(self, task):
+        task = task[0].upper()
+        return PROBLEM_URL.format(task)
 
-        sample = Util.get_sample(driver)
-        result = Util.tag_sens(sample)
-        Util.write_samples(result)
+    def placer(self, task):
+        task = task[0].lower()
+        return PLACE_PATH.format(task)
+
+    def sampler(self, elements):
+        return sample_common.Sampler.tag_sensitive(elements)

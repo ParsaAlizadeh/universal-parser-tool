@@ -5,17 +5,21 @@ import logging
 import os
 import sys
 
-from . import atcoder, codechef, quera, spoj, codeforces
-from .util.pathparser import PathParser
+from .codeforces import Codeforces
+from .spoj import Spoj
+from .codechef import Codechef
+from .quera import Quera
+from .atcoder import AtCoder
+from .util.initparser import InitParser
 
 
 PARSERS = {
-    "init": PathParser,
-    "atcoder": atcoder.Parser,
-    "codechef": codechef.Parser,
-    "cf": codeforces.Parser,
-    "quera": quera.Parser,
-    "spoj": spoj.Parser,
+    "init": InitParser,
+    "atcoder": AtCoder,
+    "codechef": Codechef,
+    "cf": Codeforces,
+    "quera": Quera,
+    "spoj": Spoj,
 }
 
 

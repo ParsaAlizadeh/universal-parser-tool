@@ -1,24 +1,23 @@
-import argparse
+from ..util import parser_common, sample_common
 
-from ..util import Util, Driver, By
+PROBLEM_URL = "http://www.spoj.com/problems/{0}/"
+PLACE_PATH = "/spoj/{0}"
 
 
-class Parser:
-    usage = "upt spoj [-h] <task>"
+class Spoj(parser_common.TemplateParser):
+    name = "spoj"
+    usage = "upt spoj [-h] [-i] [-u URL] [task...]"
 
-    @staticmethod
-    def parse(args: list):
-        argparser = argparse.ArgumentParser(prog="upt spoj",
-                                            usage=Parser.usage)
-        argparser.add_argument("task", help="Task name to parse")
-        args = argparser.parse_args(args)
+    def __init__(self):
+        super().__init__()
 
-        url = f"http://www.spoj.com/problems/{args.task}/"
+    def url_finder(self, task):
+        task = task[0].upper()
+        return PROBLEM_URL.format(task)
 
-        driver = Driver()
-        driver.get(url)
-        Util.wait_until(driver, By.CSS_SELECTOR, "pre")
+    def placer(self, task):
+        task = task[0].lower()
+        return PLACE_PATH.format(task)
 
-        sample = Util.get_sample(driver)
-        result = Util.tag_sens(sample)
-        Util.write_samples(result)
+    def sampler(self, elements):
+        return sample_common.Sampler.tag_sensitive(elements)

@@ -1,7 +1,7 @@
 import getpass
 from configparser import ConfigParser
 
-from . import CONFIG
+from . import CONFIG_PATH
 
 
 class LoginManager:
@@ -10,7 +10,7 @@ class LoginManager:
     def __init__(self, name):
         if self.configparser is None:
             self.configparser = ConfigParser()
-            self.configparser.read(CONFIG)
+            self.configparser.read(CONFIG_PATH)
         self.name = name
 
     def get_auth(self):
@@ -34,5 +34,5 @@ class LoginManager:
         return user, pwd
 
     def write(self):
-        with open(CONFIG, "w") as file:
+        with open(CONFIG_PATH, "w") as file:
             self.configparser.write(file)

@@ -13,5 +13,8 @@ upt/codeforces/__init__.py
 upt/quera/__init__.py
 upt/spoj/__init__.py
 upt/util/__init__.py
+upt/util/driver.py
+upt/util/initparser.py
 upt/util/loginmanager.py
-upt/util/pathparser.py
+upt/util/parser_common.py
+upt/util/sample_common.py
