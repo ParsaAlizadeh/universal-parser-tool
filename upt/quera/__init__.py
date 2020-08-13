@@ -3,7 +3,7 @@ from ..util.parser_common import By
 
 
 def __login_checker(driver):
-    assert "dashboard" in driver.current_url, "Login failed"
+    return "dashboard" in driver.current_url
 
 
 DRIVER_OPTIONS = {"nostrategy": False}

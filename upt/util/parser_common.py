@@ -20,6 +20,10 @@ def wait_until(driver, by, name):
     driver.execute_script("window.stop();")
 
 
+class LoginFailedError(Exception):
+    pass
+
+
 class TemplateParser:
     name = "<parser>"
     usage = "upt <parser> <commands>"
@@ -96,13 +100,22 @@ class TemplateParser:
         submit_btn = self.driver.find_element(*submit)
         submit_btn.click()
 
-        checker(self.driver)
+        try:
+            if not checker(self.driver):
+                raise LoginFailedError
+        except LoginFailedError:
+            logger.error("Login failed :(")
+            raise
 
     def parse(self, args):
         args = self.argparser.parse_args(args)
 
-        url = args.url[0] if args.url else self.url_finder(*args.task)
-        path = "./" if args.inplace or args.url else InitParser().get_path(self.placer(*args.task), makedir=True)
+        try:
+            url = args.url[0] if args.url else self.url_finder(*args.task)
+            path = "./" if args.inplace or args.url else InitParser().get_path(self.placer(*args.task), makedir=True)
+        except TypeError:
+            logger.error("Something wrong with given task")
+            raise
 
         self.driver = Driver(**self.driver_options)
         if self.login_options and args.login:
@@ -114,5 +127,10 @@ class TemplateParser:
             wait_until(self.driver, By.CSS_SELECTOR, "pre")
         elements = self.driver.find_elements_by_css_selector("pre")
 
-        samples = self.sampler(elements)
+        try:
+            samples = self.sampler(elements)
+        except sample_common.SampleFetchError:
+            logger.error("Failed to fetch correctly")
+            raise
+
         sample_common.write_samples(samples, path)

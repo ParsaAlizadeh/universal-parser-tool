@@ -2,12 +2,13 @@ import re
 
 from ..util import parser_common
 from ..util.parser_common import By
+from ..util.sample_common import SampleFetchError
 
 
 def __login_checker(driver):
     parser_common.wait_until(driver, By.CSS_SELECTOR, ".alert")
     alert = driver.find_element_by_css_selector(".alert")
-    assert "Welcome" in alert.text, "Login failed"
+    return "Welcome" in alert.text
 
 
 LOGIN_OPTIONS = {"url": "https://atcoder.jp/login",
@@ -40,7 +41,8 @@ class AtCoder(parser_common.TemplateParser):
         for elem in elements:
             if pattern.match(elem.get_attribute("id")) and elem.text:
                 sample.append(elem.text)
-        assert len(sample) % 2 == 0, "Found odd number of samples"
+        if len(sample) % 2 == 1:
+            raise SampleFetchError("Found odd number of samples")
         result = []
         for i in range(0, len(sample), 2):
             result.append([sample[i], sample[i + 1]])
