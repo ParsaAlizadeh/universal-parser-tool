@@ -39,4 +39,3 @@ def write_samples(samples: list, path: str = "./"):
     for i in range(len(samples)):
         __write_sample_to_file(samples[i][0], path + f"in{i}.txt")
         __write_sample_to_file(samples[i][1], path + f"ans{i}.txt")
-

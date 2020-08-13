@@ -5,13 +5,12 @@ import logging
 import os
 import sys
 
-from .codeforces import Codeforces
-from .spoj import Spoj
-from .codechef import Codechef
-from .quera import Quera
 from .atcoder import AtCoder
+from .codechef import Codechef
+from .codeforces import Codeforces
+from .quera import Quera
+from .spoj import Spoj
 from .util.initparser import InitParser
-
 
 PARSERS = {
     "init": InitParser,
@@ -30,7 +29,7 @@ def main():
     logger = logging.getLogger("main")
 
     usage = "\n  upt [-h]\n" + \
-        "\n".join("  " + parser.usage for parser in PARSERS.values())
+            "\n".join("  " + parser.usage for parser in PARSERS.values())
     argparser = argparse.ArgumentParser(prog="upt",
                                         usage=usage,
                                         formatter_class=argparse.RawTextHelpFormatter)

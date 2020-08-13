@@ -1,15 +1,15 @@
-import logging
 import argparse
+import logging
 import sys
 
+from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.common.by import By
 
+from . import sample_common
 from .driver import Driver
 from .initparser import InitParser
 from .loginmanager import LoginManager
-from . import sample_common
 
 logger = logging.getLogger("parser")
 
@@ -34,19 +34,19 @@ class TemplateParser:
             self.argparser.add_argument("--init",
                                         nargs=0,
                                         action=self.__init_action(),
-                                        help="Initialize data",)
+                                        help="Initialize data", )
             self.argparser.add_argument("-l",
                                         "--login",
                                         action="store_true",
-                                        help="Login before parse",)
+                                        help="Login before parse", )
         self.argparser.add_argument("-i",
                                     "--inplace",
                                     action="store_true",
-                                    help="Create Tests inplace",)
+                                    help="Create Tests inplace", )
         self.argparser.add_argument("-u",
                                     "--url",
                                     nargs=1,
-                                    help="Custom task url",)
+                                    help="Custom task url", )
         self.argparser.add_argument("task",
                                     nargs="*",
                                     help=argparse.SUPPRESS)
@@ -62,6 +62,7 @@ class TemplateParser:
             def __call__(obj, parser, namespace, values, option_string=None):
                 self.initialize()
                 sys.exit()
+
         return MyAction
 
     def initialize(self):

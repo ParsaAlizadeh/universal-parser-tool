@@ -1,6 +1,5 @@
 from ..util import parser_common
 
-
 PROBLEM_URL = "https://codeforces.com/problemset/problem/{0}/{1}/"
 PLACE_PATH = "/contest/{0}/{1}"
 

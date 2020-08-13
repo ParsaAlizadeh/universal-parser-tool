@@ -20,11 +20,10 @@ class InitParser:
     def parse(self, args: list):
         argparser = argparse.ArgumentParser(prog="upt init",
                                             usage=InitParser.usage)
-        argparser.add_argument(
-            "path",
-            nargs="?",
-            default=None,
-            help="New root path")
+        argparser.add_argument("path",
+                               nargs="?",
+                               default=None,
+                               help="New root path")
         args = argparser.parse_args(args)
 
         if args.path is None:

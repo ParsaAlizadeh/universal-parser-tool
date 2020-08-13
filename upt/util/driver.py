@@ -1,5 +1,5 @@
-import os
 import logging
+import os
 
 from selenium.webdriver import Firefox
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
