@@ -2,6 +2,8 @@
 *.swp
 *.pyc
 **/__pycache__
-/build/
-/.idea/
+/build
+/.idea
+/dist
+/universal_parser_tool.egg-info
 test.sh
