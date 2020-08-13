@@ -38,7 +38,7 @@ class AtCoder(parser_common.TemplateParser):
         pattern = re.compile(r"pre\-sample\d")
         sample = []
         for elem in elements:
-            if pattern.match(elem.get_attribute("id")) and len(elem.text) > 0:
+            if pattern.match(elem.get_attribute("id")) and elem.text:
                 sample.append(elem.text)
         assert len(sample) % 2 == 0, "Found odd number of samples"
         result = []
