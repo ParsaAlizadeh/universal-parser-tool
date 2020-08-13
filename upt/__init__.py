@@ -5,17 +5,20 @@ import logging
 import os
 import sys
 
-from . import atcoder, codechef, quera, spoj, codeforces
-from .util.pathparser import PathParser
-
+from .atcoder import AtCoder
+from .codechef import Codechef
+from .codeforces import Codeforces
+from .quera import Quera
+from .spoj import Spoj
+from .util.initparser import InitParser
 
 PARSERS = {
-    "init": PathParser,
-    "atcoder": atcoder.Parser,
-    "codechef": codechef.Parser,
-    "cf": codeforces.Parser,
-    "quera": quera.Parser,
-    "spoj": spoj.Parser,
+    "init": InitParser,
+    "atcoder": AtCoder,
+    "codechef": Codechef,
+    "cf": Codeforces,
+    "quera": Quera,
+    "spoj": Spoj,
 }
 
 
@@ -26,7 +29,7 @@ def main():
     logger = logging.getLogger("main")
 
     usage = "\n  upt [-h]\n" + \
-        "\n".join("  " + parser.usage for parser in PARSERS.values())
+            "\n".join("  " + parser.usage for parser in PARSERS.values())
     argparser = argparse.ArgumentParser(prog="upt",
                                         usage=usage,
                                         formatter_class=argparse.RawTextHelpFormatter)
