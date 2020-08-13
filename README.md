@@ -23,18 +23,19 @@ The config file located in `~/.uptrc`. Some data may be stored here from parsers
 
 After installing, initialize the root path using this command:
 
-`upt init <ROOT>`
+`upt init {root}`
 
-Some parsers create their tests in the root. For example, if `<ROOT>=~/cf/contest` and run `upt cf 4A`,
-then test files will be available in `~/cf/contest/4/A`. 
+Some parsers create their tests in the root. For example, if `root=~/cf` and run `upt cf 4A`,
+then test files will be available in `~/cf/contest/4/A`.
+Find more details in wiki.
 
 ## Parse
 
 You can use `upt` like this script:
 
-`upt <PARSER> <PARSER COMMANDS>`
+`upt {parser} {task} [options...]`
 
-Parsers are listed below. You can find their commands in the repository's wiki.
+Parsers are listed below. You can find their options and task pattern in the repository's wiki.
 
 ## Supported Parsers
 
