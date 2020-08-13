@@ -69,11 +69,11 @@ class TemplateParser:
         login.get_auth()
         login.write()
 
-    def url_finder(self, task):
-        raise Exception("No url_finder function")
+    def url_finder(self, *task):
+        raise Exception("No url_finder function for this parser")
 
-    def placer(self, task):
-        return f"/{self.__class__.name}/{task}"
+    def placer(self, *task):
+        raise Exception("No placer function for this parser")
 
     def sampler(self, elements):
         return sample_common.Sampler.even_odd(elements)
@@ -100,8 +100,8 @@ class TemplateParser:
     def parse(self, args):
         args = self.argparser.parse_args(args)
 
-        url = args.url[0] if args.url else self.url_finder(args.task)
-        path = "./" if args.inplace or args.url else InitParser().get_path(self.placer(args.task), makedir=True)
+        url = args.url[0] if args.url else self.url_finder(*args.task)
+        path = "./" if args.inplace or args.url else InitParser().get_path(self.placer(*args.task), makedir=True)
 
         self.driver = Driver(**self.driver_options)
         if self.login_options and args.login:

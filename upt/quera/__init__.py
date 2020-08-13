@@ -27,12 +27,10 @@ class Quera(parser_common.TemplateParser):
         super().__init__(login_options=LOGIN_OPTIONS,
                          driver_options=DRIVER_OPTIONS)
 
-    def url_finder(self, task):
-        problem_type = PROBLEM_TYPE.get(task[0])
-        index = task[1]
+    def url_finder(self, problem_type, index):
+        problem_type = PROBLEM_TYPE.get(problem_type)
         return PROBLEM_URL.format(problem_type, index)
 
-    def placer(self, task):
-        problem_type = PROBLEM_TYPE.get(task[0])
-        index = task[1]
+    def placer(self, problem_type, index):
+        problem_type = PROBLEM_TYPE.get(problem_type)
         return PLACE_PATH.format(problem_type, index)

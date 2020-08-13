@@ -12,11 +12,11 @@ class Spoj(parser_common.TemplateParser):
         super().__init__()
 
     def url_finder(self, task):
-        task = task[0].upper()
+        task = task.upper()
         return PROBLEM_URL.format(task)
 
     def placer(self, task):
-        task = task[0].lower()
+        task = task.lower()
         return PLACE_PATH.format(task)
 
     def sampler(self, elements):

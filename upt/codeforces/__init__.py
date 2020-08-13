@@ -14,18 +14,15 @@ class Codeforces(parser_common.TemplateParser):
 
     @staticmethod
     def get_task_info(task):
-        assert len(task) >= 2, "Wrong task"
         task = task.lower()
         if task[-1].isdigit():
             return int(task[:-2]), task[-2:]
         return int(task[:-1]), task[-1:]
 
     def url_finder(self, task):
-        task = task[0]
         contest, index = Codeforces.get_task_info(task)
         return PROBLEM_URL.format(contest, index)
 
     def placer(self, task):
-        task = task[0]
         contest, index = Codeforces.get_task_info(task)
         return PLACE_PATH.format(contest, index)

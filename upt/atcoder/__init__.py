@@ -26,14 +26,12 @@ class AtCoder(parser_common.TemplateParser):
     def __init__(self):
         super().__init__(login_options=LOGIN_OPTIONS)
 
-    def url_finder(self, task):
-        contest = task[0]
-        index = task[1]
+    def url_finder(self, contest, index):
+        index = index.lower()
         return PROBLEM_URL.format(contest, index)
 
-    def placer(self, task):
-        contest = task[0]
-        index = task[1]
+    def placer(self, contest, index):
+        index = index.lower()
         return PLACE_PATH.format(contest, index)
 
     def sampler(self, elements):
