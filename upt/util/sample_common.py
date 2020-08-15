@@ -3,15 +3,12 @@ import logging
 logger = logging.getLogger("sample")
 
 
-class SampleFetchError(Exception):
-    pass
-
-
 class Sampler:
     @staticmethod
     def even_odd(elements):
         if len(elements) % 2 == 1:
-            raise SampleFetchError("Found odd number of samples")
+            logger.warning("Found odd number of samples, skipping the first one")
+            elements = elements[1:]
 
         result = []
         for i in range(0, len(elements), 2):

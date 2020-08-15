@@ -127,10 +127,5 @@ class TemplateParser:
             wait_until(self.driver, By.CSS_SELECTOR, "pre")
         elements = self.driver.find_elements_by_css_selector("pre")
 
-        try:
-            samples = self.sampler(elements)
-        except sample_common.SampleFetchError:
-            logger.error("Failed to fetch correctly")
-            raise
-
+        samples = self.sampler(elements)
         sample_common.write_samples(samples, path)
