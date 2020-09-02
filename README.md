@@ -1,5 +1,18 @@
 # Universal Problem Parser Tool
 
+---
+## This package is outdated!
+I am going to archive this today because I found so many similar ideas.
+If you were using this, I suggest you [online-judge-tools/oj](https://github.com/online-judge-tools/oj).
+It is much faster and has great support for cp sites (except Quera and CodeChef).
+
+The problem with Quera and CodeChef is something more than I thought.
+These sites don't have a standard HTML for inputs and outputs.
+This makes it impossible to parse samples easily from these sites.
+I hope they fix this very soon.
+
+---
+
 ## Install
 
 Simple and straight. Make sure you have Python3 and pip. Then install using this command.
