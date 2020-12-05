@@ -1,5 +1,5 @@
-from ..util import parser_common
-from ..util.parser_common import By
+from .util import baseparser
+from .util.baseparser import By
 
 
 def __login_checker(driver):
@@ -19,7 +19,7 @@ PROBLEM_URL = "http://quera.ir/problemset/{0}/{1}/"
 PLACE_PATH = "/quera/{0}/{1}"
 
 
-class Quera(parser_common.TemplateParser):
+class Quera(baseparser.TemplateParser):
     name = "quera"
     usage = "upt quera [-h] [--init] [-l] [-i] [-u URL] [task...]"
 

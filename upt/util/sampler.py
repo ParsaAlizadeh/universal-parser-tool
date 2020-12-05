@@ -1,11 +1,13 @@
 import logging
+from bs4 import BeautifulSoup
 
 logger = logging.getLogger("sample")
 
 
 class Sampler:
     @staticmethod
-    def even_odd(elements):
+    def even_odd(soup: BeautifulSoup):
+        elements = soup.find_all("pre")
         if len(elements) % 2 == 1:
             logger.warning("Found odd number of samples, skipping the first one")
             elements = elements[1:]
@@ -17,7 +19,8 @@ class Sampler:
         return result
 
     @staticmethod
-    def tag_sensitive(elements, inp="Input:\n", out="Output:\n"):
+    def tag_sensitive(soup: BeautifulSoup, inp="Input:\n", out="Output:\n"):
+        elements = soup.find_all("pre")
         result = []
         for elem in elements:
             prt = elem.text

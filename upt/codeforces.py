@@ -1,10 +1,10 @@
-from ..util import parser_common
+from .util import baseparser
 
 PROBLEM_URL = "https://codeforces.com/problemset/problem/{0}/{1}/"
 PLACE_PATH = "/contest/{0}/{1}"
 
 
-class Codeforces(parser_common.TemplateParser):
+class Codeforces(baseparser.TemplateParser):
     name = "cf"
     usage = "upt cf [-h] [-i] [-u URL] [task...]"
 

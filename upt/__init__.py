@@ -1,4 +1,4 @@
-__version__ = "2.0.1"
+__version__ = "3.0.0"
 
 import argparse
 import logging
@@ -6,19 +6,15 @@ import os
 import sys
 
 from .atcoder import AtCoder
-from .codechef import Codechef
-from .codeforces import Codeforces
-from .quera import Quera
-from .spoj import Spoj
+#from .codechef import Codechef
+#from .codeforces import Codeforces
+#from .quera import Quera
+#from .spoj import Spoj
 from .util.initparser import InitParser
 
 PARSERS = {
     "init": InitParser,
     "atcoder": AtCoder,
-    "codechef": Codechef,
-    "cf": Codeforces,
-    "quera": Quera,
-    "spoj": Spoj,
 }
 
 

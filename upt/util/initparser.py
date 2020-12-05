@@ -3,7 +3,7 @@ import logging
 import os
 from configparser import ConfigParser
 
-from . import CONFIG_PATH
+from . import CONFIG_PATH, CONFIG_FILE
 
 logger = logging.getLogger("init")
 
@@ -13,9 +13,11 @@ class InitParser:
     config_parser = None
 
     def __init__(self):
+        if not os.path.exists(CONFIG_PATH):
+            os.makedirs(CONFIG_PATH)
         if self.config_parser is None:
             self.config_parser = ConfigParser()
-            self.config_parser.read(CONFIG_PATH)
+            self.config_parser.read(CONFIG_FILE)
 
     def parse(self, args: list):
         argparser = argparse.ArgumentParser(prog="upt init",
@@ -37,7 +39,7 @@ class InitParser:
             self.config_parser.add_section("upt")
         self.config_parser["upt"]["root"] = args.path
 
-        with open(CONFIG_PATH, "w") as file:
+        with open(CONFIG_FILE, "w") as file:
             self.config_parser.write(file)
 
         logger.info("Root path changed to " + args.path)

@@ -1,10 +1,10 @@
-from ..util import parser_common, sample_common
+from .util import baseparser, sampler
 
 PROBLEM_URL = "http://www.codechef.com/problems/{0}"
 PLACE_PATH = "/codechef/{0}"
 
 
-class Codechef(parser_common.TemplateParser):
+class Codechef(baseparser.TemplateParser):
     name = "codechef"
     usage = "upt codechef [-h] [-i] [-u URL] [task...]"
 
@@ -20,4 +20,4 @@ class Codechef(parser_common.TemplateParser):
         return PLACE_PATH.format(task)
 
     def sampler(self, elements):
-        return sample_common.Sampler.tag_sensitive(elements)
+        return sampler.Sampler.tag_sensitive(elements)
