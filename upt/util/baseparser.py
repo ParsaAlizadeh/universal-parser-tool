@@ -23,6 +23,10 @@ class NotImplemented(Exception):
     pass
 
 
+class NotRecognizedProblem(Exception):
+    pass
+
+
 class BaseParser:
     usage = "<commands>"
 

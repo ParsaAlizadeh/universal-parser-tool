@@ -1,6 +1,6 @@
 import re
 
-from .util.baseparser import BaseParser, BeautifulSoup
+from .util.baseparser import BaseParser, BeautifulSoup, NotRecognizedProblem
 from .util.sampler import chunkify
 
 LOGIN_PAGE = "https://codeforces.com/enter"
@@ -17,12 +17,12 @@ class Codeforces(BaseParser):
 
     def __init__(self, alias):
         super().__init__(alias, login_page=LOGIN_PAGE)
-        self.__pattern = re.compile(r"(\d+)(\w\d?)")
+        self.pattern = re.compile(r"(\d+)(\w\d?)")
 
     def get_task_info(self, task):
-        match = self.__pattern.match(task)
+        match = self.pattern.match(task)
         if not match:
-            return None
+            raise NotRecognizedProblem()
         return match.group(1), match.group(2).lower()
 
     def url_finder(self, *task):

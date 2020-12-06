@@ -18,6 +18,7 @@ class Quera(BaseParser):
 
     def __init__(self, alias):
         super().__init__(alias, login_page=LOGIN_PAGE)
+        self.statement = re.compile(r"^description_md-")
 
     def url_finder(self, problem_type, index):
         problem_type = PROBLEM_TYPE.get(problem_type, problem_type)
@@ -29,7 +30,7 @@ class Quera(BaseParser):
 
     def sampler(self, soup: BeautifulSoup):
         expected = ("ورودی نمونه", "خروجی نمونه")
-        desc = soup.find(id=re.compile(r"^description_md-"))
+        desc = soup.find(id=self.statement)
         if desc is None:
             return []
         md_soup = BeautifulSoup(markdown(desc.text), 'html.parser')

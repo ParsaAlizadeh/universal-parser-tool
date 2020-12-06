@@ -1,6 +1,6 @@
 import re
 
-from .util.baseparser import BaseParser, BeautifulSoup
+from .util.baseparser import BaseParser, BeautifulSoup, NotRecognizedProblem
 from .util.sampler import chunkify
 
 LOGIN_PAGE = "https://atcoder.jp/login"
@@ -13,14 +13,23 @@ class AtCoder(BaseParser):
 
     def __init__(self, alias):
         super().__init__(alias, login_page=LOGIN_PAGE)
+        self.pattern = re.compile(r"(a[brg]c)(\d{,3})(\w)")
 
-    def url_finder(self, contest, index):
-        index = index.lower()
-        return PROBLEM_URL.format(contest, index)
+    def get_task_info(self, task):
+        match = self.pattern.match(task)
+        if not match:
+            raise NotRecognizedProblem()
+        contest, index, problem = match.groups()
+        contest = contest + "0" * (3 - len(index)) + index
+        return contest, problem.lower()
 
-    def placer(self, contest, index):
-        index = index.lower()
-        return PLACE_PATH.format(contest, index)
+    def url_finder(self, *task):
+        task = "".join(task)
+        return PROBLEM_URL.format(*self.get_task_info(task))
+
+    def placer(self, *task):
+        task = "".join(task)
+        return PLACE_PATH.format(*self.get_task_info(task))
 
     def sampler(self, soup: BeautifulSoup):
         pattern = re.compile(r"Sample (In|Out)put")
