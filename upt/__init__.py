@@ -12,10 +12,11 @@ from .util.initparser import InitParser
 
 PARSERS = {
     "init": InitParser,
-    "atcoder": AtCoder,
-    "quera": Quera,
+    "atc": AtCoder,
     "cf": Codeforces,
+    "atcoder": AtCoder,
     "codeforces": Codeforces,
+    "quera": Quera,
 }
 
 
@@ -26,7 +27,7 @@ def main():
     logger = logging.getLogger("main")
 
     usage = "\n  upt [-h]\n" + \
-            "\n".join("  " + parser.usage for parser in PARSERS.values())
+            "\n".join(f"  upt {alias} [-h]" for alias in PARSERS.keys())
     # noinspection PyTypeChecker
     argparser = argparse.ArgumentParser(prog="upt", usage=usage, formatter_class=argparse.RawTextHelpFormatter)
     argparser.add_argument("-v",
@@ -49,7 +50,7 @@ def main():
         logger.error(f"No parser named \"{args.parser}\".")
         return
 
-    main_parser = PARSERS.get(args.parser)()
+    main_parser = PARSERS.get(args.parser)(alias=args.parser)
     main_parser.parse(args.command)
 
 

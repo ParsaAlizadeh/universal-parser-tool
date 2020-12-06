@@ -9,11 +9,10 @@ PLACE_PATH = "/contest/{0}/{1}"
 
 
 class Codeforces(BaseParser):
-    name = "cf"
-    usage = "upt cf [-h] [-l] [-i] [-u URL] [task...]"
+    usage = "[-h] [-l] [-i] [-u URL] [task...]"
 
-    def __init__(self):
-        super().__init__(login_page=LOGIN_PAGE)
+    def __init__(self, alias):
+        super().__init__(alias, login_page=LOGIN_PAGE)
         self.__pattern = re.compile(r"(\d+)(\w\d?)")
 
     def get_task_info(self, task):

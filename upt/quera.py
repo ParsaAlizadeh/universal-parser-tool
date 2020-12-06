@@ -14,11 +14,10 @@ PLACE_PATH = "/quera/{0}/{1}"
 
 
 class Quera(BaseParser):
-    name = "quera"
-    usage = "upt quera [-h] [-l] [-i] [-u URL] [task...]"
+    usage = "[-h] [-l] [-i] [-u URL] [task...]"
 
-    def __init__(self):
-        super().__init__(login_page=LOGIN_PAGE)
+    def __init__(self, alias):
+        super().__init__(alias, login_page=LOGIN_PAGE)
 
     def url_finder(self, problem_type, index):
         problem_type = PROBLEM_TYPE.get(problem_type, problem_type)

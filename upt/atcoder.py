@@ -9,11 +9,10 @@ PLACE_PATH = "/atcoder/{0}/{1}"
 
 
 class AtCoder(BaseParser):
-    name = "atcoder"
-    usage = "upt atcoder [-h] [-l] [-i] [-u URL] [task...]"
+    usage = "[-h] [-l] [-i] [-u URL] [task...]"
 
-    def __init__(self):
-        super().__init__(login_page=LOGIN_PAGE)
+    def __init__(self, alias):
+        super().__init__(alias, login_page=LOGIN_PAGE)
 
     def url_finder(self, contest, index):
         index = index.lower()

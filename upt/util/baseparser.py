@@ -24,27 +24,27 @@ class NotImplemented(Exception):
 
 
 class BaseParser:
-    name = "<parser>"
-    usage = "upt <parser> <commands>"
+    usage = "<commands>"
 
-    def __init__(self, login_page=False):
-        self.argparser = argparse.ArgumentParser(prog=self.__class__.name,
-                                                 usage=self.__class__.usage)
+    def __init__(self, alias, login_page=False):
+        self.alias = alias
+        self.argparser = argparse.ArgumentParser(prog=self.alias,
+                                                 usage=f"upt {self.alias} {self.__class__.usage}")
 
         if login_page:
             self.argparser.add_argument("-l",
                                         "--login",
                                         action="store_true",
-                                        help="Login before parse", )
+                                        help="login to service", )
             self.login_page = login_page
         self.argparser.add_argument("-i",
                                     "--inplace",
                                     action="store_true",
-                                    help="Create Tests inplace", )
+                                    help="create tests inplace", )
         self.argparser.add_argument("-u",
                                     "--url",
                                     nargs=1,
-                                    help="Custom task url", )
+                                    help="custom task url", )
         self.argparser.add_argument("task",
                                     nargs="*",
                                     help=argparse.SUPPRESS)
