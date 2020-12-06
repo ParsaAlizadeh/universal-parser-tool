@@ -82,8 +82,8 @@ class InitParser:
         self.config_parser["upt"][key] = value
         return value
 
-    def get_path(self, path="/", makedir=False):
-        path = os.path.join(self["root"], path[1:])
+    def get_path(self, path="./", makedir=False):
+        path = os.path.join(self["root"], path)
         if makedir:
             try:
                 os.makedirs(path)

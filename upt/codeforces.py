@@ -8,8 +8,8 @@ LOGIN_PAGE = "https://codeforces.com/enter"
 PROBLEM_URL = "https://codeforces.com/problemset/problem/{0}/{1}/"
 GYM_URL = "https://codeforces.com/gym/{0}/problem/{1}"
 
-PROBLEM_PATH = "/contest/{0}/{1}"
-GYM_PATH = "/gym/{0}/{1}"
+PROBLEM_PATH = "contest/{0}/{1}/"
+GYM_PATH = "gym/{0}/{1}/"
 
 
 class Codeforces(BaseParser):
