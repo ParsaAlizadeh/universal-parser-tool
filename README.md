@@ -16,6 +16,11 @@ The main idea is based on [cf-tool](https://github.com/xalanq/cf-tool) and [oj](
 
 After installing, the `upt` command will be added to your PATH.
 
+## Upgrade
+Run this command to upgrade to newer version.
+
+`pip install --upgrade universal-parser-tool`
+
 ## Configuration
 
 All configs stored at `~/.config/upt`, including `upt.conf` (general configs) and `cookie.jar` (cookies).
