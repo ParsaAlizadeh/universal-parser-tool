@@ -23,3 +23,7 @@ class Session(requests.Session):
     def save_cookiejar(self):
         with open(COOKIE_FILE, "wb") as file:
             pickle.dump(self.cookies, file)
+
+    def get(self, url, *args, **kwargs):
+        logger.info(f"Request '{url}'")
+        return super(Session, self).get(url, *args, **kwargs)

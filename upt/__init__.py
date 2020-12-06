@@ -6,15 +6,16 @@ import os
 import sys
 
 from .atcoder import AtCoder
-#from .codechef import Codechef
-#from .codeforces import Codeforces
-#from .quera import Quera
-#from .spoj import Spoj
+from .codeforces import Codeforces
+from .quera import Quera
 from .util.initparser import InitParser
 
 PARSERS = {
     "init": InitParser,
     "atcoder": AtCoder,
+    "quera": Quera,
+    "cf": Codeforces,
+    "codeforces": Codeforces,
 }
 
 
@@ -26,9 +27,8 @@ def main():
 
     usage = "\n  upt [-h]\n" + \
             "\n".join("  " + parser.usage for parser in PARSERS.values())
-    argparser = argparse.ArgumentParser(prog="upt",
-                                        usage=usage,
-                                        formatter_class=argparse.RawTextHelpFormatter)
+    # noinspection PyTypeChecker
+    argparser = argparse.ArgumentParser(prog="upt", usage=usage, formatter_class=argparse.RawTextHelpFormatter)
     argparser.add_argument("-v",
                            "--version",
                            action="version",
@@ -46,8 +46,7 @@ def main():
     args = argparser.parse_args(sys.argv[1:])
 
     if args.parser not in PARSERS:
-        logger.warning(f"No parser named \"{args.parser}\", try running cf...")
-        os.system("cf " + " ".join(sys.argv[1:]))
+        logger.error(f"No parser named \"{args.parser}\".")
         return
 
     main_parser = PARSERS.get(args.parser)()

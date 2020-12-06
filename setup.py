@@ -19,6 +19,7 @@ setup(
         'selenium',
         'requests',
         'bs4',
+        'markdown',
     ],
     python_requires='>=3.8',
     entry_points={

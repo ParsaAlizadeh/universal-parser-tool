@@ -1,6 +1,7 @@
 import re
 
-from .util.baseparser import BaseParser
+from .util.baseparser import BaseParser, BeautifulSoup
+from .util.sampler import chunkify
 
 LOGIN_PAGE = "https://atcoder.jp/login"
 PROBLEM_URL = "https://atcoder.jp/contests/{0}/tasks/{0}_{1}"
@@ -9,7 +10,7 @@ PLACE_PATH = "/atcoder/{0}/{1}"
 
 class AtCoder(BaseParser):
     name = "atcoder"
-    usage = "upt atcoder [-h] [--init] [-l] [-i] [-u URL] [task...]"
+    usage = "upt atcoder [-h] [-l] [-i] [-u URL] [task...]"
 
     def __init__(self):
         super().__init__(login_page=LOGIN_PAGE)
@@ -22,13 +23,12 @@ class AtCoder(BaseParser):
         index = index.lower()
         return PLACE_PATH.format(contest, index)
 
-    def sampler(self, soup):
-        pattern = re.compile(r"pre\-sample\d")
+    def sampler(self, soup: BeautifulSoup):
+        pattern = re.compile(r"Sample (In|Out)put")
         sample = []
-        for elem in elements:
-            if pattern.match(elem["id"]) and elem.text:
-                sample.append(elem.text)
-        result = []
-        for i in range(0, len(sample), 2):
-            result.append([sample[i], sample[i + 1]])
-        return result
+        for elem in soup.find_all("pre"):
+            header = elem.find_previous_sibling()
+            if header is None or header.name != "h3" or not pattern.match(header.text):
+                continue
+            sample.append("\n".join(elem.strings))
+        return chunkify(sample, 2)

@@ -60,8 +60,8 @@ class BaseParser:
     def placer(self, *task):
         raise NotImplemented("No placer function for this parser")
 
-    def sampler(self, soup):
-        return sampler.Sampler.even_odd(soup)
+    def sampler(self, soup: BeautifulSoup):
+        raise NotImplemented("No sampler function for this parser")
 
     def login(self):
         with Driver() as driver:
@@ -74,8 +74,8 @@ class BaseParser:
                 while driver.current_url:
                     cookies = driver.get_cookies()
                     time.sleep(0.1)
-            except selenium.common.exceptions.WebDriverException as e:
-                logger.debug(e)
+            except:
+                pass
 
         logger.info('Copying cookies via WebDriver...')
         for c in cookies:
@@ -92,7 +92,7 @@ class BaseParser:
     def parse(self, args):
         args = self.argparser.parse_args(args)
 
-        if args.login:
+        if args.login and self.login_page:
             return self.login()
 
         try:

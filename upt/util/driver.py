@@ -7,13 +7,9 @@ logger = logging.getLogger("driver")
 
 
 class Driver(Firefox):
-    def __init__(self, nostrategy=True):
-        logger.info("Loading driver")
+    def __init__(self):
+        logger.info("Starting driver")
         super().__init__(service_log_path=os.path.devnull)
-
-    def __del__(self):
-        logger.info("Quiting driver")
-        self.quit()
 
     def get(self, url):
         logger.info(f"Loading '{url}'")
