@@ -25,6 +25,7 @@ def main():
         level=logging.INFO,
         format="== [%(levelname)s] %(name)7s: %(message)s")
     logger = logging.getLogger("main")
+    logger.info(f"{__name__} {__version__}")
 
     usage = "\n  upt [-h]\n" + \
             "\n".join(f"  upt {alias} [-h]" for alias in PARSERS.keys())
