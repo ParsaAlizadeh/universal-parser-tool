@@ -110,4 +110,7 @@ class BaseParser:
         soup = BeautifulSoup(resp.text, 'html.parser')
 
         samples = self.sampler(soup)
+        if not samples:
+            logger.warning("No sample found, make sure you logged in and this url exists")
+            return
         sampler.write_samples(samples, path)
