@@ -20,13 +20,15 @@ def write_samples(samples: list, path: str = "./"):
     logger.info(f"Writing {len(samples)} sample{'s' * bool(len(samples) > 1)} into '{path}'")
     parser = InitParser(alias=None)
 
-    main_path = os.path.join(path, parser.get_input(0))
-    try:
-        os.makedirs(os.path.dirname(main_path))
-    except OSError:
-        logger.warning("Sample path created before")
+    for func in [parser.get_input, parser.get_output]:
+        try:
+            main_path = os.path.join(path, func(0))
+            os.makedirs(os.path.dirname(main_path))
+        except OSError:
+            pass
+
     for i in range(len(samples)):
         input_path = os.path.join(path, parser.get_input(i + 1))
-        output_path = os.path.join(path, parser.get_ouput(i + 1))
+        output_path = os.path.join(path, parser.get_output(i + 1))
         write_sample_to_file(samples[i][0], input_path)
         write_sample_to_file(samples[i][1], output_path)

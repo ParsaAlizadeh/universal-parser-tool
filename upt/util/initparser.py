@@ -94,5 +94,5 @@ class InitParser:
     def get_input(self, index):
         return self["input"].format(i=index)
 
-    def get_ouput(self, index):
+    def get_output(self, index):
         return self["output"].format(i=index)
