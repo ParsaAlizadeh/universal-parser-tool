@@ -10,7 +10,7 @@ PROBLEM_TYPE = {"con": "contest",
                 "uni": "university"}
 LOGIN_PAGE = "https://quera.ir/accounts/login"
 PROBLEM_URL = "http://quera.ir/problemset/{0}/{1}/"
-PLACE_PATH = "/quera/{0}/{1}/"
+PLACE_PATH = "quera/{0}/{1}/"
 
 
 class Quera(BaseParser):
