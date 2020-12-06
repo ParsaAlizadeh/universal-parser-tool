@@ -4,8 +4,12 @@ from .util.baseparser import BaseParser, BeautifulSoup
 from .util.sampler import chunkify
 
 LOGIN_PAGE = "https://codeforces.com/enter"
+
 PROBLEM_URL = "https://codeforces.com/problemset/problem/{0}/{1}/"
-PLACE_PATH = "/contest/{0}/{1}"
+GYM_URL = "https://codeforces.com/gym/{0}/problem/{1}"
+
+PROBLEM_PATH = "/contest/{0}/{1}"
+GYM_PATH = "/gym/{0}/{1}"
 
 
 class Codeforces(BaseParser):
@@ -21,13 +25,15 @@ class Codeforces(BaseParser):
             return None
         return match.group(1), match.group(2).lower()
 
-    def url_finder(self, task):
+    def url_finder(self, *task):
+        task = "".join(task)
         contest, index = self.get_task_info(task)
-        return PROBLEM_URL.format(contest, index)
+        return (PROBLEM_URL if len(contest) < 6 else GYM_URL).format(contest, index)
 
-    def placer(self, task):
+    def placer(self, *task):
+        task = "".join(task)
         contest, index = self.get_task_info(task)
-        return PLACE_PATH.format(contest, index)
+        return (PROBLEM_PATH if len(contest) < 6 else GYM_PATH).format(contest, index)
 
     def sampler(self, soup: BeautifulSoup):
         expected = ("input", "output")
