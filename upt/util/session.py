@@ -1,7 +1,8 @@
-import requests
-import pickle
-import os
 import logging
+import os
+import pickle
+
+import requests
 
 from . import COOKIE_FILE
 

@@ -1,6 +1,7 @@
+import re
+
 from .util.baseparser import BaseParser, BeautifulSoup
 from .util.sampler import chunkify
-import re
 
 LOGIN_PAGE = "https://codeforces.com/enter"
 PROBLEM_URL = "https://codeforces.com/problemset/problem/{0}/{1}/"

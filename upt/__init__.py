@@ -1,8 +1,8 @@
+__name__ = "universal-parser-tool"
 __version__ = "3.0.0"
 
 import argparse
 import logging
-import os
 import sys
 
 from .atcoder import AtCoder
@@ -32,7 +32,7 @@ def main():
     argparser.add_argument("-v",
                            "--version",
                            action="version",
-                           version=__version__)
+                           version=f"{__name__} {__version__}")
     argparser.add_argument("parser",
                            help=argparse.SUPPRESS)
     argparser.add_argument("command",

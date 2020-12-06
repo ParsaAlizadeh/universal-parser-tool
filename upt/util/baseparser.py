@@ -5,7 +5,6 @@ import logging
 import time
 
 import requests
-import selenium
 from bs4 import BeautifulSoup
 
 from . import sampler

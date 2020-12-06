@@ -1,7 +1,9 @@
+import re
+
+from markdown import markdown
+
 from .util.baseparser import BaseParser, BeautifulSoup
 from .util.sampler import chunkify
-from markdown import markdown
-import re
 
 PROBLEM_TYPE = {"con": "contest",
                 "oly": "olympiad",
