@@ -12,6 +12,15 @@ class NotInitialized(Exception):
     pass
 
 
+def prompt(args):
+    args.root = input("== Set root path (default=~/codeforces/): ")
+    args.root = args.root if args.root else "~/codeforces/"
+    args.input = input("== Set input file format (default={i}.in): ")
+    args.input = args.input if args.input else "{i}.in"
+    args.output = input("== Set output file format (default={i}.out): ")
+    args.output = args.output if args.output else "{i}.out"
+
+
 class InitParser:
     usage = "[-h] [--root ROOT] [--input INPUT] [--output OUTPUT]"
     config_parser = None
@@ -40,17 +49,9 @@ class InitParser:
                                help="output file format")
         args = argparser.parse_args(args)
 
-        if not args.root and not self.exists("root"):
-            args.root = input("== Set root path (default=~/codeforces/): ")
-            args.root = args.root if args.root else "~/codeforces/"
-
-        if not args.input and not self.exists("input"):
-            args.input = input("== Set input file format (default={i}.in): ")
-            args.input = args.input if args.input else "{i}.in"
-
-        if not args.output and not self.exists("output"):
-            args.output = input("== Set output file format (default={i}.out): ")
-            args.output = args.output if args.output else "{i}.out"
+        if (not (args.root or args.input or args.output)
+                or any(not self.exists(i) for i in ("root", "input", "output"))):
+            prompt(args)
 
         if args.root:
             args.root = os.path.expanduser(args.root)
