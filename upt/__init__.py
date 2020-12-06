@@ -1,24 +1,22 @@
-__version__ = "2.0.1"
+__name__ = "universal-parser-tool"
+__version__ = "3.0.0"
 
 import argparse
 import logging
-import os
 import sys
 
 from .atcoder import AtCoder
-from .codechef import Codechef
 from .codeforces import Codeforces
 from .quera import Quera
-from .spoj import Spoj
 from .util.initparser import InitParser
 
 PARSERS = {
     "init": InitParser,
-    "atcoder": AtCoder,
-    "codechef": Codechef,
+    "atc": AtCoder,
     "cf": Codeforces,
+    "atcoder": AtCoder,
+    "codeforces": Codeforces,
     "quera": Quera,
-    "spoj": Spoj,
 }
 
 
@@ -27,16 +25,16 @@ def main():
         level=logging.INFO,
         format="== [%(levelname)s] %(name)7s: %(message)s")
     logger = logging.getLogger("main")
+    logger.info(f"{__name__} {__version__}")
 
     usage = "\n  upt [-h]\n" + \
-            "\n".join("  " + parser.usage for parser in PARSERS.values())
-    argparser = argparse.ArgumentParser(prog="upt",
-                                        usage=usage,
-                                        formatter_class=argparse.RawTextHelpFormatter)
+            "\n".join(f"  upt {alias} [-h]" for alias in PARSERS.keys())
+    # noinspection PyTypeChecker
+    argparser = argparse.ArgumentParser(prog="upt", usage=usage, formatter_class=argparse.RawTextHelpFormatter)
     argparser.add_argument("-v",
                            "--version",
                            action="version",
-                           version=__version__)
+                           version=f"{__name__} {__version__}")
     argparser.add_argument("parser",
                            help=argparse.SUPPRESS)
     argparser.add_argument("command",
@@ -50,11 +48,10 @@ def main():
     args = argparser.parse_args(sys.argv[1:])
 
     if args.parser not in PARSERS:
-        logger.warning(f"No parser named \"{args.parser}\", try running cf...")
-        os.system("cf " + " ".join(sys.argv[1:]))
+        logger.error(f"No parser named \"{args.parser}\".")
         return
 
-    main_parser = PARSERS.get(args.parser)()
+    main_parser = PARSERS.get(args.parser)(alias=args.parser)
     main_parser.parse(args.command)
 
 
