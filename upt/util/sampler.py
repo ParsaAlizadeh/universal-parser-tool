@@ -21,9 +21,10 @@ def write_samples(samples: list, path: str = "./"):
     parser = InitParser(alias=None)
 
     main_path = os.path.join(path, parser.get_input(0))
-    if path not in ("./", "/"):
+    try:
         os.makedirs(os.path.dirname(main_path))
-
+    except OSError:
+        logger.warning("Sample path created before")
     for i in range(len(samples)):
         input_path = os.path.join(path, parser.get_input(i + 1))
         output_path = os.path.join(path, parser.get_ouput(i + 1))

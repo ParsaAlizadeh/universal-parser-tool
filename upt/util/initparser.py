@@ -85,7 +85,10 @@ class InitParser:
     def get_path(self, path="/", makedir=False):
         path = os.path.join(self["root"], path[1:])
         if makedir:
-            os.makedirs(path)
+            try:
+                os.makedirs(path)
+            except OSError:
+                logger.warning("Problem path created before")
         return path
 
     def get_input(self, index):
