@@ -19,7 +19,7 @@ class Codeforces(BaseParser):
         match = self.__pattern.match(task)
         if not match:
             return None
-        return match.groups()
+        return match.group(1), match.group(2).lower()
 
     def url_finder(self, task):
         contest, index = self.get_task_info(task)

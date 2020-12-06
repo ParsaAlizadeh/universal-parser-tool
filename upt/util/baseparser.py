@@ -96,7 +96,8 @@ class BaseParser:
 
         try:
             url = args.url[0] if args.url else self.url_finder(*args.task)
-            path = "./" if args.inplace or args.url else InitParser().get_path(self.placer(*args.task), makedir=True)
+            path = "./" if args.inplace or args.url \
+                else InitParser(alias=None).get_path(self.placer(*args.task), makedir=True)
         except TypeError:
             logger.error("Something wrong with given task")
             raise
