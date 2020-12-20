@@ -3,6 +3,7 @@ import datetime
 import http
 import logging
 import time
+import re
 
 import requests
 from bs4 import BeautifulSoup
@@ -29,6 +30,7 @@ class NotRecognizedProblem(Exception):
 
 class BaseParser:
     usage = "<commands>"
+    url_regex = re.compile(r"^http[s]?://")
 
     def __init__(self, alias, login_page=False):
         self.alias = alias
@@ -45,10 +47,6 @@ class BaseParser:
                                     "--inplace",
                                     action="store_true",
                                     help="create tests inplace", )
-        self.argparser.add_argument("-u",
-                                    "--url",
-                                    nargs=1,
-                                    help="custom task url", )
         self.argparser.add_argument("task",
                                     nargs="*",
                                     help=argparse.SUPPRESS)
@@ -98,9 +96,14 @@ class BaseParser:
         if args.login and self.login_page:
             return self.login()
 
+        if len(args.task) == 1 and self.url_regex.match(args.task[0]):
+            url = args.task[0]
+            args.inplace = True
+        else:
+            url = self.url_finder(*args.task)
+
         try:
-            url = args.url[0] if args.url else self.url_finder(*args.task)
-            path = "./" if args.inplace or args.url \
+            path = "./" if args.inplace \
                 else InitParser(alias=None).get_path(self.placer(*args.task), makedir=True)
         except TypeError:
             logger.error("Something wrong with given task")
