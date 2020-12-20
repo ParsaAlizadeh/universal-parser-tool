@@ -7,7 +7,7 @@ from .util.sampler import chunkify
 
 
 class Quera(BaseParser):
-    usage = "[-h] [-l] [-i] [-u URL] [task...]"
+    usage = "[-h] [-l] [-i] [task...]"
 
     problem_type = {"con": "contest",
                     "oly": "olympiad",
@@ -16,9 +16,10 @@ class Quera(BaseParser):
     problem_url = "http://quera.ir/problemset/{0}/{1}/"
     place_path = "quera/{0}/{1}/"
 
+    statement = re.compile(r"^description_md-")
+
     def __init__(self, alias):
         super().__init__(alias)
-        self.statement = re.compile(r"^description_md-")
 
     def url_finder(self, problem_type, index):
         problem_type = self.problem_type.get(problem_type, problem_type)

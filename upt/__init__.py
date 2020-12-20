@@ -1,5 +1,5 @@
 __name__ = "universal-parser-tool"
-__version__ = "3.1.0"
+__version__ = "3.1.1"
 
 import argparse
 import logging

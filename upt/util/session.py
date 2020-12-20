@@ -25,9 +25,9 @@ class Session(requests.Session):
         with open(COOKIE_FILE, "wb") as file:
             pickle.dump(self.cookies, file)
 
-    def get(self, url, *args, **kwargs):
+    def get(self, url, **kwargs):
         logger.info(f"GET '{url}'")
-        resp = super(Session, self).get(url, *args, **kwargs)
+        resp = super(Session, self).get(url, **kwargs)
         logger.info(f"Status Code {resp.status_code}")
         resp.raise_for_status()
         return resp

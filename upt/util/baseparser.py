@@ -2,8 +2,8 @@ import argparse
 import datetime
 import http
 import logging
-import time
 import re
+import time
 
 import requests
 from bs4 import BeautifulSoup
