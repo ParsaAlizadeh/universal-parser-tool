@@ -101,7 +101,11 @@ class BaseParser:
             url = args.task[0]
             args.inplace = True
         else:
-            url = self.url_finder(*args.task)
+            try:
+                url = self.url_finder(*args.task)
+            except NotRecognizedProblem:
+                logger.error("Given task not recognized")
+                return
 
         try:
             path = "./" if args.inplace \

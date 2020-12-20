@@ -8,15 +8,18 @@ import sys
 from .atcoder import AtCoder
 from .codeforces import Codeforces
 from .quera import Quera
+from .usaco import Usaco
 from .util.initparser import InitParser
 
 PARSERS = {
     "init": InitParser,
     "atc": AtCoder,
-    "cf": Codeforces,
     "atcoder": AtCoder,
+    "cf": Codeforces,
     "codeforces": Codeforces,
     "quera": Quera,
+    "us": Usaco,
+    "usaco": Usaco,
 }
 
 
