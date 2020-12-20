@@ -3,24 +3,25 @@ import re
 from .util.baseparser import BaseParser, BeautifulSoup, NotRecognizedProblem
 from .util.sampler import chunkify
 
-LOGIN_PAGE = "https://codeforces.com/enter"
-
-PROBLEM_URL = "https://codeforces.com/problemset/problem/{0}/{1}/"
-GYM_URL = "https://codeforces.com/gym/{0}/problem/{1}"
-
-PROBLEM_PATH = "contest/{0}/{1}/"
-GYM_PATH = "gym/{0}/{1}/"
-
 
 class Codeforces(BaseParser):
-    usage = "[-h] [-l] [-i] [-u URL] [task...]"
+    usage = "[-h] [-l] [-i] [task...]"
+
+    login_page = "https://codeforces.com/enter"
+
+    problem_url = "https://codeforces.com/problemset/problem/{0}/{1}/"
+    gym_url = "https://codeforces.com/gym/{0}/problem/{1}"
+
+    problem_path = "contest/{0}/{1}/"
+    gym_path = "gym/{0}/{1}/"
+
+    task_pattern = re.compile(r"(\d+)(\w\d?)")
 
     def __init__(self, alias):
-        super().__init__(alias, login_page=LOGIN_PAGE)
-        self.pattern = re.compile(r"(\d+)(\w\d?)")
+        super().__init__(alias)
 
     def get_task_info(self, task):
-        match = self.pattern.match(task)
+        match = self.task_pattern.match(task)
         if not match:
             raise NotRecognizedProblem()
         return match.group(1), match.group(2).lower()
@@ -28,12 +29,12 @@ class Codeforces(BaseParser):
     def url_finder(self, *task):
         task = "".join(task)
         contest, index = self.get_task_info(task)
-        return (PROBLEM_URL if len(contest) < 6 else GYM_URL).format(contest, index)
+        return (self.problem_url if len(contest) < 6 else self.gym_url).format(contest, index)
 
     def placer(self, *task):
         task = "".join(task)
         contest, index = self.get_task_info(task)
-        return (PROBLEM_PATH if len(contest) < 6 else GYM_PATH).format(contest, index)
+        return (self.problem_path if len(contest) < 6 else self.gym_path).format(contest, index)
 
     def sampler(self, soup: BeautifulSoup):
         expected = ("input", "output")

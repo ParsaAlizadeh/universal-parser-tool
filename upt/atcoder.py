@@ -3,20 +3,21 @@ import re
 from .util.baseparser import BaseParser, BeautifulSoup, NotRecognizedProblem
 from .util.sampler import chunkify
 
-LOGIN_PAGE = "https://atcoder.jp/login"
-PROBLEM_URL = "https://atcoder.jp/contests/{0}/tasks/{0}_{1}"
-PLACE_PATH = "atcoder/{0}/{1}/"
-
 
 class AtCoder(BaseParser):
-    usage = "[-h] [-l] [-i] [-u URL] [task...]"
+    usage = "[-h] [-l] [-i] [task...]"
+
+    login_page = "https://atcoder.jp/login"
+    problem_url = "https://atcoder.jp/contests/{0}/tasks/{0}_{1}"
+    place_path = "atcoder/{0}/{1}/"
+
+    task_pattern = re.compile(r"(a[brg]c)(\d{,3})(\w)")
 
     def __init__(self, alias):
-        super().__init__(alias, login_page=LOGIN_PAGE)
-        self.pattern = re.compile(r"(a[brg]c)(\d{,3})(\w)")
+        super().__init__(alias)
 
     def get_task_info(self, task):
-        match = self.pattern.match(task)
+        match = self.task_pattern.match(task)
         if not match:
             raise NotRecognizedProblem()
         contest, index, problem = match.groups()
@@ -25,11 +26,11 @@ class AtCoder(BaseParser):
 
     def url_finder(self, *task):
         task = "".join(task)
-        return PROBLEM_URL.format(*self.get_task_info(task))
+        return self.problem_url.format(*self.get_task_info(task))
 
     def placer(self, *task):
         task = "".join(task)
-        return PLACE_PATH.format(*self.get_task_info(task))
+        return self.place_path.format(*self.get_task_info(task))
 
     def sampler(self, soup: BeautifulSoup):
         pattern = re.compile(r"Sample (In|Out)put")

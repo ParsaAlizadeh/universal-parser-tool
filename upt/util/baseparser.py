@@ -32,17 +32,18 @@ class BaseParser:
     usage = "<commands>"
     url_regex = re.compile(r"^http[s]?://")
 
-    def __init__(self, alias, login_page=False):
+    login_page = None
+
+    def __init__(self, alias):
         self.alias = alias
         self.argparser = argparse.ArgumentParser(prog=self.alias,
                                                  usage=f"upt {self.alias} {self.__class__.usage}")
 
-        if login_page:
+        if self.login_page:
             self.argparser.add_argument("-l",
                                         "--login",
                                         action="store_true",
                                         help="login to service", )
-            self.login_page = login_page
         self.argparser.add_argument("-i",
                                     "--inplace",
                                     action="store_true",
