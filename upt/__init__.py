@@ -1,5 +1,5 @@
 __name__ = "universal-parser-tool"
-__version__ = "3.0.0"
+__version__ = "3.1.0"
 
 import argparse
 import logging
@@ -8,15 +8,18 @@ import sys
 from .atcoder import AtCoder
 from .codeforces import Codeforces
 from .quera import Quera
+from .usaco import Usaco
 from .util.initparser import InitParser
 
 PARSERS = {
     "init": InitParser,
     "atc": AtCoder,
-    "cf": Codeforces,
     "atcoder": AtCoder,
+    "cf": Codeforces,
     "codeforces": Codeforces,
     "quera": Quera,
+    "us": Usaco,
+    "usaco": Usaco,
 }
 
 
@@ -25,7 +28,6 @@ def main():
         level=logging.INFO,
         format="== [%(levelname)s] %(name)7s: %(message)s")
     logger = logging.getLogger("main")
-    logger.info(f"{__name__} {__version__}")
 
     usage = "\n  upt [-h]\n" + \
             "\n".join(f"  upt {alias} [-h]" for alias in PARSERS.keys())

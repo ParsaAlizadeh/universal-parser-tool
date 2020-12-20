@@ -1,11 +1,12 @@
 from setuptools import setup, find_packages
+from upt import __name__, __version__
 
 with open('README.md') as readme_file:
     README = readme_file.read()
 
 setup(
-    name='universal-parser-tool',
-    version="3.0.0",
+    name=__name__,
+    version=__version__,
     description='Useful tool to speedup testing codes in cp-programming',
     license='GPL',
     author='Parsa Alizadeh',

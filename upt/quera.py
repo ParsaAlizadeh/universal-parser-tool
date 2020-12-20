@@ -5,28 +5,28 @@ from markdown import markdown
 from .util.baseparser import BaseParser, BeautifulSoup
 from .util.sampler import chunkify
 
-PROBLEM_TYPE = {"con": "contest",
-                "oly": "olympiad",
-                "uni": "university"}
-LOGIN_PAGE = "https://quera.ir/accounts/login"
-PROBLEM_URL = "http://quera.ir/problemset/{0}/{1}/"
-PLACE_PATH = "quera/{0}/{1}/"
-
 
 class Quera(BaseParser):
     usage = "[-h] [-l] [-i] [-u URL] [task...]"
 
+    problem_type = {"con": "contest",
+                    "oly": "olympiad",
+                    "uni": "university"}
+    login_page = "https://quera.ir/accounts/login"
+    problem_url = "http://quera.ir/problemset/{0}/{1}/"
+    place_path = "quera/{0}/{1}/"
+
     def __init__(self, alias):
-        super().__init__(alias, login_page=LOGIN_PAGE)
+        super().__init__(alias)
         self.statement = re.compile(r"^description_md-")
 
     def url_finder(self, problem_type, index):
-        problem_type = PROBLEM_TYPE.get(problem_type, problem_type)
-        return PROBLEM_URL.format(problem_type, index)
+        problem_type = self.problem_type.get(problem_type, problem_type)
+        return self.problem_url.format(problem_type, index)
 
     def placer(self, problem_type, index):
-        problem_type = PROBLEM_TYPE.get(problem_type, problem_type)
-        return PLACE_PATH.format(problem_type, index)
+        problem_type = self.problem_type.get(problem_type, problem_type)
+        return self.place_path.format(problem_type, index)
 
     def sampler(self, soup: BeautifulSoup):
         expected = ("ورودی نمونه", "خروجی نمونه")

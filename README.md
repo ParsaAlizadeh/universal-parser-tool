@@ -25,14 +25,14 @@ Run this command to upgrade to newer version.
 
 All configs stored at `~/.config/upt`, including `upt.conf` (general configs) and `cookie.jar` (cookies).
 
-After installing, first run `upt init` to initialize config files
+After installing, first run `upt init` to initialize config files.
 Find more details about parameters in wiki.
 
 ## Parse
 
 You can use `upt` like this script:
 
-`upt {parser} {task} [options...]`
+`upt {parser}  [options...] {task or URL}`
 
 Parsers are listed below. You can find their options and task pattern in the repository's wiki.
 
@@ -43,5 +43,6 @@ In this time, these judges have parsers.
 - [AtCoder](https://github.com/ParsaAlizadeh/universal-parser-tool/wiki/AtCoder)
 - [Codeforces](https://github.com/ParsaAlizadeh/universal-parser-tool/wiki/Codeforces)
 - [Quera](https://github.com/ParsaAlizadeh/universal-parser-tool/wiki/Quera)
+- [Usaco](https://github.com/ParsaAlizadeh/universal-parser-tool/wiki/Usaco)
 
 **NOTE**: You need to login a service if you want to use it during contest.
