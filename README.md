@@ -25,7 +25,7 @@ Run this command to upgrade to newer version.
 
 All configs stored at `~/.config/upt`, including `upt.conf` (general configs) and `cookie.jar` (cookies).
 
-After installing, first run `upt init` to initialize config files
+After installing, first run `upt init` to initialize config files.
 Find more details about parameters in wiki.
 
 ## Parse
