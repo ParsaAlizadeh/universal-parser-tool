@@ -20,10 +20,6 @@ class LoginFailedError(Exception):
     pass
 
 
-class NotImplemented(Exception):
-    pass
-
-
 class NotRecognizedProblem(Exception):
     pass
 
@@ -57,13 +53,13 @@ class BaseParser:
         self.session.save_cookiejar()
 
     def url_finder(self, *task):
-        raise NotImplemented("No url_finder function for this parser")
+        raise NotImplementedError("No url_finder function for this parser")
 
     def placer(self, *task):
-        raise NotImplemented("No placer function for this parser")
+        raise NotImplementedError("No placer function for this parser")
 
     def sampler(self, soup: BeautifulSoup):
-        raise NotImplemented("No sampler function for this parser")
+        raise NotImplementedError("No sampler function for this parser")
 
     def login(self):
         with Driver() as driver:
