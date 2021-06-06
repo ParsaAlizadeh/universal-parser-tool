@@ -40,7 +40,6 @@ class Quera(BaseParser):
             if elem.parent is None:
                 continue
             header = elem.parent.find_previous_sibling()
-            if header is None or "h" not in header.name or not any(_ in header.text for _ in expected):
-                continue
-            sample.append("\n".join(elem.strings))
+            if header is not None and any(_ in header.text for _ in expected):
+                sample.append("\n".join(elem.strings))
         return chunkify(sample, 2)
