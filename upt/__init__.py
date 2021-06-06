@@ -50,7 +50,7 @@ def main():
     args = argparser.parse_args(sys.argv[1:])
 
     if args.parser not in PARSERS:
-        logger.error(f"No parser named \"{args.parser}\".")
+        logger.error('No parser named "%s".', args.parser)
         return
 
     main_parser = PARSERS.get(args.parser)(alias=args.parser)

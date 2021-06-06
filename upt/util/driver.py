@@ -12,5 +12,5 @@ class Driver(Firefox):  # TODO: Add other browsers
         super().__init__(service_log_path=os.path.devnull)
 
     def get(self, url):
-        logger.info(f"Loading '{url}'")
+        logger.info("Loading '%s'", url)
         super().get(url)

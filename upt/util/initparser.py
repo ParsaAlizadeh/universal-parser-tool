@@ -75,7 +75,7 @@ class InitParser:
 
     def __getitem__(self, item):
         if item not in self.config_parser["upt"]:
-            logger.error(f"Not initialized {item}")
+            logger.error("Not initialized %s", item)
             raise NotInitialized()
         return self.config_parser["upt"][item]
 

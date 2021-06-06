@@ -26,8 +26,8 @@ class Session(requests.Session):
             pickle.dump(self.cookies, file)
 
     def get(self, url, **kwargs):
-        logger.info(f"GET '{url}'")
+        logger.info("GET '%s'", url)
         resp = super(Session, self).get(url, **kwargs)
-        logger.info(f"Status Code {resp.status_code}")
+        logger.info("Return HTTP Code %s", resp.status_code)
         resp.raise_for_status()
         return resp
