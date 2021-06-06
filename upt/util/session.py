@@ -27,7 +27,7 @@ class Session(requests.Session):
 
     def get(self, url, **kwargs):
         logger.info("GET '%s'", url)
-        resp = super(Session, self).get(url, **kwargs)
+        resp = super().get(url, **kwargs)
         logger.info("Return HTTP Code %s", resp.status_code)
         resp.raise_for_status()
         return resp
