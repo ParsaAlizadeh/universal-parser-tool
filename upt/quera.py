@@ -7,13 +7,14 @@ from .util.sampler import chunkify
 
 
 class Quera(BaseParser):
+    description = 'Quera (https://quera.ir/)'
+    login_page = "https://quera.ir/accounts/login"
+
     problem_type = {"con": "contest",
                     "oly": "olympiad",
                     "uni": "university"}
-    login_page = "https://quera.ir/accounts/login"
     problem_url = "http://quera.ir/problemset/{0}/{1}/"
     place_path = "quera/{0}/{1}/"
-
     statement = re.compile(r"^description_md-")
 
     def __init__(self, alias):

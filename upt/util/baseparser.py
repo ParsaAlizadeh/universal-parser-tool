@@ -26,6 +26,7 @@ class NotRecognizedProblem(Exception):
 
 
 class BaseParser:
+    description = 'Base class for parsers'
     url_regex = re.compile(r"^http[s]?://")
     login_page = None
 
@@ -33,6 +34,7 @@ class BaseParser:
         self.alias = alias
         self.argparser = argparse.ArgumentParser(
             prog=f'upt {self.alias}',
+            description=self.description
         )
 
         if self.login_page:
