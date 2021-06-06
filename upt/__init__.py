@@ -1,4 +1,3 @@
-__name__ = "universal-parser-tool"
 __version__ = "3.1.1"
 
 import argparse
@@ -26,28 +25,38 @@ PARSERS = {
 def main():
     logging.basicConfig(
         level=logging.INFO,
-        format="== [%(levelname)s] %(name)7s: %(message)s")
+        format="== [%(levelname)s] %(name)7s: %(message)s"
+    )
     logger = logging.getLogger("main")
 
-    usage = "\n  upt [-h]\n" + \
-            "\n".join(f"  upt {alias} [-h]" for alias in PARSERS.keys())
+    usage = "\n  %(prog)s [-h]\n" + \
+            "\n".join(f"  %(prog)s {alias} [-h]" for alias in PARSERS)
     # noinspection PyTypeChecker
-    argparser = argparse.ArgumentParser(prog="upt", usage=usage, formatter_class=argparse.RawTextHelpFormatter)
-    argparser.add_argument("-v",
-                           "--version",
-                           action="version",
-                           version=f"{__name__} {__version__}")
-    argparser.add_argument("parser",
-                           help=argparse.SUPPRESS)
-    argparser.add_argument("command",
-                           nargs=argparse.REMAINDER,
-                           help=argparse.SUPPRESS)
+    argparser = argparse.ArgumentParser(
+        prog='upt',
+        usage=usage,
+        formatter_class=argparse.RawTextHelpFormatter
+    )
+    argparser.add_argument(
+        "-v", "--version",
+        action="version",
+        version=f"%(prog)s-{__version__}"
+    )
+    argparser.add_argument(
+        "parser",
+        help=argparse.SUPPRESS
+    )
+    argparser.add_argument(
+        "command",
+        nargs=argparse.REMAINDER,
+        help=argparse.SUPPRESS
+    )
 
     if len(sys.argv) < 2:
         argparser.print_help()
         sys.exit(0)
 
-    args = argparser.parse_args(sys.argv[1:])
+    args = argparser.parse_args()
 
     if args.parser not in PARSERS:
         logger.error('No parser named "%s".', args.parser)
