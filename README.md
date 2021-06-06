@@ -56,3 +56,10 @@ In this time, these judges have parsers.
 - [Usaco](https://github.com/ParsaAlizadeh/universal-parser-tool/wiki/Usaco)
 
 **NOTE**: You need to login a service if you want to use it during contest.
+
+## Contributing
+
+All contributes are welcome, specially adding new parsers.
+I tried to make it easy to define your own parsers.
+You can see [example.py](example/example.py) as a documented example
+or [module directory](upt/) predefined parsers.
