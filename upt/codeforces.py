@@ -5,8 +5,6 @@ from .util.sampler import chunkify
 
 
 class Codeforces(BaseParser):
-    usage = "[-h] [-l] [-i] [task...]"
-
     login_page = "https://codeforces.com/enter"
 
     problem_url = "https://codeforces.com/problemset/problem/{0}/{1}/"

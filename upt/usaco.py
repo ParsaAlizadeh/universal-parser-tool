@@ -5,8 +5,6 @@ from .util.sampler import chunkify
 
 
 class Usaco(BaseParser):
-    usage = "[-h] [-l] [-i] [task...]"
-
     login_page = "http://www.usaco.org/"
 
     task_pattern = re.compile(r"(a[brg]c)(\d{,3})(\w)")

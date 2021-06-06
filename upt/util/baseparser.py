@@ -26,28 +26,31 @@ class NotRecognizedProblem(Exception):
 
 
 class BaseParser:
-    usage = "<commands>"
     url_regex = re.compile(r"^http[s]?://")
-
     login_page = None
 
     def __init__(self, alias):
         self.alias = alias
-        self.argparser = argparse.ArgumentParser(prog=self.alias,
-                                                 usage=f"upt {self.alias} {self.__class__.usage}")
+        self.argparser = argparse.ArgumentParser(
+            prog=f'upt {self.alias}',
+        )
 
         if self.login_page:
-            self.argparser.add_argument("-l",
-                                        "--login",
-                                        action="store_true",
-                                        help="login to service", )
-        self.argparser.add_argument("-i",
-                                    "--inplace",
-                                    action="store_true",
-                                    help="create tests inplace", )
-        self.argparser.add_argument("task",
-                                    nargs="*",
-                                    help=argparse.SUPPRESS)
+            self.argparser.add_argument(
+                "-l", "--login",
+                action="store_true",
+                help="login to service",
+            )
+        self.argparser.add_argument(
+            "-i", "--inplace",
+            action="store_true",
+            help="create tests inplace",
+        )
+        self.argparser.add_argument(
+            "task",
+            nargs="*",
+            help='formatted taskname or task url'
+        )
         self.session = Session()
 
     def __del__(self):

@@ -7,8 +7,6 @@ from .util.sampler import chunkify
 
 
 class Quera(BaseParser):
-    usage = "[-h] [-l] [-i] [task...]"
-
     problem_type = {"con": "contest",
                     "oly": "olympiad",
                     "uni": "university"}

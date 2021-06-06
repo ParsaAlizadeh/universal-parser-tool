@@ -5,8 +5,6 @@ from .util.sampler import chunkify
 
 
 class AtCoder(BaseParser):
-    usage = "[-h] [-l] [-i] [task...]"
-
     login_page = "https://atcoder.jp/login"
     problem_url = "https://atcoder.jp/contests/{0}/tasks/{0}_{1}"
     place_path = "atcoder/{0}/{1}/"
