@@ -7,6 +7,7 @@ import time
 
 import requests
 from bs4 import BeautifulSoup
+from selenium.common.exceptions import NoSuchWindowException
 
 from . import sampler
 from .driver import Driver
@@ -65,15 +66,21 @@ class BaseParser:
         with Driver() as driver:
             url = self.login_page
             logger.info('Opening the URL via WebDriver: %s', url)
-            logger.info('Please do the followings:\n    1. login in the GUI browser\n    2. close the GUI browser')
+            logger.info(
+                'Please do the followings:\n'
+                '    1. login in the GUI browser\n'
+                '    2. close the GUI browser'
+            )
             driver.get(url)
             cookies = []
             try:
                 while driver.current_url:
                     cookies = driver.get_cookies()
                     time.sleep(0.1)
-            except:
+            except NoSuchWindowException:
                 pass
+            except Exception as err:
+                logger.warning('Ignore error %s', type(err))
 
         logger.info('Copying cookies via WebDriver...')
         for c in cookies:
@@ -91,7 +98,8 @@ class BaseParser:
         args = self.argparser.parse_args(args)
 
         if args.login and self.login_page:
-            return self.login()
+            self.login()
+            return
 
         if len(args.task) == 1 and self.url_regex.match(args.task[0]):
             url = args.task[0]
