@@ -10,9 +10,6 @@ class Usaco(BaseParser):
 
     task_pattern = re.compile(r"(a[brg]c)(\d{,3})(\w)")
 
-    def __init__(self, alias):
-        super().__init__(alias)
-
     def url_finder(self, *task):
         raise NotRecognizedProblem()
 

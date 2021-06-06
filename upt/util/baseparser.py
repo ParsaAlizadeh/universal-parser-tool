@@ -14,7 +14,7 @@ from .driver import Driver
 from .initparser import InitParser
 from .session import Session
 
-logger = logging.getLogger("parser")
+logger = logging.getLogger("base")
 
 
 class LoginFailedError(Exception):

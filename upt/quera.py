@@ -17,14 +17,13 @@ class Quera(BaseParser):
     place_path = "quera/{0}/{1}/"
     statement = re.compile(r"^description_md-")
 
-    def __init__(self, alias):
-        super().__init__(alias)
-
-    def url_finder(self, problem_type, index):
+    def url_finder(self, *task):
+        problem_type, index = task
         problem_type = self.problem_type.get(problem_type, problem_type)
         return self.problem_url.format(problem_type, index)
 
-    def placer(self, problem_type, index):
+    def placer(self, *task):
+        problem_type, index = task
         problem_type = self.problem_type.get(problem_type, problem_type)
         return self.place_path.format(problem_type, index)
 

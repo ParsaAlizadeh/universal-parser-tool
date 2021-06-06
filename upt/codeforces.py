@@ -16,9 +16,6 @@ class Codeforces(BaseParser):
 
     task_pattern = re.compile(r"(\d+)(\w\d?)")
 
-    def __init__(self, alias):
-        super().__init__(alias)
-
     def get_task_info(self, task):
         match = self.task_pattern.match(task)
         if not match:
