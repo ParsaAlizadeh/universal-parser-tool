@@ -8,10 +8,10 @@ It can be useful to speedup testing codes before final submit.
 
 ## Install
 
-Simple and straight. Make sure you have `python3` and `pip3`. Then install using this command.
+Make sure you have `python3.6+` and `pip`. Then install using this command.
 
 ```
-$ pip3 install universal-parser-tool
+$ pip install universal-parser-tool
 ```
 
 This script needs selenium to login services. The python library will be added by default if you use the above command. 
@@ -33,7 +33,7 @@ It will ask some questions about default settings.
 You can check current version by running `upt -v`. Upgrade to newer version by this command.
 
 ```
-$ pip3 install -U universal-parser-tool
+$ pip install -U universal-parser-tool
 ```
 
 ## Parse
@@ -41,7 +41,7 @@ $ pip3 install -U universal-parser-tool
 You can use `upt` like this script:
 
 ```
-$ upt {parser}  [options...] {task or URL}
+$ upt {parser} [options...] {task or URL}
 ```
 
 Parsers are listed below. You can find their options and task pattern in the repository's wiki.
