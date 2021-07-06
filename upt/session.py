@@ -4,7 +4,7 @@ import pickle
 
 import requests
 
-from . import COOKIE_FILE
+from .constants import COOKIE_FILE
 
 logger = logging.getLogger("session")
 

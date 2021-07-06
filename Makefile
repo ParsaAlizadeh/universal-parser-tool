@@ -1,6 +1,6 @@
 .PHONY: install build uninstall clean clean-dist
-install: uninstall build
-	sudo pip install dist/*.whl
+install: uninstall
+	sudo python setup.py install
 build: clean-dist
 	python setup.py bdist_wheel
 uninstall:

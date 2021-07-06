@@ -2,13 +2,22 @@ import re
 
 from markdown import markdown
 
-from .util.baseparser import BaseParser, BeautifulSoup
-from .util.sampler import chunkify
+from ..serviceparser import ServiceParser, BadTaskError, BeautifulSoup
+from ..sampler import chunkify
 
 
-class Quera(BaseParser):
-    description = 'Quera (https://quera.ir/)'
-    login_page = "https://quera.ir/accounts/login"
+class Quera(ServiceParser):
+    @property
+    def description(self):
+        return 'Quera (https://quera.ir/)'
+
+    @property
+    def aliases(self):
+        return ('quera',)
+
+    @property
+    def login_page(self):
+        return "https://quera.ir/accounts/login"
 
     problem_type = {"con": "contest",
                     "oly": "olympiad",
@@ -17,14 +26,21 @@ class Quera(BaseParser):
     place_path = "quera/{0}/{1}/"
     statement = re.compile(r"^description_md-")
 
-    def url_finder(self, *task):
+    def get_type(self, problem_type):
+        if problem_type in self.problem_type:
+            problem_type = self.problem_type.get(problem_type)
+        elif problem_type not in self.problem_type.values:
+            raise BadTaskError('Expect something like "olympiad 66756"')
+        return problem_type
+
+    def url_finder(self, task):
         problem_type, index = task
-        problem_type = self.problem_type.get(problem_type, problem_type)
+        problem_type = self.get_type(problem_type)
         return self.problem_url.format(problem_type, index)
 
-    def placer(self, *task):
+    def placer(self, task):
         problem_type, index = task
-        problem_type = self.problem_type.get(problem_type, problem_type)
+        problem_type = self.get_type(problem_type)
         return self.place_path.format(problem_type, index)
 
     def sampler(self, soup: BeautifulSoup):

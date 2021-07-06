@@ -3,40 +3,61 @@ This file supposed to be a documented template for parsers.
 You can use this file under WTFPL (http://www.wtfpl.net/txt/copying/)
 """
 
-# necessary imports
-from upt.util.baseparser import (
-    BaseParser,
+from typing import Optional, List, Tuple
+
+from upt.serviceparser import (
+    ServiceParser,
+    BadTaskError,
     BeautifulSoup,
-    NotRecognizedProblem,
 )
-from upt.util.sampler import chunkify
+# from upt.sampler import chunkify
 
 
-class ExampleParser(BaseParser):
-    # description of your parser
-    description = 'Example (https://example.com/)'
+# Inheritance from ServiceParser is required
+class ExampleParser(ServiceParser):
+    @property
+    def description(self) -> str:
+        # return description of your parser
+        return 'Example (https://example.com/)'
 
-    # login page if your parser may need logins
-    login_page = 'https://example.com/login/'
-    # set login_page to None to disable login feature
-    login_page = None
+    @property
+    def aliases(self) -> Tuple[str]:
+        # return tuple of aliases for your parser
+        return ('example', 'ex')
 
-    # next 2 functions has *task argument
+    @property
+    def login_page(self) -> Optional[str]:
+        # return login page if your parser may need logins
+        #return 'https://example.com/login/'
+        # return None to disable login feature
+        return None
+
+    # next 2 functions has task argument
     # task is a tuple of arguments (string) passed to parser
-    def url_finder(self, *task):
-        """ return task url based on given arguments """
-        # you can raise NotRecognizedProblem if passed argument is wrong
-        raise NotRecognizedProblem()
 
-    def placer(self, *task):
-        """ return path to the given task """
+    def url_finder(self, task) -> str:
+        # return task URL based on given task
+        #return f'http://example.com/problemset/{task[0]}'
+        # raise BadTaskError if you can't detect task
+        raise BadTaskError()
+
+    def placer(self, task) -> str:
+        # return path to the given task
         # this path should be relative to root (configs)
-        # raise NotRecognizedProblem for wrong arguments
-        raise NotRecognizedProblem()
+        #return f'example/{task[0]}'
+        # raise BadTaskError if you can't detect task
+        raise BadTaskError()
 
-    def sampler(self, soup: BeautifulSoup):
-        """ return samples from given soup """
+    def sampler(self, soup: BeautifulSoup) -> List[List[str]]:
+        # return samples from given soup
         # this function returns a list in this format
         # [[input_0, output_0], [input_1, output_1], ...]
-        # you may use chunkify as a utility function
+        # you may use chunkify here as a utility function
         return []
+
+
+# After completing this file:
+#   1: put it inside `upt/services/` directory
+#   2: import class in `upt/services/__init__.py` file
+#   3: build upt using `make install`
+# Now you can test your parser

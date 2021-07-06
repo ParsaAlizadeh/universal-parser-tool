@@ -1,7 +1,7 @@
 import logging
 import os
 
-from .initparser import InitParser
+from .configmanager import ConfigManager
 
 logger = logging.getLogger("sample")
 
@@ -16,24 +16,20 @@ def write_sample_to_file(string, filename):
         file.write(string)
 
 
-def write_samples(samples: list, path: str = "./"):
+def write_samples(samples: list, root: str = "./"):
     logger.info(
         "Writing %s sample%s into '%s'",
         len(samples),
         's' * bool(len(samples) > 1),
-        path
+        root
     )
-    parser = InitParser(alias=None)
-
-    for func in [parser.get_input, parser.get_output]:
-        try:
-            main_path = os.path.join(path, func(0))
-            os.makedirs(os.path.dirname(main_path))
-        except OSError:
-            pass
+    confman = ConfigManager()
+    for path in (confman.input_path(0), confman.output_path(0)):
+        main_path = os.path.join(root, path)
+        os.makedirs(os.path.dirname(main_path), exist_ok=True)
 
     for i, sample in enumerate(samples):
-        input_path = os.path.join(path, parser.get_input(i + 1))
-        output_path = os.path.join(path, parser.get_output(i + 1))
+        input_path = os.path.join(root, confman.input_path(i+1))
+        output_path = os.path.join(root, confman.output_path(i+1))
         write_sample_to_file(sample[0], input_path)
         write_sample_to_file(sample[1], output_path)

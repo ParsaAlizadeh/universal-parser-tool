@@ -21,6 +21,6 @@ setup(
     install_requires=requirements,
     python_requires='>=3.6',
     entry_points={
-        'console_scripts': ['upt=upt:main']
+        'console_scripts': ['upt=upt.__main__:main']
     }
 )
