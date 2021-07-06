@@ -11,7 +11,7 @@ It can be useful to speedup testing codes before final submit.
 You can install `upt` from pypi using this command:
 
 ```
-$ pip3 install universal-parser-tool
+$ pip install universal-parser-tool
 ```
 
 You should be able to run `upt` after install.
@@ -37,7 +37,7 @@ After installing, You may run `upt init` to initialize config options.
 You can check current version by running `upt -v`. Upgrade to newer version by this command.
 
 ```
-$ pip3 install -U universal-parser-tool
+$ pip install -U universal-parser-tool
 ```
 
 ## Parsers
