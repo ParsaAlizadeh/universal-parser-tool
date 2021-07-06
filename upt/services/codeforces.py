@@ -1,12 +1,21 @@
 import re
 
-from .util.baseparser import BaseParser, BeautifulSoup, NotRecognizedProblem
-from .util.sampler import chunkify
+from ..serviceparser import ServiceParser, BadTaskError, BeautifulSoup
+from ..sampler import chunkify
 
 
-class Codeforces(BaseParser):
-    description = 'Codeforces (https://codeforces.com/)'
-    login_page = "https://codeforces.com/enter"
+class Codeforces(ServiceParser):
+    @property
+    def description(self):
+        return 'Codeforces (https://codeforces.com/)'
+
+    @property
+    def aliases(self):
+        return ('cf', 'codeforces')
+
+    @property
+    def login_page(self):
+        return "https://codeforces.com/enter"
 
     problem_url = "https://codeforces.com/problemset/problem/{0}/{1}/"
     gym_url = "https://codeforces.com/gym/{0}/problem/{1}"
@@ -19,10 +28,10 @@ class Codeforces(BaseParser):
     def get_task_info(self, task):
         match = self.task_pattern.match(task)
         if not match:
-            raise NotRecognizedProblem()
+            raise BadTaskError('Expect something like "4A"')
         return match.group(1), match.group(2).lower()
 
-    def url_finder(self, *task):
+    def url_finder(self, task):
         task = "".join(task)
         contest, index = self.get_task_info(task)
         return (self.problem_url if len(contest) < 6 else self.gym_url).format(contest, index)

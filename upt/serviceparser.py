@@ -1,74 +1,69 @@
-import argparse
 import datetime
 import http
 import logging
 import re
 import time
+from abc import abstractmethod
+from typing import List, Optional
 
 import requests
 from bs4 import BeautifulSoup
-from selenium.common.exceptions import NoSuchWindowException
 
 from . import sampler
-from .driver import Driver
-from .initparser import InitParser
+from .baseparser import BaseParser
+from .configmanager import ConfigManager
+from .driver import get_webdriver
 from .session import Session
 
-logger = logging.getLogger("base")
+logger = logging.getLogger("service")
 
 
-class LoginFailedError(Exception):
+class BadTaskError(Exception):
     pass
 
 
-class NotRecognizedProblem(Exception):
-    pass
-
-
-class BaseParser:
-    description = 'Base class for parsers'
+class ServiceParser(BaseParser):
     url_regex = re.compile(r"^http[s]?://")
-    login_page = None
 
-    def __init__(self, alias):
-        self.alias = alias
-        self.argparser = argparse.ArgumentParser(
-            prog=f'upt {self.alias}',
-            description=self.description
-        )
+    @property
+    @abstractmethod
+    def login_page(self) -> Optional[str]:
+        ...
 
+    def __init__(self, alias=None):
+        super().__init__(alias)
         if self.login_page:
-            self.argparser.add_argument(
+            self._argparser.add_argument(
                 "-l", "--login",
                 action="store_true",
                 help="login to service",
             )
-        self.argparser.add_argument(
+        self._argparser.add_argument(
             "-i", "--inplace",
             action="store_true",
             help="create tests inplace",
         )
-        self.argparser.add_argument(
+        self._argparser.add_argument(
             "task",
             nargs="*",
             help='formatted taskname or task url'
         )
-        self.session = Session()
+        self._session = Session()
 
-    def __del__(self):
-        self.session.save_cookiejar()
+    @abstractmethod
+    def url_finder(self, task) -> str:
+        ...
 
-    def url_finder(self, *task):
-        raise NotImplementedError("No url_finder function for this parser")
+    @abstractmethod
+    def placer(self, task) -> str:
+        ...
 
-    def placer(self, *task):
-        raise NotImplementedError("No placer function for this parser")
+    @abstractmethod
+    def sampler(self, soup: BeautifulSoup) -> List[List[str]]:
+        ...
 
-    def sampler(self, soup: BeautifulSoup):
-        raise NotImplementedError("No sampler function for this parser")
-
-    def login(self):
-        with Driver() as driver:
+    def login(self) -> None:
+        with get_webdriver() as driver:
             url = self.login_page
             logger.info('Opening the URL via WebDriver: %s', url)
             logger.info(
@@ -82,10 +77,8 @@ class BaseParser:
                 while driver.current_url:
                     cookies = driver.get_cookies()
                     time.sleep(0.1)
-            except NoSuchWindowException:
+            except:
                 pass
-            except Exception as err:
-                logger.warning('Ignore error %s', type(err))
 
         logger.info('Copying cookies via WebDriver...')
         for c in cookies:
@@ -94,14 +87,17 @@ class BaseParser:
             morsel.set(c['name'], c['value'], c['value'])
             morsel.update({key: value for key, value in c.items() if morsel.isReservedKey(key)})
             if not morsel['expires']:
-                expires = datetime.datetime.now(datetime.timezone.utc).astimezone() + datetime.timedelta(days=180)
-                morsel.update({'expires': expires.strftime('%a, %d-%b-%Y %H:%M:%S GMT')})  # RFC2109 format
+                expires = datetime.datetime.now(
+                    datetime.timezone.utc
+                    ).astimezone() + datetime.timedelta(days=180)
+                morsel.update(
+                    {'expires': expires.strftime('%a, %d-%b-%Y %H:%M:%S GMT')}
+                )  # RFC2109 format
             cookie = requests.cookies.morsel_to_cookie(morsel)
-            self.session.cookies.set_cookie(cookie)
+            self._session.cookies.set_cookie(cookie)
+        self._session.save_cookiejar()
 
-    def parse(self, args):
-        args = self.argparser.parse_args(args)
-
+    def parse(self, args) -> None:
         if args.login and self.login_page:
             self.login()
             return
@@ -111,19 +107,22 @@ class BaseParser:
             args.inplace = True
         else:
             try:
-                url = self.url_finder(*args.task)
-            except NotRecognizedProblem:
-                logger.error("Given task not recognized")
+                url = self.url_finder(args.task)
+            except BadTaskError:
+                logger.error('Task URL not detected')
                 return
 
-        try:
-            path = "./" if args.inplace \
-                else InitParser(alias=None).get_path(self.placer(*args.task), makedir=True)
-        except TypeError:
-            logger.error("Something wrong with given task")
-            raise
+        path = './'
+        if not args.inplace:
+            try:
+                task_place = self.placer(args.task)
+            except BadTaskError:
+                logger.warning('Task place not detected. Creating tests at "%s".', path)
+            else:
+                confman = ConfigManager()
+                path = confman.path_from_root(task_place, makedir=True)
 
-        resp = self.session.get(url)
+        resp = self._session.get(url)
         soup = BeautifulSoup(resp.text, 'html.parser')
 
         samples = self.sampler(soup)

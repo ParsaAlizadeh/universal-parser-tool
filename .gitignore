@@ -7,3 +7,4 @@
 /dist
 /universal_parser_tool.egg-info
 test.sh
+/.vscode
