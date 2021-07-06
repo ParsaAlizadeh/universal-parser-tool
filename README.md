@@ -8,26 +8,30 @@ It can be useful to speedup testing codes before final submit.
 
 ## Install
 
-Simple and straight. Make sure you have `python3` and `pip3`. Then install using this command.
+You can install `upt` from pypi using this command:
 
 ```
 $ pip3 install universal-parser-tool
 ```
 
-This script needs selenium to login services. The python library will be added by default if you use the above command. 
-The below link has explained how to install selenium drivers.
-Firefox is the default driver for this code, so install Firefox and it's driver (geckodriver) as in the link below.
+You should be able to run `upt` after install.
 
-https://selenium-python.readthedocs.io/installation.html
+To login services and use parsers on private webpages, you need to install a supported browser and its driver.
 
-After installing, the `upt` command will be added to your PATH.
+|Browser|Driver|Supported|Tested|
+|:-----:|:-----|:-------:|:----:|
+|Firefox|https://github.com/mozilla/geckodriver/releases|✅|✅|
+|Chromium/Chrome|https://sites.google.com/a/chromium.org/chromedriver/downloads|✅|✅|
+|Opera|https://github.com/operasoftware/operachromiumdriver/releases|✅|❌|
+|Edge|https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/|✅|❌|
+|Safari|Built-in|✅|❌|
+|IE|https://selenium-release.storage.googleapis.com/index.html|❌|❌|
 
-## Getting Started
+## Configurations
 
-All configs stored at `~/.config/upt`, including `upt.conf` (general configs) and `cookie.jar` (cookies).
+All configurations stored at `~/.config/upt`, including `upt.conf` (general configs) and `cookie.jar` (login cookies).
 
-After installing, first run `upt init` to initialize config files.
-It will ask some questions about default settings. 
+After installing, You may run `upt init` to initialize config options.
 
 ## Upgrade
 You can check current version by running `upt -v`. Upgrade to newer version by this command.
@@ -36,19 +40,9 @@ You can check current version by running `upt -v`. Upgrade to newer version by t
 $ pip3 install -U universal-parser-tool
 ```
 
-## Parse
+## Parsers
 
-You can use `upt` like this script:
-
-```
-$ upt {parser}  [options...] {task or URL}
-```
-
-Parsers are listed below. You can find their options and task pattern in the repository's wiki.
-
-## Supported Parsers
-
-In this time, these judges have parsers.
+At this time, these judges have parsers.
 
 - [AtCoder](https://github.com/ParsaAlizadeh/universal-parser-tool/wiki/AtCoder)
 - [Codeforces](https://github.com/ParsaAlizadeh/universal-parser-tool/wiki/Codeforces)
