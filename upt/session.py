@@ -16,7 +16,6 @@ class Session(requests.Session):
 
     def load_cookiejar(self):
         if not os.path.exists(COOKIE_FILE):
-            logger.info("No pre-saved cookies")
             return
         with open(COOKIE_FILE, "rb") as file:
             self.cookies.update(pickle.load(file))

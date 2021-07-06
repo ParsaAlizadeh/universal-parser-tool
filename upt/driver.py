@@ -1,16 +1,32 @@
 import logging
 import os
 
-from selenium.webdriver import Firefox
+from selenium.common.exceptions import WebDriverException
+from selenium.webdriver import Chrome, Edge, Firefox, Opera, Safari
 
 logger = logging.getLogger("driver")
 
 
-class Driver(Firefox):  # TODO: Add other browsers
-    def __init__(self):
-        logger.info("Starting driver")
-        super().__init__(service_log_path=os.path.devnull)
+class NoWebDriverError(Exception):
+    pass
 
-    def get(self, url):
-        logger.info("Loading '%s'", url)
-        super().get(url)
+def get_webdriver():
+    webdrivers = {
+        'Firefox': Firefox,
+        'Chrome': Chrome,
+        'Opera': Opera,
+        'Safari': Safari,
+        'Edge': Edge,
+    }
+    for name, Driver in webdrivers.items():
+        logger.info('Trying %s...', name)
+        try:
+            return Driver() if Driver is Safari else Driver(service_log_path=os.path.devnull)
+        except WebDriverException as e:
+            logger.warning(e.msg)
+        except Exception as e:
+            logger.warning(str(e).strip())
+
+    raise NoWebDriverError(
+        'Unable to find a webdriver. Make sure you installed drivers based on your browser.'
+    )

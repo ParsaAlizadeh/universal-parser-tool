@@ -8,12 +8,11 @@ from typing import List, Optional
 
 import requests
 from bs4 import BeautifulSoup
-from selenium.common.exceptions import NoSuchWindowException
 
 from . import sampler
 from .baseparser import BaseParser
 from .configmanager import ConfigManager
-from .driver import Driver
+from .driver import get_webdriver
 from .session import Session
 
 logger = logging.getLogger("service")
@@ -51,9 +50,6 @@ class ServiceParser(BaseParser):
         )
         self._session = Session()
 
-    def __del__(self):
-        self._session.save_cookiejar()
-
     @abstractmethod
     def url_finder(self, task) -> str:
         ...
@@ -67,7 +63,7 @@ class ServiceParser(BaseParser):
         ...
 
     def login(self) -> None:
-        with Driver() as driver:
+        with get_webdriver() as driver:
             url = self.login_page
             logger.info('Opening the URL via WebDriver: %s', url)
             logger.info(
@@ -81,10 +77,8 @@ class ServiceParser(BaseParser):
                 while driver.current_url:
                     cookies = driver.get_cookies()
                     time.sleep(0.1)
-            except NoSuchWindowException:
+            except:
                 pass
-            except Exception as err:
-                logger.warning('Ignore error %s', type(err))
 
         logger.info('Copying cookies via WebDriver...')
         for c in cookies:
@@ -101,6 +95,7 @@ class ServiceParser(BaseParser):
                 )  # RFC2109 format
             cookie = requests.cookies.morsel_to_cookie(morsel)
             self._session.cookies.set_cookie(cookie)
+        self._session.save_cookiejar()
 
     def parse(self, args) -> None:
         if args.login and self.login_page:
