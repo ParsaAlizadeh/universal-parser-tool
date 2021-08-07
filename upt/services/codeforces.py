@@ -36,7 +36,7 @@ class Codeforces(ServiceParser):
         contest, index = self.get_task_info(task)
         return (self.problem_url if len(contest) < 6 else self.gym_url).format(contest, index)
 
-    def placer(self, *task):
+    def placer(self, task):
         task = "".join(task)
         contest, index = self.get_task_info(task)
         return (self.problem_path if len(contest) < 6 else self.gym_path).format(contest, index)
