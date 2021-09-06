@@ -14,14 +14,18 @@ logger = logging.getLogger("main")
 
 def detect_parsers() -> Mapping[str, type]:
     result = {'init': InitParser}
-    plugins = [
-        importlib.import_module(name)
+    plugins = {
+        name: importlib.import_module(name)
         for finder, name, ispkg
         in pkgutil.iter_modules()
         if name[:4] == "upt-"
-    ]
-    for plugin in plugins:
-        result.update(plugin.register())
+    }
+    for plugin_name, plugin_mod in plugins.items():
+        try:
+            plugin_parsers = plugin_mod.register()
+            result.update(plugin_parsers)
+        except AttributeError:
+            logger.warning("Plugin %s failed to register", plugin_name)
     return result
 
 
