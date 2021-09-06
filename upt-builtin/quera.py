@@ -12,10 +12,6 @@ class Quera(ServiceParser):
         return 'Quera (https://quera.ir/)'
 
     @property
-    def aliases(self):
-        return ('quera',)
-
-    @property
     def login_page(self):
         return "https://quera.ir/accounts/login"
 

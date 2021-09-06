@@ -8,10 +8,6 @@ class Usaco(ServiceParser):
         return 'Usaco (https://usaco.org/)'
 
     @property
-    def aliases(self):
-        return ('usaco',)
-
-    @property
     def login_page(self):
         return "http://www.usaco.org/"
 

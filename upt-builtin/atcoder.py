@@ -10,10 +10,6 @@ class AtCoder(ServiceParser):
         return 'AtCoder (https://atcoder.jp/)'
 
     @property
-    def aliases(self):
-        return ('atcoder', 'atc')
-
-    @property
     def login_page(self):
         return "https://atcoder.jp/login"
 
