@@ -1,10 +1,10 @@
 from setuptools import setup, find_packages
 from upt import __version__
 
-with open('README.md') as readme_file:
+with open('README.md', encoding='UTF-8') as readme_file:
     README = readme_file.read()
 
-with open('requirements.txt') as req_file:
+with open('requirements.txt', encoding='UTF-8') as req_file:
     requirements = req_file.readlines()
 
 setup(
