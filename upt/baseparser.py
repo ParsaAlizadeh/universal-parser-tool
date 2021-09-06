@@ -1,16 +1,11 @@
 from abc import ABC, abstractmethod
 import argparse
-from typing import List, Tuple
+from typing import List
 
 class BaseParser(ABC):
     @property
     @abstractmethod
     def description(self) -> str:
-        ...
-
-    @property
-    @abstractmethod
-    def aliases(self) -> Tuple[str]:
         ...
 
     def __init__(self, alias=None):

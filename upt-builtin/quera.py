@@ -2,8 +2,8 @@ import re
 
 from markdown import markdown
 
-from ..serviceparser import ServiceParser, BadTaskError, BeautifulSoup
-from ..sampler import chunkify
+from upt.serviceparser import ServiceParser, BadTaskError, BeautifulSoup
+from upt.sampler import chunkify
 
 
 class Quera(ServiceParser):

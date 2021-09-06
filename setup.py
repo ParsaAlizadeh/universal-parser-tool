@@ -17,7 +17,7 @@ setup(
     url='https://github.com/ParsaAlizadeh/universal-parser-tool',
     long_description_content_type="text/markdown",
     long_description=README + '\n',
-    packages=find_packages(include=['upt', 'upt.*']),
+    packages=find_packages(),
     install_requires=requirements,
     python_requires='>=3.6',
     entry_points={

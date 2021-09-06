@@ -1,31 +1,27 @@
 import argparse
 import importlib
-import inspect
+import pkgutil
 import logging
 import sys
-from typing import Dict
+from typing import Mapping
 
 from . import __version__
-from .baseparser import BaseParser
 from .initparser import InitParser
+from .baseparser import BaseParser
 
 logger = logging.getLogger("main")
 
 
-def detect_parsers() -> Dict[str, BaseParser]:
-    result = {
-        'init': InitParser('init')
-    }
-    service_mod = importlib.import_module('.services', __package__)
-    for _, klass in inspect.getmembers(service_mod, inspect.isclass):
-        if not issubclass(klass, BaseParser):
-            continue
-        dummy: BaseParser = klass(alias=None)
-        for alias in dummy.aliases:
-            if alias in result:
-                logger.warning('Multiple aliases for %s', alias)
-                continue
-            result[alias] = klass(alias)
+def detect_parsers() -> Mapping[str, type]:
+    result = {'init': InitParser}
+    plugins = [
+        importlib.import_module(name)
+        for finder, name, ispkg
+        in pkgutil.iter_modules()
+        if name[:4] == "upt-"
+    ]
+    for plugin in plugins:
+        result.update(plugin.register())
     return result
 
 
@@ -65,13 +61,15 @@ def main():
         sys.exit(0)
 
     args = argparser.parse_args()
+    alias = args.parser
 
-    if args.parser not in parsers:
-        logger.error('No parser named "%s".', args.parser)
+    if alias not in parsers:
+        logger.error('No parser named "%s".', alias)
         return
 
-    main_parser = parsers.get(args.parser)
-    main_parser.run(args.command)
+    mod_type = parsers.get(alias)
+    mod: BaseParser = mod_type(alias=alias)
+    mod.run(args.command)
 
 
 if __name__ == "__main__":
