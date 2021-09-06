@@ -3,14 +3,14 @@ This file supposed to be a documented template for parsers.
 You can use this file under WTFPL (http://www.wtfpl.net/txt/copying/)
 """
 
-from typing import Optional, List, Tuple
+from typing import Optional, List
 
 from upt.serviceparser import (
     ServiceParser,
     BadTaskError,
     BeautifulSoup,
 )
-# from upt.sampler import chunkify
+#from upt.sampler import chunkify
 
 
 # Inheritance from ServiceParser is required
@@ -19,11 +19,6 @@ class ExampleParser(ServiceParser):
     def description(self) -> str:
         # return description of your parser
         return 'Example (https://example.com/)'
-
-    @property
-    def aliases(self) -> Tuple[str]:
-        # return tuple of aliases for your parser
-        return ('example', 'ex')
 
     @property
     def login_page(self) -> Optional[str]:
@@ -56,8 +51,8 @@ class ExampleParser(ServiceParser):
         return []
 
 
-# After completing this file:
-#   1: put it inside `upt/services/` directory
-#   2: import class in `upt/services/__init__.py` file
-#   3: build upt using `make install`
-# Now you can test your parser
+# register parsers and their aliases
+def register():
+    return {
+        'example': ExampleParser
+    }
