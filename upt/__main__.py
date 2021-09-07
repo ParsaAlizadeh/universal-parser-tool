@@ -1,6 +1,7 @@
 import argparse
 import importlib
 import pkgutil
+import inspect
 import logging
 import sys
 from typing import Mapping
@@ -13,7 +14,26 @@ logger = logging.getLogger("main")
 
 
 def detect_parsers() -> Mapping[str, type]:
-    result = {'init': InitParser}
+    parsers = {'init': InitParser}
+
+    def error_register(alias, klass):
+        if alias in parsers:
+            return "Multiple alias assigned"
+        if not inspect.isclass(klass):
+            return "Passed parser is not a class"
+        if not issubclass(klass, BaseParser):
+            return "Passed parser is not inherited from BaseParser"
+        return None
+
+    def add_register(plugin_name, alias, klass):
+        error_message = error_register(alias, klass)
+        if error_message:
+            logger.warning(
+                "%s, skipping %s.%s",
+                error_message, plugin_name, alias
+            )
+        parsers[alias] = klass
+
     plugins = {
         name: importlib.import_module(name)
         for finder, name, ispkg
@@ -22,11 +42,14 @@ def detect_parsers() -> Mapping[str, type]:
     }
     for plugin_name, plugin_mod in plugins.items():
         try:
-            plugin_parsers = plugin_mod.register()
-            result.update(plugin_parsers)
+            plugin_registers = plugin_mod.register().items()
+            for alias, klass in plugin_registers:
+                add_register(plugin_name, alias, klass)
         except AttributeError:
-            logger.warning("Plugin %s failed to register", plugin_name)
-    return result
+            logger.error("Failed to register, skipping plugin %s", plugin_name)
+        except:
+            logger.fatal("Unexpected error in register, skipping plugin %s", plugin_name)
+    return parsers
 
 
 def main():
