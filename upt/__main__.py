@@ -1,14 +1,14 @@
 import argparse
 import importlib
-import pkgutil
 import inspect
 import logging
+import pkgutil
 import sys
 from typing import Mapping
 
 from . import __version__
-from .initparser import InitParser
 from .baseparser import BaseParser
+from .initparser import InitParser
 
 logger = logging.getLogger("main")
 
