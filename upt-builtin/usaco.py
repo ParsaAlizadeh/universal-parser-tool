@@ -1,15 +1,11 @@
-from ..serviceparser import ServiceParser, BadTaskError, BeautifulSoup
-from ..sampler import chunkify
+from upt.serviceparser import ServiceParser, BadTaskError, BeautifulSoup
+from upt.sampler import chunkify
 
 
 class Usaco(ServiceParser):
     @property
     def description(self):
         return 'Usaco (https://usaco.org/)'
-
-    @property
-    def aliases(self):
-        return ('usaco',)
 
     @property
     def login_page(self):

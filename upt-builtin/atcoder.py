@@ -1,17 +1,13 @@
 import re
 
-from ..serviceparser import ServiceParser, BadTaskError, BeautifulSoup
-from ..sampler import chunkify
+from upt.serviceparser import ServiceParser, BadTaskError, BeautifulSoup
+from upt.sampler import chunkify
 
 
 class AtCoder(ServiceParser):
     @property
     def description(self):
         return 'AtCoder (https://atcoder.jp/)'
-
-    @property
-    def aliases(self):
-        return ('atcoder', 'atc')
 
     @property
     def login_page(self):

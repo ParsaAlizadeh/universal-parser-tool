@@ -1,10 +1,10 @@
 from setuptools import setup, find_packages
 from upt import __version__
 
-with open('README.md') as readme_file:
+with open('README.md', encoding='UTF-8') as readme_file:
     README = readme_file.read()
 
-with open('requirements.txt') as req_file:
+with open('requirements.txt', encoding='UTF-8') as req_file:
     requirements = req_file.readlines()
 
 setup(
@@ -17,7 +17,7 @@ setup(
     url='https://github.com/ParsaAlizadeh/universal-parser-tool',
     long_description_content_type="text/markdown",
     long_description=README + '\n',
-    packages=find_packages(include=['upt', 'upt.*']),
+    packages=find_packages(),
     install_requires=requirements,
     python_requires='>=3.6',
     entry_points={

@@ -12,7 +12,7 @@ def chunkify(sequence, batch):
 
 def write_sample_to_file(string, filename):
     string = string.strip() + "\n"
-    with open(filename, "w") as file:
+    with open(filename, "w", encoding="UTF-8") as file:
         file.write(string)
 
 

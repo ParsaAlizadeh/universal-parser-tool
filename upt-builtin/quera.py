@@ -2,18 +2,14 @@ import re
 
 from markdown import markdown
 
-from ..serviceparser import ServiceParser, BadTaskError, BeautifulSoup
-from ..sampler import chunkify
+from upt.serviceparser import ServiceParser, BadTaskError, BeautifulSoup
+from upt.sampler import chunkify
 
 
 class Quera(ServiceParser):
     @property
     def description(self):
         return 'Quera (https://quera.ir/)'
-
-    @property
-    def aliases(self):
-        return ('quera',)
 
     @property
     def login_page(self):

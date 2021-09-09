@@ -1,17 +1,13 @@
 import re
 
-from ..serviceparser import ServiceParser, BadTaskError, BeautifulSoup
-from ..sampler import chunkify
+from upt.serviceparser import ServiceParser, BadTaskError, BeautifulSoup
+from upt.sampler import chunkify
 
 
 class Codeforces(ServiceParser):
     @property
     def description(self):
         return 'Codeforces (https://codeforces.com/)'
-
-    @property
-    def aliases(self):
-        return ('cf', 'codeforces')
 
     @property
     def login_page(self):
