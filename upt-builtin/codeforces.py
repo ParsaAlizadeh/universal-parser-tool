@@ -13,7 +13,7 @@ class Codeforces(ServiceParser):
     def login_page(self):
         return "https://codeforces.com/enter"
 
-    problem_url = "https://codeforces.com/problemset/problem/{0}/{1}/"
+    problem_url = "https://codeforces.com/contest/{0}/problem/{1}"
     gym_url = "https://codeforces.com/gym/{0}/problem/{1}"
 
     problem_path = "contest/{0}/{1}/"
