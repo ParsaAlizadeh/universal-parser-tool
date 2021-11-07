@@ -42,7 +42,9 @@ class Codeforces(ServiceParser):
         sample = []
         for elem in soup.find_all("pre"):
             div = elem.parent
-            if div is None or not div["class"] or div["class"][0] not in expected:
+            if div is None or div.get("class") is None:
+                continue
+            if div.get("class")[0] not in expected:
                 continue
             sample.append("\n".join(elem.strings))
         return chunkify(sample, 2)
