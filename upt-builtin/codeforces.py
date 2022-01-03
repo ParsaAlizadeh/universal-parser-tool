@@ -19,7 +19,7 @@ class Codeforces(ServiceParser):
     problem_path = "contest/{0}/{1}/"
     gym_path = "gym/{0}/{1}/"
 
-    task_pattern = re.compile(r"(\d+)(\w\d?)")
+    task_pattern = re.compile(r"^(\d+)(\w\d?)$")
 
     def get_task_info(self, task):
         match = self.task_pattern.match(task)

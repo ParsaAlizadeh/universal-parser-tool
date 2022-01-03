@@ -15,7 +15,7 @@ class AtCoder(ServiceParser):
 
     problem_url = "https://atcoder.jp/contests/{0}/tasks/{0}_{1}"
     place_path = "atcoder/{0}/{1}/"
-    task_pattern = re.compile(r"(a[brg]c) ?(\d{,3}) ?(\w)")
+    task_pattern = re.compile(r"^(a[brg]c) ?(\d{,3}) ?(\w)$")
 
     def get_task_info(self, task):
         match = self.task_pattern.match(task)
