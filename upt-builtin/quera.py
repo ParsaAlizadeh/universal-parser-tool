@@ -15,29 +15,22 @@ class Quera(ServiceParser):
     def login_page(self):
         return "https://quera.ir/accounts/login"
 
-    problem_type = {"con": "contest",
-                    "oly": "olympiad",
-                    "uni": "university"}
-    problem_url = "http://quera.ir/problemset/{0}/{1}/"
-    place_path = "quera/{0}/{1}/"
+    problem_url = "http://quera.ir/problemset/{0}/"
+    place_path = "quera/{0}/"
     statement = re.compile(r"^description_md-")
 
-    def get_type(self, problem_type):
-        if problem_type in self.problem_type:
-            problem_type = self.problem_type.get(problem_type)
-        elif problem_type not in self.problem_type.values:
-            raise BadTaskError('Expect something like "olympiad 66756"')
-        return problem_type
+    def get_task_info(self, task):
+        if len(task) != 1:
+            raise BadTaskError("Except only one argument as a task, like 127292")
+        return task[0]
 
     def url_finder(self, task):
-        problem_type, index = task
-        problem_type = self.get_type(problem_type)
-        return self.problem_url.format(problem_type, index)
+        task = self.get_task_info(task)
+        return self.problem_url.format(task)
 
     def placer(self, task):
-        problem_type, index = task
-        problem_type = self.get_type(problem_type)
-        return self.place_path.format(problem_type, index)
+        task = self.get_task_info(task)
+        return self.place_path.format(task)
 
     def sampler(self, soup: BeautifulSoup):
         expected = ("ورودی نمونه", "خروجی نمونه")

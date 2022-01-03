@@ -108,8 +108,8 @@ class ServiceParser(BaseParser):
         else:
             try:
                 url = self.url_finder(args.task)
-            except BadTaskError:
-                logger.error('Task URL not detected')
+            except BadTaskError as e:
+                logger.error('Task URL not detected: %s', e)
                 return
 
         path = './'
