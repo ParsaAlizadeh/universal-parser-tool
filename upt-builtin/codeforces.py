@@ -10,6 +10,10 @@ class Codeforces(ServiceParser):
         return 'Codeforces (https://codeforces.com/)'
 
     @property
+    def aliases(self):
+        return ['codeforces', 'cf']
+
+    @property
     def login_page(self):
         return "https://codeforces.com/enter"
 

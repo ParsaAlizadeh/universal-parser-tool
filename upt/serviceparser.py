@@ -30,8 +30,8 @@ class ServiceParser(BaseParser):
     def login_page(self) -> Optional[str]:
         ...
 
-    def __init__(self, alias=None):
-        super().__init__(alias)
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         if self.login_page:
             self._argparser.add_argument(
                 "-l", "--login",

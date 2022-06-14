@@ -4,7 +4,7 @@ import inspect
 import logging
 import pkgutil
 import sys
-from typing import Mapping
+from typing import List
 
 from . import __version__
 from .baseparser import BaseParser
@@ -13,26 +13,24 @@ from .initparser import InitParser
 logger = logging.getLogger("main")
 
 
-def detect_parsers() -> Mapping[str, type]:
-    parsers = {'init': InitParser}
+def detect_parsers() -> List[type]:
+    parsers = [InitParser]
 
-    def error_register(alias, klass):
-        if alias in parsers:
-            return "Multiple alias assigned"
+    def error_register(klass):
         if not inspect.isclass(klass):
             return "Passed parser is not a class"
         if not issubclass(klass, BaseParser):
             return "Passed parser is not inherited from BaseParser"
         return None
 
-    def add_register(plugin_name, alias, klass):
-        error_message = error_register(alias, klass)
+    def add_register(plugin_name, klass):
+        error_message = error_register(klass)
         if error_message:
             logger.warning(
                 "%s, skipping %s.%s",
-                error_message, plugin_name, alias
+                error_message, plugin_name
             )
-        parsers[alias] = klass
+        parsers.append(klass)
 
     plugins = {
         name: importlib.import_module(name)
@@ -42,9 +40,9 @@ def detect_parsers() -> Mapping[str, type]:
     }
     for plugin_name, plugin_mod in plugins.items():
         try:
-            plugin_registers = plugin_mod.register().items()
-            for alias, klass in plugin_registers:
-                add_register(plugin_name, alias, klass)
+            plugin_registers = plugin_mod.register()
+            for klass in plugin_registers:
+                add_register(plugin_name, klass)
         except AttributeError:
             logger.error("Failed to register, skipping plugin %s", plugin_name)
         except:
@@ -58,45 +56,24 @@ def main():
         format="== [%(levelname)s] %(name)7s: %(message)s"
     )
 
-    parsers = detect_parsers()
-    usage = (
-        "\n  %(prog)s [-h]\n" +
-        "\n".join(f"  %(prog)s {alias} [-h]" for alias in parsers)
-    )
-
-    argparser = argparse.ArgumentParser(
-        prog='upt',
-        usage=usage,
-    )
+    argparser = argparse.ArgumentParser(prog='upt')
     argparser.add_argument(
         "-v", "--version",
         action="version",
         version=f"%(prog)s-{__version__}"
     )
-    argparser.add_argument(
-        "parser",
-        help=argparse.SUPPRESS
-    )
-    argparser.add_argument(
-        "command",
-        nargs=argparse.REMAINDER,
-        help=argparse.SUPPRESS
-    )
+
+    subparsers = argparser.add_subparsers(dest='subcommand_name')
+    parsers = detect_parsers()
+    for klass in parsers:
+        _ = klass(subparsers)
 
     if len(sys.argv) < 2:
         argparser.print_help()
         sys.exit(0)
 
     args = argparser.parse_args()
-    alias = args.parser
-
-    if alias not in parsers:
-        logger.error('No parser named "%s".', alias)
-        return
-
-    mod_type = parsers.get(alias)
-    mod: BaseParser = mod_type(alias=alias)
-    mod.run(args.command)
+    args.func(args)
 
 
 if __name__ == "__main__":
