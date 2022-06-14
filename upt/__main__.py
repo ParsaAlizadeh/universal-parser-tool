@@ -27,10 +27,11 @@ def detect_parsers() -> List[type]:
         error_message = error_register(klass)
         if error_message:
             logger.warning(
-                "%s, skipping %s.%s",
+                "%s, skipping %s",
                 error_message, plugin_name
             )
-        parsers.append(klass)
+        else:
+            parsers.append(klass)
 
     plugins = {
         name: importlib.import_module(name)
