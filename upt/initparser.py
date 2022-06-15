@@ -11,8 +11,8 @@ class InitParser(BaseParser):
     def aliases(self):
         return ['init']
 
-    def __init__(self, alias=None):
-        super().__init__(alias)
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self._confman = ConfigManager()
         for option in self._confman.options:
             self._argparser.add_argument(
