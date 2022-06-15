@@ -9,7 +9,7 @@ from upt.sampler import chunkify
 class Quera(ServiceParser):
     @property
     def description(self):
-        return 'Quera (https://quera.ir/)'
+        return 'Quera (https://quera.org/)'
 
     @property
     def aliases(self):
@@ -17,9 +17,9 @@ class Quera(ServiceParser):
 
     @property
     def login_page(self):
-        return "https://quera.ir/accounts/login"
+        return "https://quera.org/accounts/login"
 
-    problem_url = "http://quera.ir/problemset/{0}/"
+    problem_url = "http://quera.org/problemset/{0}/"
     place_path = "quera/{0}/"
     statement = re.compile(r"^description_md-")
 
