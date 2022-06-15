@@ -13,12 +13,18 @@ from upt.serviceparser import (
 #from upt.sampler import chunkify
 
 
-# Inheritance from ServiceParser is required
+# Inheritance from BaseParser is required
+# ServiceParser provides more features by default, like login
 class ExampleParser(ServiceParser):
     @property
     def description(self) -> str:
         # return description of your parser
         return 'Example (https://example.com/)'
+
+    @property
+    def aliases(self):
+        # return list of aliases for your parser, it must be non-empty
+        return ['example', 'ex']
 
     @property
     def login_page(self) -> Optional[str]:
@@ -51,8 +57,6 @@ class ExampleParser(ServiceParser):
         return []
 
 
-# register parsers and their aliases
+# register parsers
 def register():
-    return {
-        'example': ExampleParser
-    }
+    return [ExampleParser]
