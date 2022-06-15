@@ -4,12 +4,4 @@ from .quera import Quera
 from .usaco import Usaco
 
 def register():
-    return {
-        'cf': Codeforces,
-        'codeforces': Codeforces,
-        'atc': AtCoder,
-        'atcoder': AtCoder,
-        'quera': Quera,
-        'us': Usaco,
-        'usaco': Usaco
-    }
+    return [Codeforces, AtCoder, Quera, Usaco]

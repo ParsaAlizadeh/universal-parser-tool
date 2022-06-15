@@ -7,6 +7,10 @@ class InitParser(BaseParser):
     def description(self):
         return 'Initialize configs'
 
+    @property
+    def aliases(self):
+        return ['init']
+
     def __init__(self, alias=None):
         super().__init__(alias)
         self._confman = ConfigManager()

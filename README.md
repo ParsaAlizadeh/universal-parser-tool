@@ -57,7 +57,7 @@ It is possible to develop and publish your own plugins of `upt`.
 In this context, plugins are python modules, and their name starts with `upt-`.
 Several built-in parsers are included in `upt-builtin`.
 
-The plugin must provide a `register` function, returning a `dict` mapping aliases to classes (inherited from `BaseParser`).
+The plugin must provide a `register` function, returning a list of classes (inherited from `BaseParser`).
 After installing the module, `upt` automatically finds the plugin and calls `register`.
 
 There is a documented example of a parser [here](example/example.py).
