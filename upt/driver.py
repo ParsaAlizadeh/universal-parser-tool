@@ -2,7 +2,7 @@ import logging
 import os
 
 from selenium.common.exceptions import WebDriverException
-from selenium.webdriver import Chrome, Edge, Firefox, Opera, Safari
+from selenium import webdriver
 
 logger = logging.getLogger("driver")
 
@@ -12,16 +12,15 @@ class NoWebDriverError(Exception):
 
 def get_webdriver():
     webdrivers = {
-        'Firefox': Firefox,
-        'Chrome': Chrome,
-        'Opera': Opera,
-        'Safari': Safari,
-        'Edge': Edge,
+        'Firefox': webdriver.Firefox,
+        'Chrome': webdriver.Chrome,
+        'Safari': webdriver.Safari,
+        'Edge': webdriver.Edge,
     }
     for name, Driver in webdrivers.items():
         logger.info('Trying %s...', name)
         try:
-            return Driver() if Driver is Safari else Driver(service_log_path=os.path.devnull)
+            return Driver() if name == 'Safari' else Driver(service_log_path=os.path.devnull)
         except WebDriverException as e:
             logger.warning(e.msg)
         except Exception as e:

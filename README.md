@@ -22,9 +22,9 @@ To login services and use parsers on private webpages, you need to install a sup
 |:-----:|:-----|:-------:|:----:|
 |Firefox|https://github.com/mozilla/geckodriver/releases|✅|✅|
 |Chromium/Chrome|https://sites.google.com/a/chromium.org/chromedriver/downloads|✅|✅|
-|Opera|https://github.com/operasoftware/operachromiumdriver/releases|✅|❌|
 |Edge|https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/|✅|❌|
 |Safari|Built-in|✅|❌|
+|Opera|https://github.com/operasoftware/operachromiumdriver/releases|❌|❌|
 |IE|https://selenium-release.storage.googleapis.com/index.html|❌|❌|
 
 ## Configurations
