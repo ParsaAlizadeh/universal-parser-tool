@@ -1,4 +1,4 @@
-selenium>=3.141,<5
+selenium>=4.36.0,<5
 requests<3,>=2.25
 beautifulsoup4<5,>=4.9
 markdown<4,>=3.3
