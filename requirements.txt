@@ -1,4 +1,4 @@
 selenium>=3.141,<5
 requests<3,>=2.25
-beautifulsoup4<5,>=4.9
+beautifulsoup4>=4.14.3,<5
 markdown<4,>=3.3
